@@ -1,15 +1,4 @@
-﻿/* 
-    ------------------- Code Monkey -------------------
-
-    Thank you for downloading this package
-    I hope you find it useful in your projects
-    If you have any questions let me know
-    Cheers!
-
-               unitycodemonkey.com
-    --------------------------------------------------
- */
-
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler {
 
-    [SerializeField] private Canvas canvas;
+    public Canvas canvas;
 
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
@@ -43,12 +32,12 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         Debug.Log("OnEndDrag");
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
-        transform.localScale.Set(10, 10, 10);
+        this.gameObject.SetActive(false);
     }
 
     public void OnPointerDown(PointerEventData eventData) {
         GameObject clone = Instantiate(this.gameObject);
-        clone.transform.SetParent(this.transform.parent);
+        clone.transform.SetParent(this.transform.parent, false);
         clone.transform.SetSiblingIndex(transform.GetSiblingIndex());
         transform.SetParent(canvas.transform);
         transform.SetAsLastSibling();

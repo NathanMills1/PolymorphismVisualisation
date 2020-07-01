@@ -15,6 +15,12 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             if (eventData.pointerDrag.tag.Equals("Screen"))
             {
                 _screenImage.sprite = eventData.pointerDrag.GetComponent<Image>().sprite;
+                _screenImage.gameObject.SetActive(true);
+            }
+            else if (eventData.pointerDrag.tag.Equals("Object"))
+            {
+                _objectImage.sprite = eventData.pointerDrag.GetComponent<Image>().sprite;
+                _objectImage.gameObject.SetActive(true);
             }
         }
     }
