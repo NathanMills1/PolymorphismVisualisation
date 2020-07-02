@@ -1,0 +1,5 @@
+0	223		Parent1
+1	498	0	Parent1_Child1
+2	494	0	Parent1_Child2
+3	689	1	Parent1_Child1_Baby1
+4	680	2	Parent1_Child2_Baby1

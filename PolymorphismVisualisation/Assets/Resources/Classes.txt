@@ -1,0 +1,13 @@
+0	Vehicle	"Move,Load"	
+1	Car	"StartEngine,OpenBoot,Steer"	0
+2	Plane	"Ascend,LowerWheels,RadioControl"	0
+3	Helicopter	"Ascend,SpinRotor,Winch"	0
+4	SportsCar	"ActivateTurbo,OpenRoof,ActivateTractionControl"	1
+5	Ute	"StoreInBack,TraverseTerrain,ActivateSuspension"	1
+6	ElectricCar	"Charge,TransferEnergy,DetermineRoute"	1
+7	Stealth Bomber	"DropBomb,ActivateStealth,FireMissile"	2
+8	Passenger Jet	"LoadPassengers,ActivateMovie,FlushToilet"	2
+9	Sesna	"Temp1,Temp2,KindOfLongTemp3"	2
+10	HelicopterType1	"A,B,C"	3
+11	HelicopterType2	"D,E,F"	3
+12	HelicopterType3	"H,I,J"	3

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Permissions;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class InheritanceGenerator : MonoBehaviour
     public GameObject screenTemplate;
     public GameObject objectTemplate;
     public GameObject screenList;
+    public GameObject objectList;
 
     public Sprite image_Parent1;
     public Sprite image_Parent2;
@@ -22,25 +24,13 @@ public class InheritanceGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Entity parent1 = new Entity(95, image_Parent1);
-        Entity parent1Child1 = new Entity(parent1, 187, image_Parent1Child1);
-        Entity parent1Child1SubChild1 = new Entity(parent1Child1, 266, image_Parent1Child1SubChild1);
-        Entity parent2 = new Entity(95, image_Parent2);
-        Entity parent2Child1 = new Entity(parent2, 187, image_Parent2Child1);
-        Entity parent2Child1SubChild1 = new Entity(parent2Child1, 266, image_Parent2Child1SubChild1);
+        
 
-        List<Entity> entities = new List<Entity> { parent1, parent1Child1, parent1Child1SubChild1, parent2, parent2Child1, parent2Child1SubChild1 };
-
-        Identity i1 = new Identity("vehicle", null);
-        Identity i1_1 = new Identity(i1, "Car", null);
-        Identity i1_1_1 = new Identity(i1_1, "Station Wagon", null);
-        Identity i2 = new Identity("Animal", null);
-        Identity i2_1 = new Identity(i2, "Mammal", null);
-        Identity i2_1_1 = new Identity(i2_1, "Ape", null);
-
-        List<Identity> parentIdentities = new List<Identity> { i1, i2 };
+        List<Entity> entities = loadEntities();
+        List<Identity> parentIdentities = loadIdentities();
 
         Entity.setTemplates(parentIdentities, screenTemplate, objectTemplate);
+
 
         int totalHeight = 0;
         foreach(Entity entity in entities){
@@ -56,6 +46,65 @@ public class InheritanceGenerator : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private List<Identity> loadIdentities()
+    {
+        Dictionary<string, Identity> identities = new Dictionary<string, Identity>();
+        List<Identity> parentIdentities = new List<Identity>();
+        string[] lines = System.IO.File.ReadAllLines(@"Assets\Resources\Classes.txt");
+        foreach (string line in lines)
+        {
+            string[] details = line.Split('\t');
+            string[] methods = details[2].Replace("\"", "").Split(',');
+            Identity temp;
+
+            if (!details[3].Trim().Equals(""))
+            {
+                Identity parent = identities[details[3]];
+                temp = new Identity(parent, details[1], methods);
+            }
+            else //Has no parent
+            {
+                temp = new Identity(details[1], methods);
+                parentIdentities.Add(temp);
+            }
+
+            identities.Add(details[0], temp);
+
+        }
+
+        return parentIdentities;
+    }
+
+    private List<Entity> loadEntities()
+    {
+        double SCALE_FACTOR = 0.4;
+        Dictionary<string, Entity> entityMap = new Dictionary<string, Entity>();
+        List<Entity> entities = new List<Entity>();
+        string[] lines = System.IO.File.ReadAllLines(@"Assets\Resources\Images.txt");
+        foreach (string line in lines)
+        {
+            string[] details = line.Split('\t');
+            Entity temp;
+            Sprite image = Resources.Load<Sprite>(details[3]);
+
+            if (!details[2].Trim().Equals(""))
+            {
+                Entity parent = entityMap[details[2]];
+                temp = new Entity(parent, int.Parse(details[1]), image);
+            }
+            else //Has no parent
+            {
+                temp = new Entity(int.Parse(details[1]), image);
+            }
+
+            temp.height = (int)(temp.height * SCALE_FACTOR);
+            entities.Add(temp);
+            entityMap.Add(details[0], temp);
+        }
+
+        return entities;
     }
 
 }
