@@ -20,7 +20,7 @@ public class Entity
     public int generation { get; }
     public int id { get;  }
     public string objectColour { get; }
-    protected Identity identity { get; set; }
+    public Identity identity { get; private set; }
 
     protected bool gameObjectMade = false;
 
@@ -134,7 +134,7 @@ public class Entity
                 break;
             }
         }
-        return false;
+        return isParent;
     }
 
     public void updateMethodNames(TextMeshProUGUI[] methods)
@@ -154,7 +154,7 @@ public class Entity
                     {
                         parentEntity = parentEntity.parent;
                     }
-                    text.text = parentEntity.identity.methods[pos] + "()";
+                    text.text = parentEntity.identity.selectedMethods[pos] + "()";
                     colours = parentEntity.objectColour.Split(',');
                     text.color = new Color32(byte.Parse(colours[0]), byte.Parse(colours[1]), byte.Parse(colours[2]), 255);
                     text.gameObject.SetActive(true);
@@ -171,7 +171,7 @@ public class Entity
                         {
                             childEntity = childEntity.parent;
                         }
-                        text.text = childEntity.identity.methods[pos] + "()";
+                        text.text = childEntity.identity.selectedMethods[pos] + "()";
                         colours = childEntity.objectColour.Split(',');
                         text.color = new Color32(byte.Parse(colours[0]), byte.Parse(colours[1]), byte.Parse(colours[2]), 255);
                         text.gameObject.SetActive(true);
@@ -187,7 +187,7 @@ public class Entity
                     if (generation > 2)
                     {
                         pos = int.Parse(text.name.Replace("Method", "")) - 6;
-                        text.text = identity.methods[pos] + "()";
+                        text.text = identity.selectedMethods[pos] + "()";
                         colours = this.objectColour.Split(',');
                         text.color = new Color32(byte.Parse(colours[0]), byte.Parse(colours[1]), byte.Parse(colours[2]), 255);
                         text.gameObject.SetActive(true);
@@ -204,6 +204,19 @@ public class Entity
                 
             }
         }
+    }
+
+    public int getMethodCount()
+    {
+        int totalMethods = 0;
+        Identity currentIdentity = this.identity;
+        while(currentIdentity != null)
+        {
+            totalMethods += currentIdentity.selectedMethods.Count;
+            currentIdentity = currentIdentity.parent;
+        }
+
+        return totalMethods;
     }
 
     public bool Equals(Entity other)

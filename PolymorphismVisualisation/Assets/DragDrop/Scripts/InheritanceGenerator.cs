@@ -56,11 +56,11 @@ public class InheritanceGenerator : MonoBehaviour
             if (!details[3].Trim().Equals(""))
             {
                 Identity parent = identities[details[3]];
-                temp = new Identity(parent, details[1], methods);
+                temp = new Identity(parent, details[1], methods, int.Parse(details[4]));
             }
             else //Has no parent
             {
-                temp = new Identity(details[1], methods);
+                temp = new Identity(details[1], methods, int.Parse(details[4]));
                 parentIdentities.Add(temp);
             }
 
