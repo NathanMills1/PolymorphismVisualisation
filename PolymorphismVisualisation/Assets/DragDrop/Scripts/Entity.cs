@@ -116,14 +116,19 @@ public class Entity
         }
     }
 
-    public bool determineIfParent(Entity entity)
+    public bool determineIfChildOf(Entity entity)
     {
-        bool isParent = false;
+        if(entity == null)
+        {
+            return false;
+        }
+
+        bool ischild = false;
         Entity currentEntity = this;
-        while (!isParent)
+        while (!ischild)
         {
             if(currentEntity.Equals(entity)){
-                isParent = true;
+                ischild = true;
             } 
             else if(currentEntity.parent != null)
             {
@@ -134,7 +139,7 @@ public class Entity
                 break;
             }
         }
-        return isParent;
+        return ischild;
     }
 
     public void updateMethodNames(TextMeshProUGUI[] methods)

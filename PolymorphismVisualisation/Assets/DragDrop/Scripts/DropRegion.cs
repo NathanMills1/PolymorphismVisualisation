@@ -13,9 +13,10 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     public GameObject parentTypeError;
     public GameObject fadeOut;
     public GameObject methodColourPreserver;
+    public QuestionManager questionManager;
 
-    private Entity screenEntity;
-    private Entity objectEntity;
+    public Entity screenEntity { get; private set; }
+    public Entity objectEntity { get; private set; }
 
     private TextMeshProUGUI[] screenMethods;
     private TextMeshProUGUI[] objectMethods;
@@ -50,6 +51,8 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             setMethodColourPreserverSize();
             determineFadeVisibility();
             checkForErrors();
+
+            questionManager.updateQuestion();
         }
     }
 
@@ -105,7 +108,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
 
     public void determineFadeVisibility()
     {
-        bool fadeActive = (screenEntity != null && objectEntity != null) ? true : false;
+        bool fadeActive = screenEntity != null;
         this.fadeOut.SetActive(fadeActive);
     }
 
@@ -115,7 +118,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         {
             //set size of method error box to match screen size
 
-            bool screenIsParent = objectEntity.determineIfParent(screenEntity);
+            bool screenIsParent = objectEntity.determineIfChildOf(screenEntity);
             if (!screenIsParent && screenEntity.height > objectEntity.height)
             {
                 parentTypeError.GetComponent<RectTransform>().sizeDelta = new Vector2(410, ((screenEntity.height - objectEntity.height) / 0.35f) - 10);
@@ -123,7 +126,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             }
             parentTypeError.SetActive(!screenIsParent && screenEntity.height > objectEntity.height);
 
-            if (!screenIsParent && !screenEntity.determineIfParent(objectEntity))
+            if (!screenIsParent && !screenEntity.determineIfChildOf(objectEntity))
             {
                 //TODO error showing that they don't match up
             }

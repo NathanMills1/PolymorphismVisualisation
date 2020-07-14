@@ -14,25 +14,33 @@ public class InheritanceGenerator : MonoBehaviour
     public GameObject objectTemplate;
     public GameObject screenList;
     public GameObject objectList;
+    public QuestionManager questionManager;
+
+    public static Dictionary<int, List<Entity>> selectedEntitiesByGeneration { get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
         
-
         List<Entity> entities = loadEntities();
         List<Identity> parentIdentities = loadIdentities();
 
         Entity.setTemplates(parentIdentities, screenTemplate, objectTemplate);
 
+        //TODO select which entities to use by some algorithm
+        List<Entity> selectedEntities = entities;
+        selectedEntitiesByGeneration = sortEntitiesByGeneration(selectedEntities);
 
+        //create gameObject representation for each entity
         int totalHeight = 0;
-        foreach(Entity entity in entities){
+        foreach(Entity entity in selectedEntities)
+        {
             entity.constructGameObject(screenList, objectList);
             totalHeight += 10 + entity.height;
         }
-
         screenList.GetComponent<RectTransform>().sizeDelta = new Vector2(0, totalHeight);
+
+        questionManager.generateQuestion();
 
     }
 
@@ -74,7 +82,7 @@ public class InheritanceGenerator : MonoBehaviour
     private List<Entity> loadEntities()
     {
         double SCALE_FACTOR = 0.35;
-        Dictionary<string, Entity> entityMap = new Dictionary<string, Entity>();
+        Dictionary<string, Entity> entityById = new Dictionary<string, Entity>();
         List<Entity> entities = new List<Entity>();
         string[] lines = System.IO.File.ReadAllLines(@"Assets\Resources\Images.txt");
         foreach (string line in lines)
@@ -86,7 +94,7 @@ public class InheritanceGenerator : MonoBehaviour
 
             if (!details[2].Trim().Equals(""))
             {
-                Entity parent = entityMap[details[2]];
+                Entity parent = entityById[details[2]];
                 temp = new Entity(parent, int.Parse(details[0]), int.Parse(details[1]), screenImage, objectImage, details[4]);
             }
             else //Has no parent
@@ -96,10 +104,25 @@ public class InheritanceGenerator : MonoBehaviour
 
             temp.height = (int)(temp.height * SCALE_FACTOR);
             entities.Add(temp);
-            entityMap.Add(details[0], temp);
+            entityById.Add(details[0], temp);
         }
 
         return entities;
+    }
+
+    private Dictionary<int, List<Entity>> sortEntitiesByGeneration(List<Entity> entities)
+    {
+        Dictionary<int, List<Entity>> entitiesByGeneration = new Dictionary<int, List<Entity>>();
+        entitiesByGeneration.Add(1, new List<Entity>());
+        entitiesByGeneration.Add(2, new List<Entity>());
+        entitiesByGeneration.Add(3, new List<Entity>());
+
+        foreach(Entity entity in entities)
+        {
+            entitiesByGeneration[entity.generation].Add(entity);
+        }
+
+        return entitiesByGeneration;
     }
 
 }
