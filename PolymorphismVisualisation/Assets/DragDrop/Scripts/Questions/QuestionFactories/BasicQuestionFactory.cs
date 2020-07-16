@@ -42,7 +42,7 @@ public class BasicQuestionFactory : QuestionFactory
         codeSnippetsByQuestion.Add(question, snippet);
         codeLinesBySnippet.Add(snippet, 1);
 
-        snippet = codeColour + "VariableType VariableName = New </color>" + objectColour + "VariableType();</color>\n" + codeColour + "List<</color>" + variableTypeColour + "ParentType</color>> " + codeColour + "ParentTypes.add(VariableName);</color>";
+        snippet = codeColour + "VariableType VariableName = New </color>" + objectColour + "VariableType();</color>\n" + codeColour + "List<</color>" + variableTypeColour + "ParentType</color>" + codeColour + "> ParentTypes.add(VariableName);</color>";
         question = "Place the correct screen and object to represent this situation";
         codeSnippetsByQuestion.Add(question, snippet);
         codeLinesBySnippet.Add(snippet, 2);

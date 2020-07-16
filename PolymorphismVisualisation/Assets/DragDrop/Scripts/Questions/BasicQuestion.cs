@@ -19,11 +19,12 @@ public class BasicQuestion : Question
     {
         codeBox.SetActive(true);
         setCodeBoxHeight();
-        codeBox.GetComponentInChildren<TextMeshProUGUI>().text = createCodeText();
+        codeBox.GetComponentInChildren<Text>().text = createCodeText();
 
         questionTextBox.SetActive(true);
         questionTextBox.GetComponentInChildren<TextMeshProUGUI>().text = createQuestionText();
 
+        statusMessageBox.SetActive(true);
         checkButton.SetActive(true);
     }
 
@@ -32,32 +33,25 @@ public class BasicQuestion : Question
         return questionText.Replace("variableType", variableType.identity.name);
     }
 
-    protected override string performQuestionSpecificSwaps(string newCodeText)
+    public override bool performQuestionSpecificCheck(TextMeshProUGUI textBox)
     {
-        return newCodeText.Replace("ParentType", variableType.parent.identity.name);
-    }
-
-    public override bool checkCorrectness()
-    {
-        TextMeshProUGUI textBox = statusMessageBox.GetComponentInChildren<TextMeshProUGUI>();
-        if (variableType.Equals(dropRegion.screenEntity) && dropRegion.objectEntity.determineIfChildOf(dropRegion.screenEntity))
+        try
         {
-            textBox.text = "Valid object placed in screen";
-            return true;
-        } 
-        else if (!variableType.Equals(dropRegion.screenEntity))
+            if (variableType.Equals(dropRegion.screenEntity) && dropRegion.objectEntity.determineIfChildOf(dropRegion.screenEntity))
+            {
+                textBox.text = "Status: Valid object placed in screen";
+                textBox.color = Color.green;
+                return true;
+            }
+            else if (!variableType.Equals(dropRegion.screenEntity))
+            {
+                textBox.text = "Status: Screen does not match variable type in question";
+                textBox.color = Color.red;
+            }
+        } catch (System.NullReferenceException)
         {
-            textBox.text = "Screen placed does not match variable type in question";
+            //Screen or object not placed, can't be correct
         }
-        else if(dropRegion.screenEntity == null || dropRegion.objectEntity == null)
-        {
-            textBox.text = "Compiler Error: Null reference exception to object";
-        }
-        else if (!dropRegion.objectEntity.determineIfChildOf(dropRegion.screenEntity))
-        {
-            textBox.text = "Compiler Error: " + dropRegion.objectEntity.identity.name + " does not inherit from " + dropRegion.screenEntity.identity.name;
-        }
-
         return false;
     }
 }

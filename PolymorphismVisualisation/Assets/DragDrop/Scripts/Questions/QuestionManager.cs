@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestionManager : MonoBehaviour
 {
@@ -32,9 +33,9 @@ public class QuestionManager : MonoBehaviour
 
     public void generateQuestion()
     {
+
         int numberOfQuestionTypes = 1;
         int selectedType = randomGen.Next(numberOfQuestionTypes);
-
 
         QuestionFactory factory = null;
         switch (selectedType)
@@ -55,6 +56,7 @@ public class QuestionManager : MonoBehaviour
         questionTextBox.SetActive(false);
         statusMessageBox.SetActive(false);
         statusMessageBox.GetComponentInChildren<TextMeshProUGUI>().text = "Status: ";
+        statusMessageBox.GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
         checkButton.SetActive(false);
         yesButton.SetActive(false);
         noButton.SetActive(false);
@@ -67,7 +69,6 @@ public class QuestionManager : MonoBehaviour
         if (currentQuestion.checkCorrectness())
         {
             System.Threading.Thread.Sleep(3000);
-            clearQuestionRegion();
             generateQuestion();
         }
     }
@@ -75,6 +76,7 @@ public class QuestionManager : MonoBehaviour
     public void updateQuestion()
     {
         currentQuestion.loadQuestion();
+        currentQuestion.checkCorrectness();
     }
 
 

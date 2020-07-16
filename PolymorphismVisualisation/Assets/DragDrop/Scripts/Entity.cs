@@ -226,6 +226,10 @@ public class Entity
 
     public bool Equals(Entity other)
     {
+        if(other == null)
+        {
+            return false;
+        }
         return (other.id.Equals(this.id));
     }
 }

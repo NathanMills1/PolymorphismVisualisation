@@ -154,6 +154,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             method.gameObject.SetActive(false);
         }
 
+        questionManager.updateQuestion();
     }
 
 

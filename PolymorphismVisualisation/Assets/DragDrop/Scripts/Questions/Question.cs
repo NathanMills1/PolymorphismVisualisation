@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public abstract class Question
 {
     protected Entity variableType { get; set; }
+    protected Entity childVariableType { get; set; }
     protected int variableGeneration { get; set; }
     protected int numberOfCodeLines { get; set; }
     protected string codeText { get; set; }
@@ -33,19 +35,29 @@ public abstract class Question
             "__________";
         newCodeText = newCodeText.Replace("ObjectType", objectName);
 
-        newCodeText = performQuestionSpecificSwaps(newCodeText);
+        if(variableType.parent != null)
+        {
+            newCodeText = newCodeText.Replace("ParentType", variableType.parent.identity.name);
+        }
+
+        if(childVariableType != null)
+        {
+            newCodeText = newCodeText.Replace("ChildType", childVariableType.identity.name);
+        }
+
+        newCodeText = performQuestionSpecificCodeSwaps(newCodeText);
 
         return newCodeText;
     }
 
-    protected virtual string performQuestionSpecificSwaps(string newCodeText)
+    protected virtual string performQuestionSpecificCodeSwaps(string newCodeText)
     {
         return newCodeText;
     }
 
     protected void setCodeBoxHeight()
     {
-        int height = 30 + 40 * numberOfCodeLines;
+        int height = 30 + 30 * numberOfCodeLines;
         codeBox.GetComponent<RectTransform>().sizeDelta = new Vector2(codeBox.GetComponent<RectTransform>().rect.width, height);
     }
 
@@ -60,5 +72,30 @@ public abstract class Question
         Question.dropRegion = dropRegion;
     }
 
-    public abstract bool checkCorrectness();
+    public bool checkCorrectness()
+    {
+        TextMeshProUGUI textBox = statusMessageBox.GetComponentInChildren<TextMeshProUGUI>();
+        if (dropRegion.screenEntity == null)
+        {
+            textBox.text = "Status: ";
+            textBox.color = Color.black;
+        } 
+        else if(dropRegion.objectEntity == null)
+        {
+            textBox.text = "Compiler Error: Null reference to object";
+            textBox.color = Color.red;
+        }
+        else if (!dropRegion.objectEntity.determineIfChildOf(dropRegion.screenEntity))
+        {
+            textBox.text = "Compiler Error: " + dropRegion.objectEntity.identity.name + " does not inherit from " + dropRegion.screenEntity.identity.name;
+            textBox.color = Color.red;
+        }
+
+        return performQuestionSpecificCheck(textBox);
+    }
+
+    public virtual bool performQuestionSpecificCheck(TextMeshProUGUI textBox)
+    {
+        return true;
+    }
 }
