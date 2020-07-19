@@ -49,8 +49,11 @@ public class DropRegion : MonoBehaviour, IDropHandler {
 
             updateMethods();
             setMethodColourPreserverSize();
-            determineFadeVisibility();
             checkForErrors();
+
+            //Disabled for now as might not be using it
+            //determineFadeVisibility();
+
 
             questionManager.updateQuestion();
         }
@@ -61,7 +64,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         this.screenEntity = screenEntity;
         this.screenImage.sprite = screenEntity.screenImage;
         this.screenImage.gameObject.SetActive(true);
-
+        questionManager.screenPlaced(screenEntity);
     }
 
     public void placeObject(Entity objectEntity)

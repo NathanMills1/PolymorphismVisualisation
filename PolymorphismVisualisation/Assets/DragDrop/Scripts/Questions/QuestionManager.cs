@@ -23,6 +23,7 @@ public class QuestionManager : MonoBehaviour
     void Start()
     {
         Question.setGameObjects(codeBox, questionTextBox, statusMessageBox, checkButton, yesButton, noButton, dropRegion);
+        QuestionFactory.setCodeLanguage(Language.CSharp);
     }
 
     // Update is called once per frame
@@ -34,7 +35,7 @@ public class QuestionManager : MonoBehaviour
     public void generateQuestion()
     {
 
-        int numberOfQuestionTypes = 1;
+        int numberOfQuestionTypes = 2;
         int selectedType = randomGen.Next(numberOfQuestionTypes);
 
         QuestionFactory factory = null;
@@ -42,6 +43,9 @@ public class QuestionManager : MonoBehaviour
         {
             case 0:
                 factory = new BasicQuestionFactory(InheritanceGenerator.selectedEntitiesByGeneration);
+                break;
+            case 1:
+                factory = new ValidMethodCallQuestionFactory(InheritanceGenerator.selectedEntitiesByGeneration);
                 break;
         }
 
@@ -68,7 +72,8 @@ public class QuestionManager : MonoBehaviour
     {
         if (currentQuestion.checkCorrectness())
         {
-            System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(1000);
+            clearQuestionRegion();
             generateQuestion();
         }
     }
@@ -77,6 +82,11 @@ public class QuestionManager : MonoBehaviour
     {
         currentQuestion.loadQuestion();
         currentQuestion.checkCorrectness();
+    }
+
+    public void screenPlaced(Entity screen)
+    {
+        currentQuestion.screenPlaced(screen);
     }
 
 

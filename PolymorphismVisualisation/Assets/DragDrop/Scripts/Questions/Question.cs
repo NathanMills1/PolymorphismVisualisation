@@ -12,6 +12,9 @@ public abstract class Question
     protected string codeText { get; set; }
     protected string questionText { get; set; }
 
+    protected int variableCodePosition { get; set; }
+    protected int objectCodePosition { get; set; }
+
     protected static GameObject codeBox;
     protected static GameObject questionTextBox;
     protected static GameObject statusMessageBox;
@@ -57,7 +60,7 @@ public abstract class Question
 
     protected void setCodeBoxHeight()
     {
-        int height = 30 + 30 * numberOfCodeLines;
+        int height = 25 + 35 * numberOfCodeLines;
         codeBox.GetComponent<RectTransform>().sizeDelta = new Vector2(codeBox.GetComponent<RectTransform>().rect.width, height);
     }
 
@@ -94,8 +97,26 @@ public abstract class Question
         return performQuestionSpecificCheck(textBox);
     }
 
+    public virtual bool checkYesNoAnswer(bool userAnswer)
+    {
+        return false;
+    }
+
     public virtual bool performQuestionSpecificCheck(TextMeshProUGUI textBox)
     {
         return true;
     }
+
+    public virtual void screenPlaced(Entity screenRepresentation) {
+        if(variableCodePosition != -1 && !screenRepresentation.Equals(variableType))
+        {
+            TextAnimation textAnimator = codeBox.GetComponentInChildren<TextAnimation>();
+            textAnimator.StartCoroutine(textAnimator.shakeText(variableCodePosition));
+        }
+    }
+
+    public virtual void objectPlaced(Entity objectRepresentation)
+    {
+    }
+
 }

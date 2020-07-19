@@ -14,7 +14,7 @@ public class Entity
     public Sprite objectImage;
 
     public Entity parent { get; set; }
-    private List<Entity> children { get; }
+    public List<Entity> children { get; private set; }
 
     public int height { get; set; }
     public int generation { get; }
