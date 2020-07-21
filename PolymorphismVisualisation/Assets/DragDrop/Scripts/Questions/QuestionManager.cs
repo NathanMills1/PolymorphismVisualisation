@@ -56,8 +56,6 @@ public class QuestionManager : MonoBehaviour
 
     private void clearQuestionRegion()
     {
-        codeBox.SetActive(false);
-        questionTextBox.SetActive(false);
         statusMessageBox.SetActive(false);
         statusMessageBox.GetComponentInChildren<TextMeshProUGUI>().text = "Status: ";
         statusMessageBox.GetComponentInChildren<TextMeshProUGUI>().color = Color.black;

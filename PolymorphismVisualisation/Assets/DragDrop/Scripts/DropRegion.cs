@@ -14,8 +14,6 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     public GameObject parentTypeError;
     public QuestionManager questionManager;
     public Vector2 screenStartPosition;
-    public Vector2 screenEndPosition;
-    public Vector2 objectStartPosition;
 
     public Entity screenEntity { get; private set; }
     public Entity objectEntity { get; private set; }
@@ -49,10 +47,6 @@ public class DropRegion : MonoBehaviour, IDropHandler {
                 placeObject(eventData.pointerDrag.GetComponent<EntityRepresentation>().getRepresentation());
             }
 
-            updateMethods();
-            checkForErrors();
-
-
             questionManager.updateQuestion();
         }
     }
@@ -78,31 +72,20 @@ public class DropRegion : MonoBehaviour, IDropHandler {
 
     public void placeObject(Entity objectEntity)
     {
+        parentTypeError.SetActive(false);
+
         if (screenEntity != null)
         {
             this.objectEntity = objectEntity;
             this.objectImage.sprite = objectEntity.objectImage;
             this.objectImage.gameObject.SetActive(true);
-            objectEntity.updateMethodNames(this.screenMethods);
+            objectEntity.updateMethodNames(this.objectMethods);
+            StartCoroutine(slideObjectIn());
 
         }
         else //TODO make message detailing to place screen first
         {
 
-        }
-    }
-
-    public void updateMethods()
-    {
-        if (objectEntity != null)
-        {
-
-            int numberOfMethods = screenEntity.identity.totalMethods;
-            for (int i = 0; i < objectMethods.Length; i++)
-            {
-                bool isVisible = i < numberOfMethods && i<objectEntity.identity.totalMethods;
-                screenMethods[i].gameObject.SetActive(isVisible);
-            }
         }
     }
 
@@ -154,6 +137,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     {
         const float DURATION = 0.4f;
         const float STEP_SIZE = 0.05f;
+        Vector2 screenEndPosition = new Vector2(0, -100);
         float currentTime = 0;
 
         GameObject screen = screenImage.gameObject;
@@ -171,6 +155,30 @@ public class DropRegion : MonoBehaviour, IDropHandler {
 
         screen.transform.localPosition = screenEndPosition;
         questionManager.screenPlaced(screenEntity);
+    }
+
+    public IEnumerator slideObjectIn()
+    {
+        const float DURATION = 0.6f;
+        const float STEP_SIZE = 0.05f;
+        Vector2 objectEndPosition = new Vector2(7, -107);
+        Vector2 objectStartPosition = new Vector2(7, -107 + (this.objectEntity.height / 0.35f));
+        float currentTime = 0;
+
+        GameObject page = objectImage.gameObject;
+
+        while (currentTime <= DURATION)
+        {
+            float alpha = currentTime / DURATION;
+            page.transform.localPosition = (1 - alpha) * objectStartPosition + alpha * objectEndPosition;
+
+            currentTime += STEP_SIZE;
+
+            yield return new WaitForSeconds(STEP_SIZE);
+        }
+
+        page.transform.localPosition = objectEndPosition;
+        checkForErrors();
     }
 
 

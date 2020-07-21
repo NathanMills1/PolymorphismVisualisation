@@ -27,11 +27,7 @@ public class ValidMethodCallQuestion : Question
 
     public override void loadQuestion()
     {
-        codeBox.SetActive(true);
-        setCodeBoxHeight();
         codeBox.GetComponentInChildren<TextMeshProUGUI>().text = createCodeText();
-
-        questionTextBox.SetActive(true);
         questionTextBox.GetComponentInChildren<TextMeshProUGUI>().text = createQuestionText();
 
         statusMessageBox.SetActive(true);
