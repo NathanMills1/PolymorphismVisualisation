@@ -89,17 +89,18 @@ public class InheritanceGenerator : MonoBehaviour
         {
             string[] details = line.Split('\t');
             Entity temp;
-            Sprite screenImage = Resources.Load<Sprite>(details[3]);
+            Sprite screenImage = Resources.Load<Sprite>(details[3] + " Screen");
             Sprite objectImage = Resources.Load<Sprite>(details[3] + " Object");
+            Sprite shadowImage = Resources.Load<Sprite>(details[3] + " Shadow");
 
             if (!details[2].Trim().Equals(""))
             {
                 Entity parent = entityById[details[2]];
-                temp = new Entity(parent, int.Parse(details[0]), int.Parse(details[1]), screenImage, objectImage, details[4]);
+                temp = new Entity(parent, int.Parse(details[0]), int.Parse(details[1]), screenImage, objectImage, shadowImage, details[4]);
             }
             else //Has no parent
             {
-                temp = new Entity(int.Parse(details[0]), int.Parse(details[1]), screenImage, objectImage, details[4]);
+                temp = new Entity(int.Parse(details[0]), int.Parse(details[1]), screenImage, objectImage, shadowImage, details[4]);
             }
 
             temp.height = (int)(temp.height * SCALE_FACTOR);

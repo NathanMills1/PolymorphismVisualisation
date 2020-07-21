@@ -108,10 +108,18 @@ public abstract class Question
     }
 
     public virtual void screenPlaced(Entity screenRepresentation) {
-        if(variableCodePosition != -1 && !screenRepresentation.Equals(variableType))
+        TextAnimation textAnimator = codeBox.GetComponentInChildren<TextAnimation>();
+        if (variableCodePosition != -1)
         {
-            TextAnimation textAnimator = codeBox.GetComponentInChildren<TextAnimation>();
-            textAnimator.StartCoroutine(textAnimator.shakeText(variableCodePosition));
+            if (!screenRepresentation.Equals(variableType))
+            {
+                
+                textAnimator.StartCoroutine(textAnimator.shakeText(variableCodePosition));
+            }
+            else
+            {
+                textAnimator.StartCoroutine(textAnimator.glowText(variableCodePosition));
+            }
         }
     }
 

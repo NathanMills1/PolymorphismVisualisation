@@ -12,6 +12,7 @@ public class Entity
 
     public Sprite screenImage;
     public Sprite objectImage;
+    public Sprite shadow;
 
     public Entity parent { get; set; }
     public List<Entity> children { get; private set; }
@@ -24,19 +25,20 @@ public class Entity
 
     protected bool gameObjectMade = false;
 
-    public Entity(Entity parent, int id, int height, Sprite image, Sprite objectImage, string objectColour) : this(id, height, image, objectImage, objectColour)
+    public Entity(Entity parent, int id, int height, Sprite image, Sprite objectImage, Sprite shadow, string objectColour) : this(id, height, image, objectImage, shadow, objectColour)
     {
         this.parent = parent;
         parent.addChild(this);
         generation = this.parent.generation + 1;
     }
 
-    public Entity(int id,int height, Sprite image, Sprite objectImage, string objectColour)
+    public Entity(int id,int height, Sprite image, Sprite objectImage, Sprite shadow, string objectColour)
     {
         this.id = id;
         this.height = height;
         this.screenImage = image;
         this.objectImage = objectImage;
+        this.shadow = shadow;
         this.children = new List<Entity>();
         this.objectColour = objectColour;
         generation = 1;

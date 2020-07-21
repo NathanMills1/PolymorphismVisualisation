@@ -10,10 +10,12 @@ public class DropRegion : MonoBehaviour, IDropHandler {
 
     public Image screenImage;
     public Image objectImage;
+    public Image screenShadow;
     public GameObject parentTypeError;
-    public GameObject fadeOut;
-    public GameObject methodColourPreserver;
     public QuestionManager questionManager;
+    public Vector2 screenStartPosition;
+    public Vector2 screenEndPosition;
+    public Vector2 objectStartPosition;
 
     public Entity screenEntity { get; private set; }
     public Entity objectEntity { get; private set; }
@@ -48,11 +50,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             }
 
             updateMethods();
-            setMethodColourPreserverSize();
             checkForErrors();
-
-            //Disabled for now as might not be using it
-            //determineFadeVisibility();
 
 
             questionManager.updateQuestion();
@@ -61,10 +59,21 @@ public class DropRegion : MonoBehaviour, IDropHandler {
 
     public void placeScreen(Entity screenEntity)
     {
-        this.screenEntity = screenEntity;
-        this.screenImage.sprite = screenEntity.screenImage;
-        this.screenImage.gameObject.SetActive(true);
-        questionManager.screenPlaced(screenEntity);
+        if(objectEntity == null)
+        {
+            this.screenEntity = screenEntity;
+            this.screenImage.sprite = screenEntity.screenImage;
+            this.screenImage.gameObject.SetActive(true);
+            this.screenShadow.sprite = screenEntity.shadow;
+            this.screenShadow.gameObject.SetActive(true);
+            StartCoroutine(dropScreen());
+        }
+        else //TODO have error appear stating cannot change screen type while object is placed
+        {
+
+        }
+        
+        
     }
 
     public void placeObject(Entity objectEntity)
@@ -75,23 +84,11 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             this.objectImage.sprite = objectEntity.objectImage;
             this.objectImage.gameObject.SetActive(true);
             objectEntity.updateMethodNames(this.screenMethods);
-            objectEntity.updateMethodNames(this.objectMethods);
 
         }
         else //TODO make message detailing to place screen first
         {
 
-        }
-    }
-
-    public void setMethodColourPreserverSize()
-    {
-        if(objectEntity != null)
-        {
-            int height = System.Math.Min(objectEntity.height,screenEntity.height);
-            height = (int)(height / 0.35) - 65;
-            methodColourPreserver.GetComponent<RectTransform>().sizeDelta = new Vector2(220, height);
-            methodColourPreserver.SetActive(true);
         }
     }
 
@@ -109,12 +106,6 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         }
     }
 
-    public void determineFadeVisibility()
-    {
-        bool fadeActive = screenEntity != null;
-        this.fadeOut.SetActive(fadeActive);
-    }
-
     public void checkForErrors()
     {
         if(objectEntity != null)
@@ -125,7 +116,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             if (!screenIsParent && screenEntity.height > objectEntity.height)
             {
                 parentTypeError.GetComponent<RectTransform>().sizeDelta = new Vector2(410, ((screenEntity.height - objectEntity.height) / 0.35f) - 10);
-                parentTypeError.transform.localPosition = new Vector3(0, 0.0f - (objectEntity.height/0.35f), 0);
+                parentTypeError.transform.localPosition = new Vector3(0, -100.0f - (objectEntity.height/0.35f), 0);
             }
             parentTypeError.SetActive(!screenIsParent && screenEntity.height > objectEntity.height);
 
@@ -141,9 +132,8 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     {
         this.screenImage.gameObject.SetActive(false);
         this.objectImage.gameObject.SetActive(false);
-        this.methodColourPreserver.SetActive(false);
         this.parentTypeError.SetActive(false);
-        this.fadeOut.SetActive(false);
+        this.screenShadow.gameObject.SetActive(false);
 
         this.screenEntity = null;
         this.objectEntity = null;
@@ -158,6 +148,29 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         }
 
         questionManager.updateQuestion();
+    }
+
+    public IEnumerator dropScreen()
+    {
+        const float DURATION = 0.4f;
+        const float STEP_SIZE = 0.05f;
+        float currentTime = 0;
+
+        GameObject screen = screenImage.gameObject;
+
+        while(currentTime <= DURATION)
+        {
+            float alpha = currentTime / DURATION;
+            screen.transform.localPosition = (1 - alpha) * screenStartPosition + alpha * screenEndPosition;
+            screenShadow.color = new Color(55, 55, 55, 0.6f * alpha);
+
+            currentTime += STEP_SIZE;
+
+            yield return new WaitForSeconds(STEP_SIZE);
+        }
+
+        screen.transform.localPosition = screenEndPosition;
+        questionManager.screenPlaced(screenEntity);
     }
 
 
