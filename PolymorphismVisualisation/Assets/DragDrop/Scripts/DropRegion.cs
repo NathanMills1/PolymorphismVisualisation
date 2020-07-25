@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class DropRegion : MonoBehaviour, IDropHandler {
 
     public Image screenImage;
+    public Image bottomScreenImage;
     public Image objectImage;
     public Image screenShadow;
     public GameObject parentTypeError;
@@ -58,6 +59,10 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             this.screenEntity = screenEntity;
             this.screenImage.sprite = screenEntity.screenImage;
             this.screenImage.gameObject.SetActive(true);
+
+            this.bottomScreenImage.sprite = screenEntity.screenImage;
+            this.bottomScreenImage.gameObject.SetActive(true);
+            
             this.screenShadow.sprite = screenEntity.shadow;
             this.screenShadow.gameObject.SetActive(true);
             StartCoroutine(dropScreen());
@@ -98,8 +103,8 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             bool screenIsParent = objectEntity.determineIfChildOf(screenEntity);
             if (!screenIsParent && screenEntity.height > objectEntity.height)
             {
-                parentTypeError.GetComponent<RectTransform>().sizeDelta = new Vector2(410, ((screenEntity.height - objectEntity.height) / 0.35f) - 10);
-                parentTypeError.transform.localPosition = new Vector3(0, -100.0f - (objectEntity.height/0.35f), 0);
+                parentTypeError.GetComponent<RectTransform>().sizeDelta = new Vector2(410, (screenEntity.height - objectEntity.height) - 10);
+                parentTypeError.transform.localPosition = new Vector3(0, -100.0f - (objectEntity.height), 0);
             }
             parentTypeError.SetActive(!screenIsParent && screenEntity.height > objectEntity.height);
 
@@ -114,6 +119,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     public void clearSelected()
     {
         this.screenImage.gameObject.SetActive(false);
+        this.bottomScreenImage.gameObject.SetActive(false);
         this.objectImage.gameObject.SetActive(false);
         this.parentTypeError.SetActive(false);
         this.screenShadow.gameObject.SetActive(false);
@@ -137,15 +143,17 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     {
         const float DURATION = 0.4f;
         const float STEP_SIZE = 0.05f;
-        Vector2 screenEndPosition = new Vector2(0, -100);
+        Vector2 screenEndPosition = new Vector2(-5, -125);
         float currentTime = 0;
 
         GameObject screen = screenImage.gameObject;
+        GameObject bottomScreen = bottomScreenImage.gameObject;
 
         while(currentTime <= DURATION)
         {
             float alpha = currentTime / DURATION;
             screen.transform.localPosition = (1 - alpha) * screenStartPosition + alpha * screenEndPosition;
+            bottomScreen.transform.localPosition = (1 - alpha) * screenStartPosition + alpha * screenEndPosition - new Vector2(-9,9);
             screenShadow.color = new Color(55, 55, 55, 0.6f * alpha);
 
             currentTime += STEP_SIZE;
@@ -154,6 +162,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         }
 
         screen.transform.localPosition = screenEndPosition;
+        bottomScreen.transform.localPosition = screenEndPosition - new Vector2(-9, 9);
         questionManager.screenPlaced(screenEntity);
     }
 
@@ -161,8 +170,8 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     {
         const float DURATION = 0.6f;
         const float STEP_SIZE = 0.05f;
-        Vector2 objectEndPosition = new Vector2(7, -107);
-        Vector2 objectStartPosition = new Vector2(7, -107 + (this.objectEntity.height / 0.35f));
+        Vector2 objectEndPosition = new Vector2(3, -133);
+        Vector2 objectStartPosition = new Vector2(400, -133);
         float currentTime = 0;
 
         GameObject page = objectImage.gameObject;

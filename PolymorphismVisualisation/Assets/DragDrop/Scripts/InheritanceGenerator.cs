@@ -32,13 +32,14 @@ public class InheritanceGenerator : MonoBehaviour
         selectedEntitiesByGeneration = sortEntitiesByGeneration(selectedEntities);
 
         //create gameObject representation for each entity
-        int totalHeight = 0;
+        float totalHeight = 0;
         foreach(Entity entity in selectedEntities)
         {
             entity.constructGameObject(screenList, objectList);
-            totalHeight += 10 + entity.height;
+            totalHeight += 20 + entity.height * Entity.SCALE_FACTOR;
         }
-        screenList.GetComponent<RectTransform>().sizeDelta = new Vector2(0, totalHeight);
+        screenList.GetComponent<RectTransform>().sizeDelta = new Vector2(0, totalHeight + 10);
+        objectList.GetComponent<RectTransform>().sizeDelta = new Vector2(0, totalHeight);
 
         questionManager.generateQuestion();
 
@@ -81,7 +82,6 @@ public class InheritanceGenerator : MonoBehaviour
 
     private List<Entity> loadEntities()
     {
-        double SCALE_FACTOR = 0.35;
         Dictionary<string, Entity> entityById = new Dictionary<string, Entity>();
         List<Entity> entities = new List<Entity>();
         string[] lines = System.IO.File.ReadAllLines(@"Assets\Resources\Images.txt");
@@ -102,8 +102,6 @@ public class InheritanceGenerator : MonoBehaviour
             {
                 temp = new Entity(int.Parse(details[0]), int.Parse(details[1]), screenImage, objectImage, shadowImage, details[4]);
             }
-
-            temp.height = (int)(temp.height * SCALE_FACTOR);
             entities.Add(temp);
             entityById.Add(details[0], temp);
         }

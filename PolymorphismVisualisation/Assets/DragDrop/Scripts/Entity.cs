@@ -18,6 +18,7 @@ public class Entity
     public List<Entity> children { get; private set; }
 
     public int height { get; set; }
+    public const float SCALE_FACTOR = 0.35f;
     public int generation { get; }
     public int id { get;  }
     public string objectColour { get; }
@@ -87,7 +88,8 @@ public class Entity
         objectRepresentation.GetComponentInChildren<EntityRepresentation>().setEntity(this);
         objectRepresentation.SetActive(true);
         objectRepresentation.GetComponentInChildren<UnityEngine.UI.Image>().sprite = objectImage;
-        objectRepresentation.GetComponent<LayoutElement>().minHeight = height + 10;
+        objectRepresentation.GetComponent<LayoutElement>().minHeight = height*SCALE_FACTOR + 10;
+        objectRepresentation.GetComponent<LayoutElement>().preferredHeight = height * SCALE_FACTOR + 10;
         objectRepresentation.GetComponentInChildren<Text>().text = identity.name;
         TextMeshProUGUI[] texts = objectRepresentation.GetComponentsInChildren<TextMeshProUGUI>();
         updateMethodNames(texts);
@@ -101,7 +103,8 @@ public class Entity
         screen.GetComponentInChildren<EntityRepresentation>().setEntity(this);
         screen.SetActive(true);
         screen.GetComponentInChildren<UnityEngine.UI.Image>().sprite = screenImage;
-        screen.GetComponent<LayoutElement>().minHeight = height + 10;
+        screen.GetComponent<LayoutElement>().minHeight = height * SCALE_FACTOR + 10;
+        screen.GetComponent<LayoutElement>().preferredHeight = height * SCALE_FACTOR + 10;
         screen.GetComponentInChildren<Text>().text = identity.name;
         return screen;
     }
