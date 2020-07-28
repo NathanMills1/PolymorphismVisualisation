@@ -30,9 +30,6 @@ public class ValidMethodCallQuestion : Question
         codeBox.GetComponentInChildren<TextMeshProUGUI>().text = createCodeText();
         questionTextBox.GetComponentInChildren<TextMeshProUGUI>().text = createQuestionText();
 
-        statusMessageBox.SetActive(true);
-        checkButton.SetActive(true);
-
         yesButton.SetActive(true);
         noButton.SetActive(true);
     }
@@ -65,6 +62,6 @@ public class ValidMethodCallQuestion : Question
 
     public override bool checkYesNoAnswer(bool userAnswer)
     {
-        return (userAnswer = correctAnswer);
+        return userAnswer == correctAnswer;
     }
 }

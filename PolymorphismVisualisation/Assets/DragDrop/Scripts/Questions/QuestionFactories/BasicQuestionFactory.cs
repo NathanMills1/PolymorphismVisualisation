@@ -28,13 +28,18 @@ public class BasicQuestionFactory : QuestionFactory
     {
         switch (codeLanguage)
         {
-            case Language.Java:
             case Language.CSharp:
                 return new CodeTextFormatter().addCodeSection(CodeTextFormatter.variableTypeColour, "VariableType ")
-                    .addCodeSection(CodeTextFormatter.codeColour, "VariableName = New ")
+                    .addCodeSection(CodeTextFormatter.codeColour, "*VariableName = new ")
+                    .addCodeSection(CodeTextFormatter.objectColour, "ObjectType();")
+                    .formattedString;
+            case Language.Java:
+                return new CodeTextFormatter().addCodeSection(CodeTextFormatter.variableTypeColour, "VariableType ")
+                    .addCodeSection(CodeTextFormatter.codeColour, "VariableName = new ")
                     .addCodeSection(CodeTextFormatter.objectColour, "ObjectType();")
                     .formattedString;
             case Language.Python:
+                //Question doesnt work in python as can't set typing
                 return "";
             default:
                 return "";

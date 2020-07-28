@@ -19,17 +19,10 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     public Entity screenEntity { get; private set; }
     public Entity objectEntity { get; private set; }
 
-    private TextMeshProUGUI[] screenMethods;
     private TextMeshProUGUI[] objectMethods;
 
     void Start()
     {
-        screenMethods = screenImage.gameObject.transform.GetComponentsInChildren<TextMeshProUGUI>();
-        foreach (TextMeshProUGUI text in screenMethods)
-        {
-            text.gameObject.SetActive(false);
-        }
-
         objectMethods = objectImage.gameObject.transform.GetComponentsInChildren<TextMeshProUGUI>();
         foreach (TextMeshProUGUI text in objectMethods)
         {
@@ -127,10 +120,6 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         this.screenEntity = null;
         this.objectEntity = null;
 
-        foreach(TextMeshProUGUI method in screenMethods)
-        {
-            method.gameObject.SetActive(false);
-        }
         foreach (TextMeshProUGUI method in objectMethods)
         {
             method.gameObject.SetActive(false);
@@ -188,6 +177,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
 
         page.transform.localPosition = objectEndPosition;
         checkForErrors();
+        questionManager.objectPlaced(objectEntity);
     }
 
 

@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class Question
 {
     protected Entity variableType { get; set; }
+    protected Entity objectType { get; set; }
     protected Entity childVariableType { get; set; }
     protected int variableGeneration { get; set; }
     protected int numberOfCodeLines { get; set; }
@@ -29,14 +30,16 @@ public abstract class Question
 
     protected virtual string createCodeText()
     {
-        string newCodeText = codeText
-            .Replace("VariableType", variableType.identity.name)
+        string newCodeText = performQuestionSpecificCodeSwaps(codeText);
+        string variableName = camelCase(variableType);
+
+        newCodeText = newCodeText.Replace("VariableType", variableType.identity.name)
             .Replace("VariableName", variableType.identity.name.ToLower());
 
-        string objectName = (dropRegion.objectEntity != null) ?
+        string objectType = (dropRegion.objectEntity != null) ?
             dropRegion.objectEntity.identity.name :
             "__________";
-        newCodeText = newCodeText.Replace("ObjectType", objectName);
+        newCodeText = newCodeText.Replace("ObjectType", objectType);
 
         if(variableType.parent != null)
         {
@@ -125,6 +128,25 @@ public abstract class Question
 
     public virtual void objectPlaced(Entity objectRepresentation)
     {
+        TextAnimation textAnimator = codeBox.GetComponentInChildren<TextAnimation>();
+        if (objectCodePosition != -1)
+        {
+            if (!objectRepresentation.Equals(objectType))
+            {
+
+                textAnimator.StartCoroutine(textAnimator.shakeText(objectCodePosition));
+            }
+            else
+            {
+                textAnimator.StartCoroutine(textAnimator.glowText(objectCodePosition));
+            }
+        }
+    }
+
+    protected string camelCase(Entity entity)
+    {
+        string input = entity.identity.name;
+        return input.ToCharArray()[0].ToString().ToLowerInvariant() + input.Substring(1);
     }
 
 }

@@ -35,7 +35,7 @@ public class QuestionManager : MonoBehaviour
     public void generateQuestion()
     {
 
-        int numberOfQuestionTypes = 2;
+        int numberOfQuestionTypes = 3;
         int selectedType = randomGen.Next(numberOfQuestionTypes);
 
         QuestionFactory factory = null;
@@ -47,6 +47,9 @@ public class QuestionManager : MonoBehaviour
             case 1:
                 factory = new ValidMethodCallQuestionFactory(InheritanceGenerator.selectedEntitiesByGeneration);
                 break;
+            case 2:
+                factory = new ValidInsertionQuestionFactory(InheritanceGenerator.selectedEntitiesByGeneration);
+                break;
         }
 
         Question question = factory.getQuestion();
@@ -56,36 +59,54 @@ public class QuestionManager : MonoBehaviour
 
     private void clearQuestionRegion()
     {
+        dropRegion.clearSelected();
+
         statusMessageBox.SetActive(false);
-        statusMessageBox.GetComponentInChildren<TextMeshProUGUI>().text = "Status: ";
-        statusMessageBox.GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
         checkButton.SetActive(false);
         yesButton.SetActive(false);
         noButton.SetActive(false);
-
-        dropRegion.clearSelected();
     }
 
     public void checkQuestion()
     {
         if (currentQuestion.checkCorrectness())
         {
-            System.Threading.Thread.Sleep(1000);
-            clearQuestionRegion();
-            generateQuestion();
+            correctAnswerProcedure();
         }
+    }
+
+    public void answerBoolQuestion(bool answer)
+    {
+        if (currentQuestion.checkYesNoAnswer(answer))
+        {
+            correctAnswerProcedure();
+        }
+    }
+
+    private void correctAnswerProcedure()
+    {
+        //#TODO add correct answer sound
+        System.Threading.Thread.Sleep(1000);
+        clearQuestionRegion();
+        generateQuestion();
     }
 
     public void updateQuestion()
     {
         currentQuestion.loadQuestion();
-        currentQuestion.checkCorrectness();
     }
 
     public void screenPlaced(Entity screen)
     {
         currentQuestion.screenPlaced(screen);
     }
+
+    public void objectPlaced(Entity objectEntity)
+    {
+        currentQuestion.objectPlaced(objectEntity);
+    }
+
+    
 
 
 }

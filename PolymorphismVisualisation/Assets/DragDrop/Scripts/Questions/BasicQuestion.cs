@@ -22,6 +22,8 @@ public class BasicQuestion : Question
         codeBox.GetComponentInChildren<TextMeshProUGUI>().text = createCodeText();
         questionTextBox.GetComponentInChildren<TextMeshProUGUI>().text = createQuestionText();
 
+        statusMessageBox.GetComponentInChildren<TextMeshProUGUI>().text = "Status: ";
+        statusMessageBox.GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
         statusMessageBox.SetActive(true);
         checkButton.SetActive(true);
     }

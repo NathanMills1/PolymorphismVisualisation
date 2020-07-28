@@ -5,8 +5,8 @@
 4	SportsCar	"ActivateTurbo,OpenRoof,ActivateTractionControl"	1	2
 5	Ute	"StoreInBack,TraverseTerrain,ActivateSuspension"	1	2
 6	ElectricCar	"Charge,TransferEnergy,DetermineRoute"	1	2
-7	Stealth Bomber	"DropBomb,ActivateStealth,FireMissile"	2	2
-8	Passenger Jet	"LoadPassengers,ActivateMovie,FlushToilet"	2	2
+7	StealthBomber	"DropBomb,ActivateStealth,FireMissile"	2	2
+8	PassengerJet	"LoadPassengers,ActivateMovie,FlushToilet"	2	2
 9	Sesna	"Temp1,Temp2,KindOfLongTemp3"	2	2
 10	HelicopterType1	"A,B,C"	3	2
 11	HelicopterType2	"D,E,F"	3	2

@@ -29,9 +29,12 @@ public class TextAnimation : MonoBehaviour
 
     public IEnumerator shakeText(int wordPosition)
     {
-
+        Debug.Log(textObject.textInfo.wordInfo.Length);
         int firstCharacter = textObject.textInfo.wordInfo[wordPosition].firstCharacterIndex;
         int lastCharacter = textObject.textInfo.wordInfo[wordPosition].lastCharacterIndex;
+
+        textObject = gameObject.GetComponent<TextMeshProUGUI>();
+        textObject.ForceMeshUpdate();
 
         int shakeDirection = 1;
         float shakeOffset = 0;
@@ -108,6 +111,8 @@ public class TextAnimation : MonoBehaviour
         const float HORIZONTAL_INCREASE = 15.0f;
         const float VERTICAL_INCREASE = 5f;
 
+        textObject = gameObject.GetComponent<TextMeshProUGUI>();
+        textObject.ForceMeshUpdate();
 
         int firstCharacter = textObject.textInfo.wordInfo[wordPosition].firstCharacterIndex;
         int lastCharacter = textObject.textInfo.wordInfo[wordPosition].lastCharacterIndex;
