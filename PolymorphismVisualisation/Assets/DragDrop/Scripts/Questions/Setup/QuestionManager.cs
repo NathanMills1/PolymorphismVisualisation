@@ -13,6 +13,8 @@ public class QuestionManager : MonoBehaviour
     public GameObject yesButton;
     public GameObject noButton;
     public DropRegion dropRegion;
+    public AudioSource correctSound;
+    public AudioSource incorrectSound;
 
     private Question currentQuestion;
     private System.Random randomGen = new System.Random();
@@ -35,7 +37,7 @@ public class QuestionManager : MonoBehaviour
     public void generateQuestion()
     {
 
-        int numberOfQuestionTypes = 3;
+        int numberOfQuestionTypes = 4;
         int selectedType = randomGen.Next(numberOfQuestionTypes);
 
         QuestionFactory factory = null;
@@ -49,6 +51,9 @@ public class QuestionManager : MonoBehaviour
                 break;
             case 2:
                 factory = new ValidInsertionQuestionFactory(InheritanceGenerator.selectedEntitiesByGeneration);
+                break;
+            case 3:
+                factory = new CollectionCreationQuestionFactory(InheritanceGenerator.selectedEntitiesByGeneration);
                 break;
         }
 
@@ -73,6 +78,10 @@ public class QuestionManager : MonoBehaviour
         {
             correctAnswerProcedure();
         }
+        else
+        {
+            wrongAnswerProcedure();
+        }
     }
 
     public void answerBoolQuestion(bool answer)
@@ -81,14 +90,22 @@ public class QuestionManager : MonoBehaviour
         {
             correctAnswerProcedure();
         }
+        else
+        {
+            wrongAnswerProcedure();
+        }
     }
 
     private void correctAnswerProcedure()
     {
-        //#TODO add correct answer sound
-        System.Threading.Thread.Sleep(1000);
+        correctSound.Play();
         clearQuestionRegion();
         generateQuestion();
+    }
+
+    private void wrongAnswerProcedure()
+    {
+        incorrectSound.Play();
     }
 
     public void updateQuestion()

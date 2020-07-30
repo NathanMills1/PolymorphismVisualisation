@@ -33,21 +33,26 @@ public class BasicQuestion : Question
         return questionText.Replace("variableType", variableType.identity.name);
     }
 
-    public override bool performQuestionSpecificCheck(TextMeshProUGUI textBox)
+    protected override bool performQuestionSpecificCheck()
     {
+        string status;
+        Color colour;
         try
         {
-            if (variableType.Equals(dropRegion.screenEntity) && dropRegion.objectEntity.determineIfChildOf(dropRegion.screenEntity))
+            if (dropRegion.objectEntity == null)
             {
-                textBox.text = "Status: Valid object placed in screen";
-                textBox.color = Color.green;
+                status = "Compiler Error: Null reference to object";
+                colour = Color.red;
+                statusMessageBox.GetComponent<StatusHandler>().updateStatus(status, colour);
+            }
+             else if (variableType.Equals(dropRegion.screenEntity) && dropRegion.objectEntity.determineIfChildOf(dropRegion.screenEntity))
+            {
+                status = "Status: Valid object placed in screen";
+                colour = new Color32(33, 171, 74, 255);
+                statusMessageBox.GetComponent<StatusHandler>().updateStatus(status, colour);
                 return true;
             }
-            else if (!variableType.Equals(dropRegion.screenEntity))
-            {
-                textBox.text = "Status: Screen does not match variable type in question";
-                textBox.color = Color.red;
-            }
+
         } catch (System.NullReferenceException)
         {
             //Screen or object not placed, can't be correct

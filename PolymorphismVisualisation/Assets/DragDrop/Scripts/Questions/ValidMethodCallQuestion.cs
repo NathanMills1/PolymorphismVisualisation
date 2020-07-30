@@ -44,22 +44,6 @@ public class ValidMethodCallQuestion : Question
         return newCodeText.Replace("SelectedMethod", selectedMethod).Replace("ChildType", childType.identity.name);
     }
 
-    public override bool performQuestionSpecificCheck(TextMeshProUGUI textBox)
-    {
-        try
-        {
-            if (!variableType.Equals(dropRegion.screenEntity))
-            {
-                textBox.text = "Status: Screen does not match variable type in question";
-                textBox.color = Color.red;
-            }
-        } catch (System.NullReferenceException)
-        {
-            //Screen or object not placed, can't be correct
-        }
-        return false;
-    }
-
     public override bool checkYesNoAnswer(bool userAnswer)
     {
         return userAnswer == correctAnswer;

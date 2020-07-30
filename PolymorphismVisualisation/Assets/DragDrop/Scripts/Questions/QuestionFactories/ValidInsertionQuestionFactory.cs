@@ -59,7 +59,7 @@ public class ValidInsertionQuestionFactory : QuestionFactory
                 formattedText.addCodeSection(CodeTextFormatter.variableTypeColour, "VariableType");
 
                 variablePart = containerType == 0 ? ">" : "[]";
-                formattedText.addCodeSection(CodeTextFormatter.codeColour, variablePart + " VariableName;\nVariableName");
+                formattedText.addCodeSection(CodeTextFormatter.codeColour, variablePart + " VariableNames;\nVariableNames");
 
                 variablePart = containerType == 0 ? ".push_back(" : "[0] = ";
                 formattedText.addCodeSection(CodeTextFormatter.codeColour, variablePart)
@@ -86,16 +86,16 @@ public class ValidInsertionQuestionFactory : QuestionFactory
 
                 variablePart = containerType == 0 ? ">()" : "[]";
                 string variablePart2 = containerType == 0 ? ".add(" : "[0] = ";
-                formattedText.addCodeSection(CodeTextFormatter.codeColour, "VariableType" + variablePart + ";\nVariableName" + variablePart2);
+                formattedText.addCodeSection(CodeTextFormatter.codeColour, "VariableType" + variablePart + ";\nVariableNames" + variablePart2);
 
                  variablePart = containerType == 0 ? ");" : ";";
                 formattedText.addCodeSection(CodeTextFormatter.codeColour, "new ")
-                    .addCodeSection(CodeTextFormatter.objectColour, "InsertedType")
+                    .addCodeSection(CodeTextFormatter.objectColour, "InsertedType()")
                     .addCodeSection(CodeTextFormatter.codeColour, variablePart);
                 return formattedText.formattedString;
 
             case Language.Python:
-                return new CodeTextFormatter().addCodeSection(CodeTextFormatter.codeColour, "VariableName = []\nVariableName.append(")
+                return new CodeTextFormatter().addCodeSection(CodeTextFormatter.codeColour, "VariableNames = []\nVariableNames.append(")
                     .addCodeSection(CodeTextFormatter.objectColour, "InsertedType()")
                     .addCodeSection(CodeTextFormatter.codeColour, ")")
                     .formattedString;

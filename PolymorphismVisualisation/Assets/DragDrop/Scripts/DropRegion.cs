@@ -15,16 +15,23 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     public GameObject parentTypeError;
     public QuestionManager questionManager;
     public Vector2 screenStartPosition;
+    public AudioSource thudSound;
 
     public Entity screenEntity { get; private set; }
     public Entity objectEntity { get; private set; }
 
     private TextMeshProUGUI[] objectMethods;
+    private TextMeshProUGUI[] screenNames;
 
     void Start()
     {
         objectMethods = objectImage.gameObject.transform.GetComponentsInChildren<TextMeshProUGUI>();
         foreach (TextMeshProUGUI text in objectMethods)
+        {
+            text.gameObject.SetActive(false);
+        }
+        screenNames = screenImage.gameObject.transform.GetComponentsInChildren<TextMeshProUGUI>();
+        foreach (TextMeshProUGUI text in screenNames)
         {
             text.gameObject.SetActive(false);
         }
@@ -58,6 +65,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             
             this.screenShadow.sprite = screenEntity.shadow;
             this.screenShadow.gameObject.SetActive(true);
+            updateScreenNames(screenEntity);
             StartCoroutine(dropScreen());
         }
         else //TODO have error appear stating cannot change screen type while object is placed
@@ -109,6 +117,22 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         
     }
 
+    private void updateScreenNames(Entity screen)
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            screenNames[i].gameObject.SetActive(screen.generation > i);
+
+            Entity currentScreen = screen;
+            while (currentScreen.generation > i+1)
+            {
+                currentScreen = currentScreen.parent;
+            }
+            screenNames[i].text = currentScreen.identity.name;
+        }
+        
+    }
+
     public void clearSelected()
     {
         this.screenImage.gameObject.SetActive(false);
@@ -152,6 +176,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
 
         screen.transform.localPosition = screenEndPosition;
         bottomScreen.transform.localPosition = screenEndPosition - new Vector2(-9, 9);
+        thudSound.Play();
         questionManager.screenPlaced(screenEntity);
     }
 

@@ -31,20 +31,27 @@ public abstract class Question
     protected virtual string createCodeText()
     {
         string newCodeText = performQuestionSpecificCodeSwaps(codeText);
-        string variableName = camelCase(variableType);
 
-        newCodeText = newCodeText.Replace("VariableType", variableType.identity.name)
-            .Replace("VariableName", variableType.identity.name.ToLower());
+        if(variableType != null)
+        {
+            string variableName = camelCase(variableType);
+
+            newCodeText = newCodeText.Replace("VariableType", variableType.identity.name)
+                .Replace("VariableName", variableName);
+
+            if (variableType.parent != null)
+            {
+                newCodeText = newCodeText.Replace("ParentType", variableType.parent.identity.name);
+            }
+        }
+        
 
         string objectType = (dropRegion.objectEntity != null) ?
             dropRegion.objectEntity.identity.name :
             "__________";
         newCodeText = newCodeText.Replace("ObjectType", objectType);
 
-        if(variableType.parent != null)
-        {
-            newCodeText = newCodeText.Replace("ParentType", variableType.parent.identity.name);
-        }
+        
 
         if(childVariableType != null)
         {
@@ -80,24 +87,20 @@ public abstract class Question
 
     public bool checkCorrectness()
     {
-        TextMeshProUGUI textBox = statusMessageBox.GetComponentInChildren<TextMeshProUGUI>();
+        string status;
+        Color colour;
         if (dropRegion.screenEntity == null)
         {
-            textBox.text = "Status: ";
-            textBox.color = Color.black;
+            //#TODO make popup box for no screen
         } 
-        else if(dropRegion.objectEntity == null)
+        else if (dropRegion.objectEntity != null && !dropRegion.objectEntity.determineIfChildOf(dropRegion.screenEntity))
         {
-            textBox.text = "Compiler Error: Null reference to object";
-            textBox.color = Color.red;
-        }
-        else if (!dropRegion.objectEntity.determineIfChildOf(dropRegion.screenEntity))
-        {
-            textBox.text = "Compiler Error: " + dropRegion.objectEntity.identity.name + " does not inherit from " + dropRegion.screenEntity.identity.name;
-            textBox.color = Color.red;
+            status = "Compiler Error: " + dropRegion.objectEntity.identity.name + " does not inherit from " + dropRegion.screenEntity.identity.name;
+            colour = Color.red;
+            statusMessageBox.GetComponent<StatusHandler>().updateStatus(status, colour);
         }
 
-        return performQuestionSpecificCheck(textBox);
+        return performQuestionSpecificCheck();
     }
 
     public virtual bool checkYesNoAnswer(bool userAnswer)
@@ -105,7 +108,7 @@ public abstract class Question
         return false;
     }
 
-    public virtual bool performQuestionSpecificCheck(TextMeshProUGUI textBox)
+    protected virtual bool performQuestionSpecificCheck()
     {
         return true;
     }
@@ -148,5 +151,6 @@ public abstract class Question
         string input = entity.identity.name;
         return input.ToCharArray()[0].ToString().ToLowerInvariant() + input.Substring(1);
     }
+
 
 }
