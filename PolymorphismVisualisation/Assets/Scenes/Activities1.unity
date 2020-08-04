@@ -2412,6 +2412,7 @@ MonoBehaviour:
   screenList: {fileID: 797456927}
   objectList: {fileID: 380605603}
   questionManager: {fileID: 94753900}
+  activitySection: 3
 --- !u!1 &532841937
 GameObject:
   m_ObjectHideFlags: 0

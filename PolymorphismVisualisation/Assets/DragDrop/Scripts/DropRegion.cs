@@ -104,7 +104,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             bool screenIsParent = objectEntity.determineIfChildOf(screenEntity);
             if (!screenIsParent && screenEntity.height > objectEntity.height)
             {
-                parentTypeError.GetComponent<RectTransform>().sizeDelta = new Vector2(410, (screenEntity.height - objectEntity.height) - 10);
+                parentTypeError.GetComponent<RectTransform>().sizeDelta = new Vector2(410, (screenEntity.height - objectEntity.height));
                 parentTypeError.transform.localPosition = new Vector3(0, -100.0f - (objectEntity.height), 0);
             }
             parentTypeError.SetActive(!screenIsParent && screenEntity.height > objectEntity.height);

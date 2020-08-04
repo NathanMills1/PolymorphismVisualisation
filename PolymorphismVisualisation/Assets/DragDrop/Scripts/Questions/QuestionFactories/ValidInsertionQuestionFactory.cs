@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ValidInsertionQuestionFactory : QuestionFactory
 {
+    private int containerType { get; set; }
 
     public ValidInsertionQuestionFactory(Dictionary<int, List<Entity>> entities)
     {
@@ -18,7 +19,8 @@ public class ValidInsertionQuestionFactory : QuestionFactory
 
         bool correctAnswer = selectedEntity.determineIfChildOf(containerEntity);
 
-        int containerType = randomGen.Next(2);
+        containerType = randomGen.Next(2);
+
         int variablePosition;
         int objectPosition;
         if (containerType.Equals(0))
@@ -40,7 +42,8 @@ public class ValidInsertionQuestionFactory : QuestionFactory
     }
     protected override string getQuestionText()
     {
-        return "Is the method call shown in the code snippet valid?";
+        string type = containerType == 0 ? "list" : "array";
+        return "Can the object type shown be added to the given " + type + " type";
     }
 
     protected string getCodeText(int containerType)

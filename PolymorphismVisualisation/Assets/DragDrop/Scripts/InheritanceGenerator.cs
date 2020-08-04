@@ -15,7 +15,9 @@ public class InheritanceGenerator : MonoBehaviour
     public GameObject screenList;
     public GameObject objectList;
     public QuestionManager questionManager;
+    public int activitySection;
 
+    private System.Random randomGen = new System.Random();
     public static Dictionary<int, List<Entity>> selectedEntitiesByGeneration { get; private set; }
 
     // Start is called before the first frame update
@@ -28,16 +30,19 @@ public class InheritanceGenerator : MonoBehaviour
         Entity.setTemplates(parentIdentities, screenTemplate, objectTemplate);
 
         //TODO select which entities to use by some algorithm
-        List<Entity> selectedEntities = entities;
+        List<Entity> selectedEntities = selectEntities(entities);
         selectedEntitiesByGeneration = sortEntitiesByGeneration(selectedEntities);
+        removeObsoleteEntityReferences(selectedEntities);
 
         //create gameObject representation for each entity
         float totalHeight = 0;
+
         foreach(Entity entity in selectedEntities)
         {
             entity.constructGameObject(screenList, objectList);
             totalHeight += 20 + entity.height * Entity.SCALE_FACTOR;
         }
+
         screenList.GetComponent<RectTransform>().sizeDelta = new Vector2(0, totalHeight + 10);
         objectList.GetComponent<RectTransform>().sizeDelta = new Vector2(0, totalHeight);
 
@@ -122,6 +127,60 @@ public class InheritanceGenerator : MonoBehaviour
         }
 
         return entitiesByGeneration;
+    }
+
+    private List<Entity> selectEntities(List<Entity> allEntities)
+    {
+        Dictionary<int, List<Entity>> entitiesByGeneration = sortEntitiesByGeneration(allEntities);
+        switch (activitySection)
+        {
+            case 1:
+                //select only gen1 entities
+                break;
+            case 2:
+                //Select gen1 and gen2 entities
+                break;
+            case 3:
+                return selectEntitiesForMultiInheritance(entitiesByGeneration);
+            default:
+                //Set up case for overriding
+                break;
+        }
+        return null;
+    }
+
+    private List<Entity> selectEntitiesForMultiInheritance(Dictionary<int, List<Entity>> entitiesByGeneration)
+    {
+        List<Entity> chosenEntities = new List<Entity>();
+        Entity chosenEntity = null;
+
+        for(int i = 0; i<2; i++)
+        {
+            int entityPos = randomGen.Next(entitiesByGeneration[3].Count);
+            chosenEntity = entitiesByGeneration[3][entityPos];
+            while (chosenEntities.Contains(chosenEntity.parent))
+            {
+                entityPos = randomGen.Next(entitiesByGeneration[3].Count);
+                chosenEntity = entitiesByGeneration[3][entityPos];
+            }
+
+            chosenEntities.Add(chosenEntity);
+            chosenEntities.Add(chosenEntity.parent);
+            
+        }
+
+        chosenEntities.Add(chosenEntity.parent.parent);
+
+        return chosenEntities;
+
+    }
+
+    private void removeObsoleteEntityReferences(List<Entity> selectedEntities)
+    {
+        foreach(Entity entity in selectedEntities)
+        {
+            entity.children.RemoveAll(new System.Predicate<Entity>(x => !selectedEntities.Contains(x)));
+        }
     }
 
 }

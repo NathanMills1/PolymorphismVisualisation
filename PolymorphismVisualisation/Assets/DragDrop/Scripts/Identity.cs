@@ -13,7 +13,6 @@ public class Identity
     public Identity parent;
     public List<Identity> children;
     public string name;
-    public string[] methods;
     public List<string> selectedMethods;
     public int generation;
 
@@ -30,7 +29,6 @@ public class Identity
     public Identity(string name, string[] methods, int numberOfMethodsToUse)
     {
         this.name = name;
-        this.methods = methods;
         children = new List<Identity>();
 
         selectedMethods = new List<string>();

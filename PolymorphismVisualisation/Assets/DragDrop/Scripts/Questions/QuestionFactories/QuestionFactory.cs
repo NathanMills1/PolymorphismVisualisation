@@ -41,9 +41,9 @@ public abstract class QuestionFactory
 
     protected string selectMethod(Entity entity)
     {
-        int methodCount = entity.identity.methods.Length;
+        int methodCount = entity.identity.selectedMethods.Count;
         int selectedIndex = randomGen.Next(methodCount);
-        string method = entity.identity.methods[selectedIndex];
+        string method = entity.identity.selectedMethods[selectedIndex];
         return method;
     }
 
