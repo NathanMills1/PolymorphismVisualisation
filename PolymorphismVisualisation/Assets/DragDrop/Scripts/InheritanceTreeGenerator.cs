@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +20,7 @@ public class InheritanceTreeGenerator : MonoBehaviour
             treeMembersByParent.Add(treeMember, new List<GameObject>());
             foreach (GameObject childMember in treeMembers)
             {
-                if (childMember.name.Contains(treeMember.name + "_"))
+                if (Regex.IsMatch(childMember.name, treeMember.name + "_\\d"))
                 {
                     treeMembersByParent[treeMember].Add(childMember);
                 }
@@ -29,8 +30,8 @@ public class InheritanceTreeGenerator : MonoBehaviour
 
     private void assignEntity(Entity entity, GameObject treeMember)
     {
-        int children = entity.children.Count;
-        if(children > 0)
+        int children = treeMembersByParent[treeMember].Count;
+        if (children > 0)
         {
             for(int i = 0; i<children; i++)
             {
@@ -41,7 +42,7 @@ public class InheritanceTreeGenerator : MonoBehaviour
         TextMeshProUGUI[] fields = treeMember.GetComponentsInChildren<TextMeshProUGUI>();
         treeMember.GetComponentInChildren<Image>().sprite = entity.objectImage;
         treeMember.GetComponentInChildren<Text>().text = entity.identity.name;
-        entity.updateMethodNames(fields);
+        entity.updateFields(fields, false);
     }
 
     public void setupInheritanceTree(Dictionary<int, List<Entity>> entitiesByGeneration)

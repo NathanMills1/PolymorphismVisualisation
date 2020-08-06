@@ -1,13 +1,13 @@
 ID	Class	Fields	Parent ID	Fields Needed
 0	Vehicle	"fuelType:Electric/Petrol/Diesel,age:0-20"		2
-1	Car	"seats:2-8,make:Ferari/Holden/Audi/Toyota/Jaguar, steeringSide:left/right"	0	3
-2	Plane	"Engines:2-8,LandingWheels:2-7,Commercial:true/false"	0	3
-3	Helicopter	"Rotors:2-4,Pilots:1-2,hover:true/false"	0	3
+1	Car	"seats:2-8,make:Ferari/Holden/Audi/Toyota/Jaguar,steeringSide:left/right"	0	3
+2	Plane	"engines:2-8,landingWheels:2-7,commercial:true/false"	0	3
+3	Helicopter	"rotors:2-4,Pilots:1-2,hover:true/false"	0	3
 4	SportsCar	"boostType:turbo/nitro,engineSize:6/8/10"	1	2
-5	Ute	"BootCapactiy:40-100, WheelDrive:fwd/rwd/4wd"	1	2
-6	Minivan	"SlidingDoor:true/false,removableSeats:true/false"	1	2
+5	Ute	"bootCapactiy:40-100,wheelDrive:fwd/rwd/4wd"	1	2
+6	Minivan	"slidingDoor:true/false,removableSeats:true/false"	1	2
 7	StealthBomber	"bombs:2-12,cloaking:true/false"	2	2
 8	PassengerJet	"topClass:Business/premium/economyPlus,crew:6-14"	2	2
 9	Sesna	"wingspan:3-7,gildeDuration:15-75"	2	2
 10	Robinson R-22	"passengerComms:true/false,maxAltitude:800-2400"	3	2
-11	Apache	"Guns:1-2,Rounds:200-800"	3	2
+11	Apache	"guns:1-2,Rounds:200-800"	3	2

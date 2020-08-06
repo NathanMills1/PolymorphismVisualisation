@@ -85,7 +85,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             this.objectEntity = objectEntity;
             this.objectImage.sprite = objectEntity.objectImage;
             this.objectImage.gameObject.SetActive(true);
-            objectEntity.updateMethodNames(this.objectMethods);
+            objectEntity.updateFields(this.objectMethods, true);
             StartCoroutine(slideObjectIn());
 
         }

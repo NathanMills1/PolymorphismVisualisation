@@ -10,40 +10,60 @@ using UnityEngine.UIElements;
 
 public class Identity
 {
-    public Identity parent;
-    public List<Identity> children;
-    public string name;
+    public Identity parent { get; private set; }
+    public List<Identity> children { get; private set; }
+    public string name { get; private set; }
     public List<string> selectedMethods;
-    public int generation;
+    public Dictionary<string, string> fieldsAndValues { get; private set; }
+    public int totalFields { get; private set; }
 
-    public int totalMethods;
+    private static System.Random randomGen = new System.Random();
 
-    public Identity(Identity parent, string name, string[] methods, int numberOfMethodsToUse) : this(name, methods, numberOfMethodsToUse)
+    public Identity(Identity parent, string name, string fields, int numberOfFieldsToUse) : this(name, fields, numberOfFieldsToUse)
     {
         this.parent = parent;
         parent.addChild(this);
 
-        this.totalMethods = parent.totalMethods + numberOfMethodsToUse;
+        this.totalFields = parent.totalFields + numberOfFieldsToUse;
     }
 
-    public Identity(string name, string[] methods, int numberOfMethodsToUse)
+    public Identity(string name, string fields, int numberOfFieldsToUse)
     {
         this.name = name;
         children = new List<Identity>();
 
-        selectedMethods = new List<string>();
+        selectFieldsAndValues(fields, numberOfFieldsToUse);
 
-        //select methods to use from list of methods
-        for(int i = 0;i< numberOfMethodsToUse; i++)
+        this.totalFields = numberOfFieldsToUse;
+    }
+
+    private void selectFieldsAndValues(string fieldsString, int numberOfFieldsToUse)
+    {
+        string[] fields = fieldsString.Split(',');
+        fieldsAndValues = new Dictionary<string, string>();
+
+        for(int i = 0; i < numberOfFieldsToUse; i++)
         {
-            int nextMethod = new System.Random().Next(methods.Length);
-            while (selectedMethods.Contains(methods[nextMethod])){
-                nextMethod = new System.Random().Next(methods.Length);
-            }
-            selectedMethods.Add(methods[nextMethod]);
-        }
+            string field = fields[i];
+            string[] fieldAndValueRange = field.Split(':');
+            string fieldName = fieldAndValueRange[0];
+            string combinedValues = fieldAndValueRange[1];
 
-        this.totalMethods = numberOfMethodsToUse;
+            //selectFromOptions
+            if (combinedValues.Contains('/'))
+            {
+                string[] potentialValues = combinedValues.Split('/');
+                int selectedPos = randomGen.Next(potentialValues.Length);
+                fieldsAndValues.Add(fieldName, potentialValues[selectedPos]);
+            }
+            //selectFromRange
+            else
+            {
+                string[] minAndMax = combinedValues.Split('-');
+                int value = randomGen.Next(int.Parse(minAndMax[0]), int.Parse(minAndMax[1]) + 1);
+                fieldsAndValues.Add(fieldName, value.ToString());
+            }
+        }
     }
 
     public void addChild(Identity child)

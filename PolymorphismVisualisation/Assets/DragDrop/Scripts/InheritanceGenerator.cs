@@ -18,6 +18,8 @@ public class InheritanceGenerator : MonoBehaviour
     public QuestionManager questionManager;
     public int activitySection;
 
+    public string theme = "Vehicles";
+
     private System.Random randomGen = new System.Random();
     public static Dictionary<int, List<Entity>> selectedEntitiesByGeneration { get; private set; }
 
@@ -44,7 +46,7 @@ public class InheritanceGenerator : MonoBehaviour
             totalHeight += 20 + entity.height * Entity.SCALE_FACTOR;
         }
 
-        treeGenerator.setupInheritanceTree(selectedEntitiesByGeneration);
+        //treeGenerator.setupInheritanceTree(selectedEntitiesByGeneration);
 
         screenList.GetComponent<RectTransform>().sizeDelta = new Vector2(0, totalHeight + 10);
         objectList.GetComponent<RectTransform>().sizeDelta = new Vector2(0, totalHeight);
@@ -63,21 +65,21 @@ public class InheritanceGenerator : MonoBehaviour
     {
         Dictionary<string, Identity> identities = new Dictionary<string, Identity>();
         List<Identity> parentIdentities = new List<Identity>();
-        string[] lines = System.IO.File.ReadAllLines(@"Assets\Resources\Classes.txt");
-        foreach (string line in lines)
+        string[] lines = System.IO.File.ReadAllLines(@"Assets\Resources\Classes_" + this.theme + ".txt");
+        foreach (string line in lines.Skip(1))
         {
             string[] details = line.Split('\t');
-            string[] methods = details[2].Replace("\"", "").Split(',');
+            string fields = details[2].Replace("\"","");
             Identity temp;
 
             if (!details[3].Trim().Equals(""))
             {
                 Identity parent = identities[details[3]];
-                temp = new Identity(parent, details[1], methods, int.Parse(details[4]));
+                temp = new Identity(parent, details[1], fields, int.Parse(details[4]));
             }
             else //Has no parent
             {
-                temp = new Identity(details[1], methods, int.Parse(details[4]));
+                temp = new Identity(details[1], fields, int.Parse(details[4]));
                 parentIdentities.Add(temp);
             }
 

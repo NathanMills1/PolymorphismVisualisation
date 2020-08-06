@@ -92,7 +92,7 @@ public class Entity
         objectRepresentation.GetComponent<LayoutElement>().preferredHeight = height * SCALE_FACTOR + 10;
         objectRepresentation.GetComponentInChildren<Text>().text = identity.name;
         TextMeshProUGUI[] texts = objectRepresentation.GetComponentsInChildren<TextMeshProUGUI>();
-        updateMethodNames(texts);
+        updateFields(texts, false);
         
         return objectRepresentation;
     }
@@ -147,71 +147,39 @@ public class Entity
         return ischild;
     }
 
-    public void updateMethodNames(TextMeshProUGUI[] methods)
+    public void updateFields(TextMeshProUGUI[] methods, bool includeValue)
     {
         foreach (TextMeshProUGUI text in methods)
         {
             
             int pos;
             string[] colours;
-            switch (text.name)
+            int methodNum = int.Parse(text.name.Replace("Method", ""));
+            int positionOffset = methodNum < 3 ? 1 : methodNum < 6 ? 3 : 6;
+            int generationCutOff = methodNum < 3 ? 1 : methodNum < 6 ? 2 : 3;
+
+            if(generation >= generationCutOff)
             {
-                case "Method1":
-                case "Method2":
-                    pos = int.Parse(text.name.Replace("Method", "")) - 1;
-                    Entity parentEntity = this;
-                    for (int i = this.generation; i > 1; i--)
-                    {
-                        parentEntity = parentEntity.parent;
-                    }
-                    text.text = parentEntity.identity.selectedMethods[pos] + "()";
-                    colours = parentEntity.objectColour.Split(',');
-                    text.color = new Color32(byte.Parse(colours[0]), byte.Parse(colours[1]), byte.Parse(colours[2]), 255);
-                    text.gameObject.SetActive(true);
-
-                    break;
-                case "Method3":
-                case "Method4":
-                case "Method5":
-                    if (generation > 1)
-                    {
-                        pos = int.Parse(text.name.Replace("Method", "")) - 3;
-                        Entity childEntity = this;
-                        for (int i = this.generation; i > 2; i--)
-                        {
-                            childEntity = childEntity.parent;
-                        }
-                        text.text = childEntity.identity.selectedMethods[pos] + "()";
-                        colours = childEntity.objectColour.Split(',');
-                        text.color = new Color32(byte.Parse(colours[0]), byte.Parse(colours[1]), byte.Parse(colours[2]), 255);
-                        text.gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                        text.gameObject.SetActive(false);
-                    }
-
-                    break;
-                case "Method6":
-                case "Method7":
-                    if (generation > 2)
-                    {
-                        pos = int.Parse(text.name.Replace("Method", "")) - 6;
-                        text.text = identity.selectedMethods[pos] + "()";
-                        colours = this.objectColour.Split(',');
-                        text.color = new Color32(byte.Parse(colours[0]), byte.Parse(colours[1]), byte.Parse(colours[2]), 255);
-                        text.gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                        text.gameObject.SetActive(false);
-                    }
-
-                    
-                    break;
-                default:
-                    break;
-                
+                pos = int.Parse(text.name.Replace("Method", "")) - positionOffset;
+                Entity entity = this;
+                for(int i = this.generation; i > generationCutOff; i--)
+                {
+                    entity = entity.parent;
+                }
+                string[] fields = new string[entity.identity.fieldsAndValues.Keys.Count];
+                entity.identity.fieldsAndValues.Keys.CopyTo(fields, 0);
+                text.text = fields[pos];
+                if (includeValue)
+                {
+                    text.text += ": " + entity.identity.fieldsAndValues[fields[pos]];
+                }
+                colours = entity.objectColour.Split(',');
+                text.color = new Color32(byte.Parse(colours[0]), byte.Parse(colours[1]), byte.Parse(colours[2]), 255);
+                text.gameObject.SetActive(true);
+            }
+            else
+            {
+                text.gameObject.SetActive(false);
             }
         }
     }
