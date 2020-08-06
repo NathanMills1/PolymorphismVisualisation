@@ -1,0 +1,14 @@
+ID	Class	Fields	Parent ID	Fields Needed
+0	Vehicle	"fuelType:Electric/Petrol/Diesel,age:0-20"		2
+1	Car	"seats:2-8,make:Ferari/Holden/Audi/Toyota/Jaguar, steeringSide:left/right"	0	3
+2	Plane	"Ascend,LowerWheels,RadioControl"	0	3
+3	Helicopter	"Ascend,SpinRotor,Winch"	0	3
+4	SportsCar	"boostType:turbo/nitro,engineSize:6/8/10"	1	2
+5	Ute	"StoreInBack,TraverseTerrain,ActivateSuspension"	1	2
+6	ElectricCar	"Charge,TransferEnergy,DetermineRoute"	1	2
+7	StealthBomber	"DropBomb,ActivateStealth,FireMissile"	2	2
+8	PassengerJet	"LoadPassengers,ActivateMovie,FlushToilet"	2	2
+9	Sesna	"Temp1,Temp2,KindOfLongTemp3"	2	2
+10	HelicopterType1	"A,B,C"	3	2
+11	HelicopterType2	"D,E,F"	3	2
+12	HelicopterType3	"H,I,J"	3	2

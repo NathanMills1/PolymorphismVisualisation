@@ -14,6 +14,7 @@ public class InheritanceGenerator : MonoBehaviour
     public GameObject objectTemplate;
     public GameObject screenList;
     public GameObject objectList;
+    public InheritanceTreeGenerator treeGenerator;
     public QuestionManager questionManager;
     public int activitySection;
 
@@ -42,6 +43,8 @@ public class InheritanceGenerator : MonoBehaviour
             entity.constructGameObject(screenList, objectList);
             totalHeight += 20 + entity.height * Entity.SCALE_FACTOR;
         }
+
+        treeGenerator.setupInheritanceTree(selectedEntitiesByGeneration);
 
         screenList.GetComponent<RectTransform>().sizeDelta = new Vector2(0, totalHeight + 10);
         objectList.GetComponent<RectTransform>().sizeDelta = new Vector2(0, totalHeight);
