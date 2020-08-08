@@ -154,25 +154,27 @@ public class Entity
             
             int pos;
             string[] colours;
-            int methodNum = int.Parse(text.name.Replace("Method", ""));
-            int positionOffset = methodNum < 3 ? 1 : methodNum < 6 ? 3 : 6;
-            int generationCutOff = methodNum < 3 ? 1 : methodNum < 6 ? 2 : 3;
+            int generationOfSlot = int.Parse(text.name.Substring(0,1));
 
-            if(generation >= generationCutOff)
+            if (generation >= generationOfSlot)
             {
-                pos = int.Parse(text.name.Replace("Method", "")) - positionOffset;
                 Entity entity = this;
-                for(int i = this.generation; i > generationCutOff; i--)
+                for (int i = this.generation; i > generationOfSlot; i--)
                 {
                     entity = entity.parent;
                 }
-                string[] fields = new string[entity.identity.fieldsAndValues.Keys.Count];
-                entity.identity.fieldsAndValues.Keys.CopyTo(fields, 0);
-                text.text = fields[pos];
-                if (includeValue)
+
+                if (text.name.Contains("Field"))
                 {
-                    text.text += ": " + entity.identity.fieldsAndValues[fields[pos]];
+
+                    text.text = includeValue ? entity.identity.generateFieldValue() : entity.identity.field;
                 }
+                else //Method spot
+                {
+                    pos = int.Parse(text.name.Substring(text.name.Length - 1)) - 1;
+                    text.text = entity.identity.methods[pos] + "()";
+                }
+
                 colours = entity.objectColour.Split(',');
                 text.color = new Color32(byte.Parse(colours[0]), byte.Parse(colours[1]), byte.Parse(colours[2]), 255);
                 text.gameObject.SetActive(true);
@@ -190,7 +192,7 @@ public class Entity
         Identity currentIdentity = this.identity;
         while(currentIdentity != null)
         {
-            totalMethods += currentIdentity.selectedMethods.Count;
+            totalMethods += currentIdentity.methods.Length;
             currentIdentity = currentIdentity.parent;
         }
 

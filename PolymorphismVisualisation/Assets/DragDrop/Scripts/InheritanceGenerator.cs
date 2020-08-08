@@ -70,16 +70,17 @@ public class InheritanceGenerator : MonoBehaviour
         {
             string[] details = line.Split('\t');
             string fields = details[2].Replace("\"","");
+            string methods = details[3].Replace("\"", "");
             Identity temp;
 
-            if (!details[3].Trim().Equals(""))
+            if (!details[4].Trim().Equals(""))
             {
-                Identity parent = identities[details[3]];
-                temp = new Identity(parent, details[1], fields, int.Parse(details[4]));
+                Identity parent = identities[details[4]];
+                temp = new Identity(parent, details[1], fields, methods);
             }
             else //Has no parent
             {
-                temp = new Identity(details[1], fields, int.Parse(details[4]));
+                temp = new Identity(details[1], fields, methods);
                 parentIdentities.Add(temp);
             }
 
