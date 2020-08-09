@@ -21,7 +21,10 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     public Entity objectEntity { get; private set; }
 
     private TextMeshProUGUI[] objectMethods;
-    private TextMeshProUGUI[] screenNames;
+    private List<TextMeshProUGUI> screenNames = new List<TextMeshProUGUI>();
+    private List<TextMeshProUGUI> fieldNames = new List<TextMeshProUGUI>();
+    private Image[] shades;
+
 
     void Start()
     {
@@ -30,11 +33,20 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         {
             text.gameObject.SetActive(false);
         }
-        screenNames = screenImage.gameObject.transform.GetComponentsInChildren<TextMeshProUGUI>();
-        foreach (TextMeshProUGUI text in screenNames)
+        TextMeshProUGUI[] labels = screenImage.gameObject.transform.GetComponentsInChildren<TextMeshProUGUI>();
+        foreach (TextMeshProUGUI label in labels)
         {
-            text.gameObject.SetActive(false);
+            if (label.gameObject.name.Contains("Field"))
+            {
+                fieldNames.Add(label);
+            }
+            else
+            {
+                screenNames.Add(label);
+            }
+            label.gameObject.SetActive(false);
         }
+        shades = screenImage.gameObject.GetComponentsInChildren<Image>();
     }
 
     public void OnDrop(PointerEventData eventData) {
@@ -65,7 +77,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             
             this.screenShadow.sprite = screenEntity.shadow;
             this.screenShadow.gameObject.SetActive(true);
-            updateScreenNames(screenEntity);
+            updateScreenLabels(screenEntity);
             StartCoroutine(dropScreen());
         }
         else //TODO have error appear stating cannot change screen type while object is placed
@@ -117,11 +129,13 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         
     }
 
-    private void updateScreenNames(Entity screen)
+    private void updateScreenLabels(Entity screen)
     {
         for(int i = 0; i < 3; i++)
         {
             screenNames[i].gameObject.SetActive(screen.generation > i);
+            fieldNames[i].gameObject.SetActive(screen.generation > i);
+            shades[i].gameObject.SetActive(screen.generation > i);
 
             Entity currentScreen = screen;
             while (currentScreen.generation > i+1)
@@ -129,6 +143,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
                 currentScreen = currentScreen.parent;
             }
             screenNames[i].text = currentScreen.identity.name;
+            fieldNames[i].text = currentScreen.identity.field;
         }
         
     }
