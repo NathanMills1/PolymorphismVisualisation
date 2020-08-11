@@ -46,7 +46,7 @@ public class InheritanceGenerator : MonoBehaviour
             totalHeight += 20 + entity.height * Entity.SCALE_FACTOR;
         }
 
-        //treeGenerator.setupInheritanceTree(selectedEntitiesByGeneration);
+        treeGenerator.setupInheritanceTree(selectedEntitiesByGeneration);
 
         screenList.GetComponent<RectTransform>().sizeDelta = new Vector2(0, totalHeight + 10);
         objectList.GetComponent<RectTransform>().sizeDelta = new Vector2(0, totalHeight);

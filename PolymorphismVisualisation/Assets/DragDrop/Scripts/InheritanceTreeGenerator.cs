@@ -13,24 +13,12 @@ public class InheritanceTreeGenerator : MonoBehaviour
 
     void Start()
     {
-        treeMembersByParent = new Dictionary<GameObject, List<GameObject>>();
-
-        foreach (GameObject treeMember in treeMembers)
-        {
-            treeMembersByParent.Add(treeMember, new List<GameObject>());
-            foreach (GameObject childMember in treeMembers)
-            {
-                if (Regex.IsMatch(childMember.name, treeMember.name + "_\\d"))
-                {
-                    treeMembersByParent[treeMember].Add(childMember);
-                }
-            }
-        }
+        
     }
 
     private void assignEntity(Entity entity, GameObject treeMember)
     {
-        int children = treeMembersByParent[treeMember].Count;
+        int children = entity.children.Count;
         if (children > 0)
         {
             for(int i = 0; i<children; i++)
@@ -47,6 +35,20 @@ public class InheritanceTreeGenerator : MonoBehaviour
 
     public void setupInheritanceTree(Dictionary<int, List<Entity>> entitiesByGeneration)
     {
+        treeMembersByParent = new Dictionary<GameObject, List<GameObject>>();
+
+        foreach (GameObject treeMember in treeMembers)
+        {
+            treeMembersByParent.Add(treeMember, new List<GameObject>());
+            foreach (GameObject childMember in treeMembers)
+            {
+                if (Regex.IsMatch(childMember.name, treeMember.name + "_\\d"))
+                {
+                    treeMembersByParent[treeMember].Add(childMember);
+                }
+            }
+        }
+
 
         int count = parentMembers.Length;
         for(int i = 0; i<count; i++)
