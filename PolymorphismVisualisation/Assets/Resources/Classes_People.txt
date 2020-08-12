@@ -1,0 +1,10 @@
+ID	Class	Fields	Methods	Parent ID
+0	Person	"age:18-65,gender:male/female"	"sleep,eat,walk,talk"	
+1	Student	yearLevel:1-6	"study,cram,watchRecording"	0
+2	Staff	campus:city/grafton/manukau	"accessBuilding,manageStudents"	0
+3	Engineer	"specialisation:software/civil/mechanical/electrical/compsys/mechatronics, practicalHours:0-800"	"doMaths,createDesign,buildPrototype"	1
+4	MedStudent	"specialised:true/false,placement:northShore/middlemore/tauranga/hamilton"	"diagnose,performCPR,bandageWound"	1
+5	FineArtStudent	"style:painting/sculpting/sketching/pastels,sponsored:true/false"	"buySupplies,mixColours,colourIn"	1
+6	Lecturer	"classes:2-14,teachingHours:3-24"	"giveLecture,markAssignment,uploadGrades"	2
+7	LabTech	headLabTech:true/false	"setupEquipment,teachSafety,prepareSolution"	2
+8	Cleaner	"area:bathrooms/classrooms/grounds,shift:morning/night"	"getTools,clean,disposeRubbish"	2
