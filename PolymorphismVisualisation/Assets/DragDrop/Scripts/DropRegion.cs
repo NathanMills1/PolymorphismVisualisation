@@ -12,6 +12,8 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     public Image bottomScreenImage;
     public Image objectImage;
     public Image screenShadow;
+    public GameObject topFade;
+    public GameObject bottomFade;
     public GameObject parentTypeError;
     public QuestionManager questionManager;
     public Vector2 screenStartPosition;
@@ -25,6 +27,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     private List<TextMeshProUGUI> screenNames = new List<TextMeshProUGUI>();
     private List<TextMeshProUGUI> fieldNames = new List<TextMeshProUGUI>();
     private Image[] shades;
+    private bool faded = false;
 
 
     void Start()
@@ -80,6 +83,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             this.screenShadow.gameObject.SetActive(true);
             updateScreenLabels(screenEntity);
             StartCoroutine(dropScreen());
+            setFadePositions();
         }
         else //TODO have error appear stating cannot change screen type while object is placed
         {
@@ -156,9 +160,14 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         this.objectImage.gameObject.SetActive(false);
         this.parentTypeError.SetActive(false);
         this.screenShadow.gameObject.SetActive(false);
+        Color colour = this.topFade.GetComponent<Image>().color;
+        Color invisColour = new Color(colour.r, colour.g, colour.b, 0);
+        this.topFade.GetComponent<Image>().color = invisColour;
+        this.bottomFade.GetComponent<Image>().color = invisColour;
 
         this.screenEntity = null;
         this.objectEntity = null;
+        this.faded = false;
 
         foreach (TextMeshProUGUI method in objectMethods)
         {
@@ -221,6 +230,53 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         page.transform.localPosition = objectEndPosition;
         checkForErrors();
         questionManager.objectPlaced(objectEntity);
+
+        if (!faded)
+        {
+            StartCoroutine(fadeIn());
+            faded = true;
+        }
+        
+    }
+
+    private void setFadePositions()
+    {
+        int topFadeHeight = 125 + screenEntity.height;
+        int bottomFadeYPos = 0 - topFadeHeight;
+        int bottomFadeHeight = 830 - topFadeHeight;
+
+        Vector2 topSize = topFade.gameObject.GetComponent<RectTransform>().sizeDelta;
+        topFade.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(topSize.x, topFadeHeight);
+        bottomFade.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector3(topSize.x, bottomFadeHeight, 0);
+        bottomFade.transform.localPosition = new Vector3(0, bottomFadeYPos, 0);
+    }
+
+    private IEnumerator fadeIn()
+    {
+
+        Image topFadeImage = topFade.GetComponent<Image>();
+        Image bottomFadeImage = bottomFade.GetComponent<Image>();
+        Color finalColour = topFadeImage.color;
+        Image[] fades = new Image[] { topFadeImage, bottomFadeImage };
+
+        const float DURATION = 0.6f;
+        const float STEP_SIZE = 0.05f;
+        const float finalTransparency = 0.9f;
+        float currentTime = 0;
+
+        while (currentTime <= DURATION)
+        {
+            float currentTransparency = finalTransparency * (currentTime / DURATION);
+            foreach (Image fade in fades)
+            {
+                fade.color = new Color(finalColour.r, finalColour.g, finalColour.b, currentTransparency);
+            }
+
+            currentTime += STEP_SIZE;
+
+            yield return new WaitForSeconds(STEP_SIZE);
+        }
+
     }
 
 
