@@ -28,7 +28,9 @@ public class ValidInsertionQuestion : Question
         questionTextBox.GetComponentInChildren<TextMeshProUGUI>().text = createQuestionText();
 
         yesButton.SetActive(true);
+        yesButton.GetComponent<Button>().interactable = false;
         noButton.SetActive(true);
+        noButton.GetComponent<Button>().interactable = false;
     }
 
     protected override string createQuestionText()

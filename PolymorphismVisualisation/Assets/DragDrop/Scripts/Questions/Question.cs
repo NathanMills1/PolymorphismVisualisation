@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Question
 {
@@ -144,12 +145,28 @@ public abstract class Question
                 textAnimator.StartCoroutine(textAnimator.glowText(objectCodePosition));
             }
         }
+        setButtonStatus(activateButtonsCondition(objectRepresentation));
     }
 
     protected string camelCase(Entity entity)
     {
         string input = entity.identity.name;
         return input.ToCharArray()[0].ToString().ToLowerInvariant() + input.Substring(1);
+    }
+
+    public void setButtonStatus(bool setInteractable)
+    {
+        yesButton.GetComponent<Button>().interactable = setInteractable;
+        noButton.GetComponent<Button>().interactable = setInteractable;
+    }
+
+    protected virtual bool activateButtonsCondition(Entity objectRepresentation)
+    {
+        if(objectRepresentation != null)
+        {
+            return true;
+        }
+        return false;
     }
 
 
