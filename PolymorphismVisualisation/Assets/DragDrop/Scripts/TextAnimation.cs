@@ -6,8 +6,10 @@ using System;
 
 public class TextAnimation : MonoBehaviour
 {
+    public AudioSource shakeSound;
+    public AudioSource glowSound;
 
-    TextMeshProUGUI textObject;
+    private TextMeshProUGUI textObject;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +31,6 @@ public class TextAnimation : MonoBehaviour
 
     public IEnumerator shakeText(int wordPosition)
     {
-        Debug.Log(textObject.textInfo.wordInfo.Length);
         int firstCharacter = textObject.textInfo.wordInfo[wordPosition].firstCharacterIndex;
         int lastCharacter = textObject.textInfo.wordInfo[wordPosition].lastCharacterIndex;
 
@@ -43,6 +44,10 @@ public class TextAnimation : MonoBehaviour
         
         int materialIndex = textObject.textInfo.characterInfo[firstCharacter].materialReferenceIndex;
         Vector3[] startPositions = (Vector3[])(textObject.textInfo.meshInfo[materialIndex].vertices.Clone());
+
+        yield return new WaitForSeconds(0.3f);
+
+        shakeSound.Play();
 
         while (maxOffset > 3f)
         {
@@ -79,6 +84,8 @@ public class TextAnimation : MonoBehaviour
                 maxOffset *= 0.9f;
             }
 
+            
+
             textObject.UpdateVertexData();
             yield return new WaitForSeconds(0.02f);
 
@@ -100,6 +107,8 @@ public class TextAnimation : MonoBehaviour
                 textObject.textInfo.meshInfo[materialIndex].vertices[vertexIndex + i] = startPositions[vertexIndex + i];
             }
         }
+
+        shakeSound.Stop();
 
         textObject.UpdateVertexData();
     }
@@ -134,6 +143,8 @@ public class TextAnimation : MonoBehaviour
 
         Color32[] newVertexColors;
 
+        yield return new WaitForSeconds(0.3f);
+        glowSound.Play();
 
         //Calculate the transformed vertices
         for (int charPos = firstCharacter; charPos <= lastCharacter; charPos++)
@@ -220,6 +231,6 @@ public class TextAnimation : MonoBehaviour
 
         }
 
-
+        glowSound.Stop();
     }
 }

@@ -16,6 +16,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     public QuestionManager questionManager;
     public Vector2 screenStartPosition;
     public AudioSource thudSound;
+    public AudioSource paperSound;
 
     public Entity screenEntity { get; private set; }
     public Entity objectEntity { get; private set; }
@@ -205,6 +206,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
 
         GameObject page = objectImage.gameObject;
 
+        paperSound.Play();
         while (currentTime <= DURATION)
         {
             float alpha = currentTime / DURATION;
@@ -214,6 +216,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
 
             yield return new WaitForSeconds(STEP_SIZE);
         }
+        paperSound.Stop();
 
         page.transform.localPosition = objectEndPosition;
         checkForErrors();

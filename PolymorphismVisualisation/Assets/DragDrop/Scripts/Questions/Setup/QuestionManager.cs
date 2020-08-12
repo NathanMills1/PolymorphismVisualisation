@@ -38,7 +38,7 @@ public class QuestionManager : MonoBehaviour
     {
 
         int numberOfQuestionTypes = 4;
-        int selectedType = randomGen.Next(2, numberOfQuestionTypes);
+        int selectedType = randomGen.Next(numberOfQuestionTypes);
 
         QuestionFactory factory = null;
         switch (selectedType)

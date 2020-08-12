@@ -1,0 +1,13 @@
+Add new themes
+Create code for selecting different themes
+Add sounds for in/correct placement + add delay to shake
+Add sheet slide in sound
+Create menu
+Setup different activity sections
+Add count to sections before it goes to next one?
+Make yes/no buttons unselectable until screen/sheet placed
+Create tutorials for the sections
+Add shade to screen area
+Pop-up explaining why its wrong on question answer
+fix status bar
+Fix image sizing for side bars for different aspect ratios

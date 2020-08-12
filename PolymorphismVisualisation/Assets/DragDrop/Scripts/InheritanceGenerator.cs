@@ -18,7 +18,7 @@ public class InheritanceGenerator : MonoBehaviour
     public QuestionManager questionManager;
     public int activitySection;
 
-    public string theme = "Vehicles";
+    public Theme theme = Theme.Animals;
 
     private System.Random randomGen = new System.Random();
     public static Dictionary<int, List<Entity>> selectedEntitiesByGeneration { get; private set; }
