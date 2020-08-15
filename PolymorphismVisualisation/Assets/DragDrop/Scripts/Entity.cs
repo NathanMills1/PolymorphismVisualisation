@@ -21,19 +21,18 @@ public class Entity
     public const float SCALE_FACTOR = 0.35f;
     public int generation { get; }
     public int id { get;  }
-    public string objectColour { get; }
     public Identity identity { get; private set; }
 
     protected bool gameObjectMade = false;
 
-    public Entity(Entity parent, int id, int height, Sprite image, Sprite objectImage, Sprite shadow, string objectColour) : this(id, height, image, objectImage, shadow, objectColour)
+    public Entity(Entity parent, int id, int height, Sprite image, Sprite objectImage, Sprite shadow) : this(id, height, image, objectImage, shadow)
     {
         this.parent = parent;
         parent.addChild(this);
         generation = this.parent.generation + 1;
     }
 
-    public Entity(int id,int height, Sprite image, Sprite objectImage, Sprite shadow, string objectColour)
+    public Entity(int id,int height, Sprite image, Sprite objectImage, Sprite shadow)
     {
         this.id = id;
         this.height = height;
@@ -41,7 +40,6 @@ public class Entity
         this.objectImage = objectImage;
         this.shadow = shadow;
         this.children = new List<Entity>();
-        this.objectColour = objectColour;
         generation = 1;
 
     }
@@ -88,6 +86,8 @@ public class Entity
         objectRepresentation.GetComponentInChildren<EntityRepresentation>().setEntity(this);
         objectRepresentation.SetActive(true);
         objectRepresentation.GetComponentInChildren<UnityEngine.UI.Image>().sprite = objectImage;
+
+        //CODE NEEDS CORRECTING FOR DIFFERENT ASPECT RATIOS. MUST BE BASED OFF WIDTH
         objectRepresentation.GetComponent<LayoutElement>().minHeight = height*SCALE_FACTOR + 10;
         objectRepresentation.GetComponent<LayoutElement>().preferredHeight = height * SCALE_FACTOR + 10;
         objectRepresentation.GetComponentInChildren<Text>().text = identity.name;
@@ -175,8 +175,6 @@ public class Entity
                     text.text = entity.identity.methods[pos] + "()";
                 }
 
-                colours = entity.objectColour.Split(',');
-                text.color = new Color32(byte.Parse(colours[0]), byte.Parse(colours[1]), byte.Parse(colours[2]), 255);
                 text.gameObject.SetActive(true);
             }
             else
