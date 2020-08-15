@@ -1,13 +1,13 @@
 ID	Class	Fields	Methods	Parent ID
-0	Animal	"age:1-80,height(cm):5-500,gender:male/female"	"move,eat,grow"	
-1	Mammal	"furLength(cm):0-10,foodType:herbivore/carnivore/omnivore"	"giveBirth,produceMilk,growFur"	0
-2	Bird	"wingspan(cm):5-130,gildeDuration(mins):15-75"	"fly,layEggs,feedYoung,buildNest"	0
-3	Fish	"maxDepth(m):40-2500,fins:2-5"	"swim,dive,surface,layEggs"	0
-4	Elephant	"tuskLength(cm):40-250,trunkLength(m):1-6"	"blowTrunk,grabFood,squash"	1
+0	Animal	"age:1-80,height:5-500,gender:male/female"	"move,eat,grow"	
+1	Mammal	"furLength:0-10,foodType:herbivore/carnivore/omnivore"	"giveBirth,produceMilk,growFur"	0
+2	Bird	"wingspan:5-130,gildeDuration:15-75"	"fly,layEggs,feedYoung,buildNest"	0
+3	Fish	"maxDepth:40-2500,fins:2-5"	"swim,dive,surface,layEggs"	0
+4	Elephant	"tuskLength:40-250,trunkLength:1-6"	"blowTrunk,grabFood,squash"	1
 5	Lion	"claws:6-10,prideSize:7-24,prideLeader:yes/no"	"huntPrey,lickWounds,playFight"	1
 6	Human	"hairColour:blonde/brunette/black/ginger,eyeColour:blue/green/brown"	"opposeThumbs,speak,program"	1
 7	Chicken	"gender:rooster/hen,status:freeRange/caged"	"cluck,cockFight,goToCoop"	2
-8	falcon	topSpeed(km/h):220-370	"diveBomb,scanForPrey,deliverMessage"	2
-9	Penguin	"Location:antarctica/artic/New Zealand,maxDive(mins):5-25"	"slide,warmEgg,dance"	2
+8	falcon	topSpeed:220-370	"diveBomb,scanForPrey,diveOnPrey"	2
+9	Penguin	"Location:antarctica/artic/New Zealand,maxDive:5-25"	"slide,warmEgg,dance"	2
 10	Shark	"type:hammer/great white/tiger/whale,favouriteFood:seal/dolphin/human/sealion"	"circlePrey,attack,followScent"	3
 11	Stingray	"poisonous:true/false,barbed:true/false"	"sting,glide,thrash"	3
