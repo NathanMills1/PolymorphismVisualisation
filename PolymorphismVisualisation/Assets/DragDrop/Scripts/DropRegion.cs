@@ -29,6 +29,10 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     private Image[] shades;
     private bool faded = false;
 
+    private Vector3 screenBasePosition;
+    private Vector3 objectBasePosition;
+    private Coroutine sheetSlideInRoutine;
+    private Coroutine screenSheetErrorRoutine;
 
     void Start()
     {
@@ -51,6 +55,9 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             label.gameObject.SetActive(false);
         }
         shades = screenImage.gameObject.GetComponentsInChildren<Image>();
+
+        screenBasePosition = screenImage.gameObject.GetComponent<RectTransform>().localPosition;
+        objectBasePosition = objectImage.gameObject.GetComponent<RectTransform>().localPosition;
     }
 
     public void OnDrop(PointerEventData eventData) {
@@ -99,17 +106,40 @@ public class DropRegion : MonoBehaviour, IDropHandler {
 
         if (screenEntity != null)
         {
+            if(sheetSlideInRoutine != null)
+            {
+                StopCoroutine(sheetSlideInRoutine);
+            }
+            resetScreenSheetPositions();
+
             this.objectEntity = objectEntity;
             this.objectImage.sprite = objectEntity.objectImage;
             this.objectImage.gameObject.SetActive(true);
             objectEntity.updateFields(this.objectMethods, true);
-            StartCoroutine(slideObjectIn());
+            sheetSlideInRoutine = StartCoroutine(slideObjectIn());
 
         }
         else //TODO make message detailing to place screen first
         {
 
         }
+    }
+
+    //Used to stop current animations, at set sheets back to initial placements
+    private void resetScreenSheetPositions()
+    {
+        if(screenSheetErrorRoutine != null)
+        {
+            StopCoroutine(screenSheetErrorRoutine);
+        }
+        if(sheetSlideInRoutine != null)
+        {
+            StopCoroutine(sheetSlideInRoutine);
+        }
+        screenImage.rectTransform.localPosition = screenBasePosition;
+        objectImage.rectTransform.localPosition = objectBasePosition;
+        bottomScreenImage.rectTransform.localPosition = objectBasePosition + new Vector3(1, -1, 0);
+
     }
 
     public void checkForErrors()
@@ -122,7 +152,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             if (!screenIsParent && screenEntity.height > objectEntity.height)
             {
                 parentTypeError.GetComponent<RectTransform>().sizeDelta = new Vector2(410, (screenEntity.height - objectEntity.height));
-                parentTypeError.transform.localPosition = new Vector3(0, -100.0f - (objectEntity.height), 0);
+                parentTypeError.transform.localPosition = new Vector3(0, -125.0f - (objectEntity.height), 0);
             }
             parentTypeError.SetActive(!screenIsParent && screenEntity.height > objectEntity.height);
 
@@ -236,6 +266,11 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             StartCoroutine(fadeIn());
             faded = true;
         }
+
+        if (!objectEntity.determineIfChildOf(screenEntity) && !screenEntity.determineIfChildOf(objectEntity))
+        {
+            screenSheetErrorRoutine = StartCoroutine(ejectBadSheet());
+        }
         
     }
 
@@ -275,6 +310,66 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             currentTime += STEP_SIZE;
 
             yield return new WaitForSeconds(STEP_SIZE);
+        }
+
+    }
+
+    private IEnumerator ejectBadSheet()
+    {
+        const float INITIAL_WAIT_PERIOD = 1.3f;
+        const float MAX_OFFSET = 10f;
+        const float NUMBER_OF_SHAKES = 5f;
+        const float DECREASE_RATE = 0.9f;
+        const float SHAKE_SPEED = 5f;
+
+        yield return new WaitForSeconds(INITIAL_WAIT_PERIOD);
+
+        int direction = 1;
+        float shakeCount = 0;
+        float currentOffset = 0;
+
+        RectTransform screenTransform = screenImage.rectTransform;
+        RectTransform objectTransform = objectImage.rectTransform;
+        RectTransform bottomTransform = bottomScreenImage.rectTransform;
+
+        while (shakeCount < NUMBER_OF_SHAKES)
+        {
+            Vector3 movementVector = new Vector3(SHAKE_SPEED * direction, 0, 0);
+            screenTransform.localPosition += movementVector;
+            objectTransform.localPosition += movementVector;
+            bottomTransform.localPosition += movementVector;
+
+            currentOffset += SHAKE_SPEED * direction;
+
+            if(currentOffset * direction > MAX_OFFSET)
+            {
+                direction *= -1;
+                shakeCount++;
+            }
+
+            yield return new WaitForSeconds(0.015f);
+        }
+
+        screenTransform.localPosition = screenBasePosition;
+        objectTransform.localPosition = objectBasePosition;
+        bottomTransform.localPosition = objectBasePosition + new Vector3(1, -1, 0);
+
+        //TODO start unfade coroutine
+
+
+        const float MAX_SHEET_MOVEMENT = 450f;
+        const float SHEET_MOVE_TIME = 1f;
+        const float DIVISIONS = 20f;
+
+        float sheetMovement = 0;
+
+        while(sheetMovement< MAX_SHEET_MOVEMENT)
+        {
+            float moveDistance = MAX_SHEET_MOVEMENT / DIVISIONS;
+            objectTransform.localPosition += new Vector3(moveDistance, 0, 0);
+
+            sheetMovement += moveDistance;
+            yield return new WaitForSeconds(SHEET_MOVE_TIME/ DIVISIONS);
         }
 
     }
