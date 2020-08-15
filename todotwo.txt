@@ -1,0 +1,13 @@
+similar to languages like blockly and scratch, only lets equivalent parts connect
+
+Remove method and field colouring
+
+Change inheritance tree colour.
+
+Tone down question area colour, and check button
+
+bold method font,
+
+add tear line to paper
+
+vector of fish pointers instead of array in c++
