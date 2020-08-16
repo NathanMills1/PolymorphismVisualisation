@@ -2,27 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicQuestionFactory : QuestionFactory
+public class ValidAssignmentQuestionFactory : QuestionFactory
 {
+    private int containerType { get; set; }
+    private int[] variableTypeWeighting;
 
-    public BasicQuestionFactory(int[] generationWeighting)
+    public ValidAssignmentQuestionFactory(int[] generationWeighting, int[] variableTypeWeighting)
     {
         this.entities = InheritanceGenerator.selectedEntitiesByGeneration;
-        this.codeText = getCodeText();
-        this.questionText = getQuestionText();
         this.generationWeighting = generationWeighting;
+        this.variableTypeWeighting = variableTypeWeighting;
     }
 
     public override Question getQuestion()
     {
 
         Entity selectedEntity = generateVariable(generationWeighting);
+        Entity variableTypeEntity = generateVariable(variableTypeWeighting);
 
-        return new BasicQuestion(codeText, questionText, 1, selectedEntity);
+        bool correctAnswer = selectedEntity.determineIfChildOf(variableTypeEntity);
+
+        containerType = randomGen.Next(2);
+
+        int variablePosition = 0;
+        int objectPosition = -1;
+        
+
+        
+
+
+        return new ValidAssignmentQuestion(getCodeText(), getQuestionText(), 1, variableTypeEntity, selectedEntity, correctAnswer, variablePosition, objectPosition);
     }
     protected override string getQuestionText()
     {
-        return "Place a screen and object to make this statement a valid call";
+        return "Can the object type shown be assigned to the variable type shown?";
     }
 
     protected override string getCodeText()
@@ -32,22 +45,20 @@ public class BasicQuestionFactory : QuestionFactory
             case Language.CSharp:
                 return new CodeTextFormatter().addCodeSection(CodeTextFormatter.variableTypeColour, "VariableType ")
                     .addCodeSection(CodeTextFormatter.codeColour, "*VariableName = new ")
-                    .addCodeSection(CodeTextFormatter.objectColour, "ObjectType();")
+                    .addCodeSection(CodeTextFormatter.objectColour, "selectedType();")
                     .formattedString;
             case Language.Java:
                 return new CodeTextFormatter().addCodeSection(CodeTextFormatter.variableTypeColour, "VariableType ")
                     .addCodeSection(CodeTextFormatter.codeColour, "VariableName = new ")
-                    .addCodeSection(CodeTextFormatter.objectColour, "ObjectType();")
+                    .addCodeSection(CodeTextFormatter.objectColour, "selectedType();")
                     .formattedString;
+
             case Language.Python:
-                //Question doesnt work in python as can't set typing
-                return "";
+                //defunct
+
             default:
                 return "";
         }
         
-
-        //snippet = codeColour + "VariableType VariableName = New </color>" + objectColour + "VariableType();</color>\n" + codeColour + "List<</color>" + variableTypeColour + "ParentType</color>" + codeColour + "> ParentTypes.add(VariableName);</color>";
-        //question = "Place the correct screen and object to represent this situation";
     }
 }

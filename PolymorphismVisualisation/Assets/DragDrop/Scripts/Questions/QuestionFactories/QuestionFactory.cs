@@ -9,6 +9,7 @@ public abstract class QuestionFactory
 
     protected string codeText;
     protected string questionText;
+    protected int[] generationWeighting;
     protected Dictionary<int, List<Entity>> entities;
     protected System.Random randomGen = new System.Random();
 
@@ -18,13 +19,12 @@ public abstract class QuestionFactory
 
     protected abstract string getCodeText();
 
-    protected virtual Entity generateVariable(int gen1Odds, int gen2Odds, int gen3Odds)
+    protected virtual Entity generateVariable(int[] weighting)
     {
-        int total = gen1Odds + gen2Odds + gen3Odds;
+        int total = weighting[0] + weighting[1] + weighting[2];
         int weightingResult = randomGen.Next(total);
-        int chosenGeneration = 0;
 
-        chosenGeneration = weightingResult < gen1Odds ? 1 : (weightingResult < gen1Odds + gen2Odds) ? 2 : 3;
+        int chosenGeneration = weightingResult < weighting[0] ? 1 : (weightingResult < weighting[0] + weighting[1]) ? 2 : 3;
 
         int entityCount = entities[chosenGeneration].Count;
         int chosenEntityIndex = randomGen.Next(entityCount);

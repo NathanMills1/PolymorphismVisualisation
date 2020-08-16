@@ -5,19 +5,24 @@ using UnityEngine;
 public class CollectionCreationQuestionFactory : QuestionFactory
 {
 
-    public CollectionCreationQuestionFactory(Dictionary<int, List<Entity>> entities)
+    public CollectionCreationQuestionFactory(int[] generationWeighting)
     {
-        this.entities = entities;
+        this.entities = InheritanceGenerator.selectedEntitiesByGeneration;
+        this.generationWeighting = generationWeighting;
     }
 
     public override Question getQuestion()
     {
 
-        Entity selectedEntity = generateVariable(1, 1, 0);
+        Entity selectedEntity = generateVariable(generationWeighting);
         List<Entity> descendants = new List<Entity>();
         addChildrenToList(descendants, selectedEntity);
         Entity child1 = descendants[randomGen.Next(descendants.Count)];
         Entity child2 = descendants[randomGen.Next(descendants.Count)];
+        while (child2.Equals(child1))
+        {
+            child2 = descendants[randomGen.Next(descendants.Count)];
+        }
 
         int containerType = randomGen.Next(2);
         int variablePosition = -1;

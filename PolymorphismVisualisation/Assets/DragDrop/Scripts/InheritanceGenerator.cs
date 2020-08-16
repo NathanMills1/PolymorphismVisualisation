@@ -21,43 +21,44 @@ public class InheritanceGenerator : MonoBehaviour
     public Theme theme = Theme.Animals;
 
     private System.Random randomGen = new System.Random();
+    private List<Entity> allEntities;
     public static Dictionary<int, List<Entity>> selectedEntitiesByGeneration { get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
-        
-        List<Entity> entities = loadEntities();
-        List<Identity> parentIdentities = loadIdentities();
 
+        
+
+    }
+
+    public void setupEntities(int activitySection, Theme theme)
+    {
+        this.activitySection = activitySection;
+        this.theme = theme;
+
+
+        allEntities = loadEntities();
+        List<Identity> parentIdentities = loadIdentities();
         Entity.setTemplates(parentIdentities, screenTemplate, objectTemplate);
 
-        //TODO select which entities to use by some algorithm
-        List<Entity> selectedEntities = selectEntities(entities);
+
+
+        List<Entity> selectedEntities = selectEntities(allEntities);
         selectedEntitiesByGeneration = sortEntitiesByGeneration(selectedEntities);
         removeObsoleteEntityReferences(selectedEntities);
 
-        //create gameObject representation for each entity
         float totalHeight = 0;
 
-        foreach(Entity entity in selectedEntities)
+        foreach (Entity entity in selectedEntities)
         {
             entity.constructGameObject(screenList, objectList);
             totalHeight += 20 + entity.height * Entity.SCALE_FACTOR;
         }
 
-        treeGenerator.setupInheritanceTree(selectedEntitiesByGeneration);
-
         screenList.GetComponent<RectTransform>().sizeDelta = new Vector2(0, totalHeight + 10);
         objectList.GetComponent<RectTransform>().sizeDelta = new Vector2(0, totalHeight);
 
-        questionManager.generateQuestion();
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         
     }
 

@@ -21,41 +21,31 @@ public class QuestionManager : MonoBehaviour
 
     private Dictionary<int, List<Entity>> entities;
 
+    private int activitySection;
+    private List<QuestionFactory> questionList;
+
     // Start is called before the first frame update
     void Start()
     {
-        Question.setGameObjects(codeBox, questionTextBox, statusMessageBox, checkButton, yesButton, noButton, dropRegion);
-        QuestionFactory.setCodeLanguage(Language.CSharp);
+        
     }
 
-    // Update is called once per frame
-    void Update()
+    public void setupQuestionManager(int activitySection, Language codeLanguage)
     {
-        
+        Question.setGameObjects(codeBox, questionTextBox, statusMessageBox, checkButton, yesButton, noButton, dropRegion);
+        this.activitySection = activitySection;
+        QuestionFactory.setCodeLanguage(codeLanguage);
+        questionList = QuestionListFactory.generateQuestionList(activitySection);
+        generateQuestion();
     }
 
     public void generateQuestion()
     {
 
-        int numberOfQuestionTypes = 4;
+        int numberOfQuestionTypes = questionList.Count;
         int selectedType = randomGen.Next(numberOfQuestionTypes);
 
-        QuestionFactory factory = null;
-        switch (selectedType)
-        {
-            case 0:
-                factory = new BasicQuestionFactory(InheritanceGenerator.selectedEntitiesByGeneration);
-                break;
-            case 1:
-                factory = new ValidMethodCallQuestionFactory(InheritanceGenerator.selectedEntitiesByGeneration);
-                break;
-            case 2:
-                factory = new ValidInsertionQuestionFactory(InheritanceGenerator.selectedEntitiesByGeneration);
-                break;
-            case 3:
-                factory = new CollectionCreationQuestionFactory(InheritanceGenerator.selectedEntitiesByGeneration);
-                break;
-        }
+        QuestionFactory factory = questionList[selectedType];
 
         Question question = factory.getQuestion();
         this.currentQuestion = question;

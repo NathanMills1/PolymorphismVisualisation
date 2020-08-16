@@ -5,17 +5,18 @@ using UnityEngine;
 public class ValidMethodCallQuestionFactory : QuestionFactory
 {
 
-    public ValidMethodCallQuestionFactory(Dictionary<int, List<Entity>> entities)
+    public ValidMethodCallQuestionFactory(int[] generationWeighting)
     {
-        this.entities = entities;
+        this.entities = InheritanceGenerator.selectedEntitiesByGeneration;
         this.codeText = getCodeText();
         this.questionText = getQuestionText();
+        this.generationWeighting = generationWeighting;
     }
 
     public override Question getQuestion()
     {
 
-        Entity selectedEntity = generateVariable(1, 3, 0);
+        Entity selectedEntity = generateVariable(generationWeighting);
         Entity selectedChild = selectChild(selectedEntity);
 
         int methodCallGeneration = randomGen.Next(2);

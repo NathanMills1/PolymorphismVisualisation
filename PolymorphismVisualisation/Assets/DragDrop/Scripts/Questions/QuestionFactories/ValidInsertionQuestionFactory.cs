@@ -5,33 +5,36 @@ using UnityEngine;
 public class ValidInsertionQuestionFactory : QuestionFactory
 {
     private int containerType { get; set; }
+    private int[] containerWeighting;
 
-    public ValidInsertionQuestionFactory(Dictionary<int, List<Entity>> entities)
+    public ValidInsertionQuestionFactory(int[] generationWeighting, int[] containerWeighting)
     {
-        this.entities = entities;
+        this.entities = InheritanceGenerator.selectedEntitiesByGeneration;
+        this.generationWeighting = generationWeighting;
+        this.containerWeighting = containerWeighting;
     }
 
     public override Question getQuestion()
     {
 
-        Entity selectedEntity = generateVariable(1, 1, 1);
-        Entity containerEntity = generateVariable(1, 1, 1);
+        Entity selectedEntity = generateVariable(generationWeighting);
+        Entity containerEntity = generateVariable(containerWeighting);
 
         bool correctAnswer = selectedEntity.determineIfChildOf(containerEntity);
 
         containerType = randomGen.Next(2);
 
         int variablePosition;
-        int objectPosition;
+        int objectPosition = -1;
         if (containerType.Equals(0))
         {
             variablePosition = codeLanguage == Language.Python ? -1 : 1;
-            objectPosition = codeLanguage == Language.Java ? 8 : codeLanguage == Language.CSharp ? 6 : 3;
+            //objectPosition = codeLanguage == Language.Java ? 8 : codeLanguage == Language.CSharp ? 6 : 3;
         }
         else
         {
             variablePosition = codeLanguage == Language.Python ? -1 : 0;
-            objectPosition = codeLanguage == Language.Java ? 7 : codeLanguage == Language.CSharp ? 4 : 3;
+            //objectPosition = codeLanguage == Language.Java ? 7 : codeLanguage == Language.CSharp ? 4 : 3;
         }
         
 
