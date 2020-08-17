@@ -37,6 +37,7 @@ public static class QuestionListFactory
     {
         List<QuestionFactory> multiInheritanceQuestions = new List<QuestionFactory>();
         multiInheritanceQuestions.Add(new BasicQuestionFactory(new int[] { 1, 1, 1 }));
+        multiInheritanceQuestions.Add(new BasicInheritanceQuestionFactory(new int[] { 1, 1, 0 }));
         multiInheritanceQuestions.Add(new ValidMethodCallQuestionFactory(new int[] { 1, 2, 0 }));
         multiInheritanceQuestions.Add(new ValidAssignmentQuestionFactory(new int[] { 4, 1, 2 }, new int[] { 1, 2, 4 }));
         multiInheritanceQuestions.Add(new ValidInsertionQuestionFactory(new int[] { 3, 2, 1 }, new int[] { 1, 2, 3 }));

@@ -13,7 +13,7 @@ public class Identity
     public Identity parent { get; set; }
     public List<Identity> children { get; private set; }
     public string name { get; private set; }
-    public string[] methods { get; private set; }
+    public string[] methods { get; set; }
     public string field { get; private set; }
     public string fieldValues { get; private set; }
 
@@ -23,7 +23,6 @@ public class Identity
     {
         this.parent = parent;
         parent.addChild(this);
-
     }
 
     public Identity(string name, string fieldsString, string methodsString)

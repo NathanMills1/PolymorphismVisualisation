@@ -38,6 +38,7 @@ public class InheritanceGenerator : MonoBehaviour
         List<Entity> selectedEntities = selectEntities(allEntities);
         selectedEntitiesByGeneration = sortEntitiesByGeneration(selectedEntities);
         removeObsoleteEntityReferences(selectedEntities);
+        correctMethodCounts();
         Entity.setTemplates(parentIdentities, screenTemplate, objectTemplate);
 
         float totalHeight = 0;
@@ -209,6 +210,21 @@ public class InheritanceGenerator : MonoBehaviour
             identity.parent = null;
         }
 
+    }
+
+    private void correctMethodCounts()
+    {
+        foreach(Identity identity in parentIdentities)
+        {
+            identity.methods = new string[] { identity.methods[0] };
+            foreach(Identity childIdentity in identity.children)
+            {
+                foreach(Identity babyIdentity in childIdentity.children)
+                {
+                    babyIdentity.methods = new string[] { identity.methods[0] };
+                }
+            }
+        }
     }
 
     private void removeObsoleteEntityReferences(List<Entity> selectedEntities)
