@@ -16,7 +16,6 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     public GameObject bottomFade;
     public GameObject parentTypeError;
     public QuestionManager questionManager;
-    public Vector2 screenStartPosition;
     public AudioSource thudSound;
     public AudioSource paperSound;
 
@@ -29,10 +28,12 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     private Image[] shades;
     private bool faded = false;
 
+    private Vector2 screenDropFromOffset = new Vector3(-40, 75);
     private Vector3 screenBasePosition;
     private Vector3 objectBasePosition;
     private Coroutine sheetSlideInRoutine;
     private Coroutine screenSheetErrorRoutine;
+    private Coroutine fadeRoutine;
 
     void Start()
     {
@@ -125,6 +126,20 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         }
     }
 
+    public void adjustScreenPositions(int yOffset)
+    {
+        Vector3 offset = new Vector3(0, yOffset, 0);
+        screenBasePosition += offset;
+        objectBasePosition += offset;
+
+        GameObject[] dropComponents = new GameObject[] { screenImage.gameObject, bottomScreenImage.gameObject, objectImage.gameObject, screenShadow.gameObject, parentTypeError, bottomFade};
+        foreach(GameObject component in dropComponents)
+        {
+            component.GetComponent<RectTransform>().localPosition += offset;
+        }
+        topFade.GetComponent<RectTransform>().sizeDelta += new Vector2(0, yOffset);
+    }
+
     //Used to stop current animations, at set sheets back to initial placements
     private void resetScreenSheetPositions()
     {
@@ -190,6 +205,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         this.objectImage.gameObject.SetActive(false);
         this.parentTypeError.SetActive(false);
         this.screenShadow.gameObject.SetActive(false);
+        StopCoroutine(fadeRoutine);
         Color colour = this.topFade.GetComponent<Image>().color;
         Color invisColour = new Color(colour.r, colour.g, colour.b, 0);
         this.topFade.GetComponent<Image>().color = invisColour;
@@ -211,11 +227,12 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     {
         const float DURATION = 0.4f;
         const float STEP_SIZE = 0.05f;
-        Vector2 screenEndPosition = new Vector2(-5, -125);
+        Vector2 screenEndPosition = screenBasePosition;
         float currentTime = 0;
 
         GameObject screen = screenImage.gameObject;
         GameObject bottomScreen = bottomScreenImage.gameObject;
+        Vector2 screenStartPosition = (Vector2)screenBasePosition + screenDropFromOffset;
 
         while(currentTime <= DURATION)
         {
@@ -263,7 +280,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
 
         if (!faded)
         {
-            StartCoroutine(fadeIn());
+            fadeRoutine = StartCoroutine(fadeIn());
             faded = true;
         }
 

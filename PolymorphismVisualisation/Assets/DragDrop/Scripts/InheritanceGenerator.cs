@@ -22,15 +22,9 @@ public class InheritanceGenerator : MonoBehaviour
 
     private System.Random randomGen = new System.Random();
     private List<Entity> allEntities;
+    private List<Identity> parentIdentities;
     public static Dictionary<int, List<Entity>> selectedEntitiesByGeneration { get; private set; }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-        
-
-    }
 
     public void setupEntities(int activitySection, Theme theme)
     {
@@ -39,20 +33,18 @@ public class InheritanceGenerator : MonoBehaviour
 
 
         allEntities = loadEntities();
-        List<Identity> parentIdentities = loadIdentities();
-        Entity.setTemplates(parentIdentities, screenTemplate, objectTemplate);
-
-
-
+        parentIdentities = loadIdentities();
+        
         List<Entity> selectedEntities = selectEntities(allEntities);
         selectedEntitiesByGeneration = sortEntitiesByGeneration(selectedEntities);
         removeObsoleteEntityReferences(selectedEntities);
+        Entity.setTemplates(parentIdentities, screenTemplate, objectTemplate);
 
         float totalHeight = 0;
 
         foreach (Entity entity in selectedEntities)
         {
-            entity.constructGameObject(screenList, objectList);
+            entity.constructGameObject(screenList, objectList, activitySection);
             totalHeight += 20 + entity.height * Entity.SCALE_FACTOR;
         }
 
@@ -133,6 +125,11 @@ public class InheritanceGenerator : MonoBehaviour
             entitiesByGeneration[entity.generation].Add(entity);
         }
 
+        if(entitiesByGeneration[3].Count == 0)
+        {
+            entitiesByGeneration.Remove(3);
+        }
+
         return entitiesByGeneration;
     }
 
@@ -142,8 +139,7 @@ public class InheritanceGenerator : MonoBehaviour
         switch (activitySection)
         {
             case 1:
-                //select only gen1 entities
-                break;
+                return selectEntitiesForBasic(entitiesByGeneration);
             case 2:
                 //Select gen1 and gen2 entities
                 break;
@@ -154,6 +150,29 @@ public class InheritanceGenerator : MonoBehaviour
                 break;
         }
         return null;
+    }
+
+    private List<Entity> selectEntitiesForBasic(Dictionary<int, List<Entity>> entitiesByGeneration)
+    {
+        decreaseIdentityGeneration();
+
+        List<Entity> chosenEntities = new List<Entity>();
+        Entity chosenEntity = null;
+
+        for (int i = 0; i < 3; i++)
+        {
+            int entityPos = randomGen.Next(entitiesByGeneration[1].Count);
+            chosenEntity = entitiesByGeneration[1][entityPos];
+            while (chosenEntities.Contains(chosenEntity))
+            {
+                entityPos = randomGen.Next(entitiesByGeneration[1].Count);
+                chosenEntity = entitiesByGeneration[1][entityPos];
+            }
+
+            chosenEntities.Add(chosenEntity);
+        }
+
+        return chosenEntities;
     }
 
     private List<Entity> selectEntitiesForMultiInheritance(Dictionary<int, List<Entity>> entitiesByGeneration)
@@ -179,6 +198,16 @@ public class InheritanceGenerator : MonoBehaviour
         chosenEntities.Add(chosenEntity.parent.parent);
 
         return chosenEntities;
+
+    }
+
+    private void decreaseIdentityGeneration()
+    {
+        parentIdentities = parentIdentities[0].children;
+        foreach(Identity identity in parentIdentities)
+        {
+            identity.parent = null;
+        }
 
     }
 

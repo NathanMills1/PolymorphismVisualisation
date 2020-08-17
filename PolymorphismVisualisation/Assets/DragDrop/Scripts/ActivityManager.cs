@@ -5,7 +5,7 @@ using UnityEngine;
 public class ActivityManager : MonoBehaviour
 {
     public InheritanceGenerator inheritanceGenerator;
-    public InheritanceTreeGenerator treeGenerator;
+    public TreeManager treeGenerator;
     public QuestionManager questionManager;
 
     public void Start()
@@ -16,7 +16,7 @@ public class ActivityManager : MonoBehaviour
     public void loadActivitySection(int activitySection, Theme theme, Language language)
     {
         inheritanceGenerator.setupEntities(activitySection, theme);
-        treeGenerator.setupInheritanceTree(InheritanceGenerator.selectedEntitiesByGeneration);
+        treeGenerator.loadInheritanceTree(activitySection);
         questionManager.setupQuestionManager(activitySection, language);
     }
 }

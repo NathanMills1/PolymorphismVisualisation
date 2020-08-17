@@ -18,8 +18,8 @@ public class Entity
     public List<Entity> children { get; private set; }
 
     public int height { get; set; }
-    public const float SCALE_FACTOR = 0.35f;
-    public int generation { get; }
+    public static float SCALE_FACTOR { get; private set; }
+    public int generation { get; set; }
     public int id { get;  }
     public string objectColour { get; }
     public Identity identity { get; private set; }
@@ -59,14 +59,14 @@ public class Entity
         children.Add(child);
     }
 
-    public void constructGameObject(GameObject screenList, GameObject objectList)
+    public void constructGameObject(GameObject screenList, GameObject objectList, int activitySection)
     {
-
+        SCALE_FACTOR = activitySection == 1 ? 0.5f : 0.35f;
         if (gameObjectMade == false)
         {
             if (parent != null && parent.gameObjectMade == false)
             {
-                parent.constructGameObject(screenList, objectList);
+                parent.constructGameObject(screenList, objectList, activitySection);
             }
 
             //Also create one for both Screen and 
@@ -81,6 +81,7 @@ public class Entity
         }
 
     }
+
 
     public GameObject createObjectRepresentation()
     {
@@ -114,7 +115,6 @@ public class Entity
         if (identity == null)
         {
             List<Identity> possibleIdentities = (parent != null) ? parent.identity.children : parentIdentities;
-
             int identityPos = new System.Random().Next(possibleIdentities.Count);
             identity = possibleIdentities[identityPos];
             possibleIdentities.RemoveAt(identityPos);

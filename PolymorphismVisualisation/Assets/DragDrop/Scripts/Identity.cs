@@ -10,14 +10,12 @@ using UnityEngine.UIElements;
 
 public class Identity
 {
-    public Identity parent { get; private set; }
+    public Identity parent { get; set; }
     public List<Identity> children { get; private set; }
     public string name { get; private set; }
     public string[] methods { get; private set; }
     public string field { get; private set; }
     public string fieldValues { get; private set; }
-    public int generation { get; private set; }
-    public int screenPositions { get; private set; }
 
     private static System.Random randomGen = new System.Random();
 
@@ -25,23 +23,17 @@ public class Identity
     {
         this.parent = parent;
         parent.addChild(this);
-        int numberOfMethods = (generation + 1) % 2 + 1;
 
-        this.screenPositions = parent.screenPositions + numberOfMethods;
-        this.generation = parent.generation + 1;
     }
 
     public Identity(string name, string fieldsString, string methodsString)
     {
-        int numberOfMethods = (generation + 1) % 2 + 1;
+        int numberOfMethods = 2;
         this.name = name;
         children = new List<Identity>();
 
         selectFieldAndValues(fieldsString);
         selectMethods(methodsString, numberOfMethods);
-
-        this.screenPositions = numberOfMethods + 1;
-        this.generation = 1;
     }
 
     private void selectMethods(string methodString, int numberOfMethods)

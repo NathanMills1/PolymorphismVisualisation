@@ -11,11 +11,6 @@ public class InheritanceTreeGenerator : MonoBehaviour
     public GameObject[] parentMembers;
     private Dictionary<GameObject, List<GameObject>> treeMembersByParent { get; set; }
 
-    void Start()
-    {
-        
-    }
-
     private void assignEntity(Entity entity, GameObject treeMember)
     {
         int children = entity.children.Count;
@@ -33,8 +28,9 @@ public class InheritanceTreeGenerator : MonoBehaviour
         entity.updateFields(fields, false);
     }
 
-    public void setupInheritanceTree(Dictionary<int, List<Entity>> entitiesByGeneration)
+    public void setupInheritanceTree()
     {
+        Dictionary<int, List<Entity>> entitiesByGeneration = InheritanceGenerator.selectedEntitiesByGeneration;
         treeMembersByParent = new Dictionary<GameObject, List<GameObject>>();
 
         foreach (GameObject treeMember in treeMembers)
@@ -56,12 +52,5 @@ public class InheritanceTreeGenerator : MonoBehaviour
             assignEntity(entitiesByGeneration[1][i], parentMembers[i]);
         }
     }
-
-    public void toggleTree(bool toggle)
-    {
-        this.gameObject.SetActive(toggle);
-    }
-
-
 
 }
