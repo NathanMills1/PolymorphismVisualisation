@@ -12642,6 +12642,7 @@ MonoBehaviour:
   inheritanceGenerator: {fileID: 525155183}
   treeGenerator: {fileID: 278627182}
   questionManager: {fileID: 94753900}
+  dropRegion: {fileID: 1811152936}
 --- !u!1 &998482290
 GameObject:
   m_ObjectHideFlags: 0

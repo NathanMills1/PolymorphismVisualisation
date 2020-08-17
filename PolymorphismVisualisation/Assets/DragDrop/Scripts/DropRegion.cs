@@ -126,18 +126,33 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         }
     }
 
-    public void adjustScreenPositions(int yOffset)
+    public void adjustForActivitySection(int activitySection)
+    {
+        switch (activitySection)
+        {
+            case 1:
+                adjustGameObjectPositions(-200);
+                break;
+            case 2: 
+                adjustGameObjectPositions(-100);
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    private void adjustGameObjectPositions(int yOffset)
     {
         Vector3 offset = new Vector3(0, yOffset, 0);
         screenBasePosition += offset;
         objectBasePosition += offset;
 
-        GameObject[] dropComponents = new GameObject[] { screenImage.gameObject, bottomScreenImage.gameObject, objectImage.gameObject, screenShadow.gameObject, parentTypeError, bottomFade};
+        GameObject[] dropComponents = new GameObject[] { screenImage.gameObject, bottomScreenImage.gameObject, objectImage.gameObject, screenShadow.gameObject};
         foreach(GameObject component in dropComponents)
         {
             component.GetComponent<RectTransform>().localPosition += offset;
         }
-        topFade.GetComponent<RectTransform>().sizeDelta += new Vector2(0, yOffset);
     }
 
     //Used to stop current animations, at set sheets back to initial placements
@@ -164,12 +179,12 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             //set size of method error box to match screen size
 
             bool screenIsParent = objectEntity.determineIfChildOf(screenEntity);
-            if (!screenIsParent && screenEntity.height > objectEntity.height)
+            if (!screenIsParent && screenEntity.generation > objectEntity.generation)
             {
                 parentTypeError.GetComponent<RectTransform>().sizeDelta = new Vector2(410, (screenEntity.height - objectEntity.height));
-                parentTypeError.transform.localPosition = new Vector3(0, -125.0f - (objectEntity.height), 0);
+                parentTypeError.transform.localPosition = new Vector3(0, objectImage.rectTransform.localPosition.y - (objectEntity.height), 0);
             }
-            parentTypeError.SetActive(!screenIsParent && screenEntity.height > objectEntity.height);
+            parentTypeError.SetActive(!screenIsParent && screenEntity.generation > objectEntity.generation);
 
             if (!screenIsParent && !screenEntity.determineIfChildOf(objectEntity))
             {
@@ -256,8 +271,8 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     {
         const float DURATION = 0.6f;
         const float STEP_SIZE = 0.05f;
-        Vector2 objectEndPosition = new Vector2(3, -133);
-        Vector2 objectStartPosition = new Vector2(400, -133);
+        Vector2 objectEndPosition = objectBasePosition;
+        Vector2 objectStartPosition = objectBasePosition + new Vector3(400, 0, 0);
         float currentTime = 0;
 
         GameObject page = objectImage.gameObject;
@@ -293,9 +308,9 @@ public class DropRegion : MonoBehaviour, IDropHandler {
 
     private void setFadePositions()
     {
-        int topFadeHeight = 125 + screenEntity.height;
-        int bottomFadeYPos = 0 - topFadeHeight;
-        int bottomFadeHeight = 830 - topFadeHeight;
+        float topFadeHeight = System.Math.Abs(screenBasePosition.y) + screenEntity.height;
+        float bottomFadeYPos = 0 - topFadeHeight;
+        float bottomFadeHeight = 1000 - topFadeHeight;
 
         Vector2 topSize = topFade.gameObject.GetComponent<RectTransform>().sizeDelta;
         topFade.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(topSize.x, topFadeHeight);

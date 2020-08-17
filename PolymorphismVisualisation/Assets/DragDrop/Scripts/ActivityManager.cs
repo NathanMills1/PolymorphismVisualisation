@@ -7,6 +7,7 @@ public class ActivityManager : MonoBehaviour
     public InheritanceGenerator inheritanceGenerator;
     public TreeManager treeGenerator;
     public QuestionManager questionManager;
+    public DropRegion dropRegion;
 
     public void Start()
     {
@@ -18,5 +19,6 @@ public class ActivityManager : MonoBehaviour
         inheritanceGenerator.setupEntities(activitySection, theme);
         treeGenerator.loadInheritanceTree(activitySection);
         questionManager.setupQuestionManager(activitySection, language);
+        dropRegion.adjustForActivitySection(activitySection);
     }
 }
