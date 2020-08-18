@@ -11,7 +11,7 @@ public class ActivityManager : MonoBehaviour
 
     public void Start()
     {
-        loadActivitySection(1, Theme.People, Language.CSharp);
+        loadActivitySection(2, Theme.People, Language.CSharp);
     }
 
     public void loadActivitySection(int activitySection, Theme theme, Language language)

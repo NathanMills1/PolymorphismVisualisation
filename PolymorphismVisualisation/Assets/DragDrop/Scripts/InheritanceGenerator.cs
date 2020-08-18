@@ -142,15 +142,10 @@ public class InheritanceGenerator : MonoBehaviour
             case 1:
                 return selectEntitiesForBasic(entitiesByGeneration);
             case 2:
-                //Select gen1 and gen2 entities
-                break;
-            case 3:
-                return selectEntitiesForMultiInheritance(entitiesByGeneration);
+                return selectEntitiesForInheritance(entitiesByGeneration);
             default:
-                //Set up case for overriding
-                break;
+                return selectEntitiesForMultiInheritance(entitiesByGeneration);
         }
-        return null;
     }
 
     private List<Entity> selectEntitiesForBasic(Dictionary<int, List<Entity>> entitiesByGeneration)
@@ -176,7 +171,44 @@ public class InheritanceGenerator : MonoBehaviour
         return chosenEntities;
     }
 
-    private List<Entity> selectEntitiesForMultiInheritance(Dictionary<int, List<Entity>> entitiesByGeneration)
+    private List<Entity> selectEntitiesForInheritance(Dictionary<int, List<Entity>> entitiesByGeneration)
+    {
+        decreaseIdentityGeneration();
+
+        List<Entity> chosenEntities = new List<Entity>();
+        Entity chosenEntity;
+
+        for (int i = 0; i < 2; i++)
+        {
+            int entityPos = randomGen.Next(entitiesByGeneration[1].Count);
+            chosenEntity = entitiesByGeneration[1][entityPos];
+            while (chosenEntities.Contains(chosenEntity))
+            {
+                entityPos = randomGen.Next(entitiesByGeneration[1].Count);
+                chosenEntity = entitiesByGeneration[1][entityPos];
+            }
+
+            chosenEntities.Add(chosenEntity);
+
+            for (int j = 0; j < 2; j++)
+            {
+                int childPos = randomGen.Next(chosenEntity.children.Count);
+                Entity childEntity = chosenEntity.children[childPos];
+                while (chosenEntities.Contains(childEntity))
+                {
+                    childPos = randomGen.Next(chosenEntity.children.Count);
+                    childEntity = chosenEntity.children[childPos];
+                }
+
+                chosenEntities.Add(childEntity);
+            }
+
+        }
+
+        return chosenEntities;
+    }
+
+        private List<Entity> selectEntitiesForMultiInheritance(Dictionary<int, List<Entity>> entitiesByGeneration)
     {
         List<Entity> chosenEntities = new List<Entity>();
         Entity chosenEntity = null;

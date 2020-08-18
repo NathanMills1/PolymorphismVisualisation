@@ -41,7 +41,7 @@ public class Entity
         this.objectImage = objectImage;
         this.shadow = shadow;
         this.children = new List<Entity>();
-        this.objectColour = objectColour;
+        this.objectColour = objectColour.Replace("\"", "");
         generation = 1;
 
     }

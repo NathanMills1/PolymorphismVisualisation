@@ -1,7 +1,5 @@
 Create code for selecting different themes
-Add sounds for in/correct placement + add delay to shake - needs correct sound
 Create menu
-Setup different activity sections
 Add count to sections before it goes to next one?
 Create tutorials for the sections
 Pop-up explaining why its wrong on question answer
