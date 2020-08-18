@@ -47,7 +47,7 @@ public class ValidMethodCallQuestionFactory : QuestionFactory
     {
         switch (codeLanguage)
         {
-            case Language.CSharp:
+            case Language.CPlusPlus:
                 return new CodeTextFormatter().addCodeSection(CodeTextFormatter.variableTypeColour, "VariableType ")
                     .addCodeSection(CodeTextFormatter.codeColour, "*VariableName = new ")
                     .addCodeSection(CodeTextFormatter.objectColour, "ChildType();\n")
@@ -59,7 +59,7 @@ public class ValidMethodCallQuestionFactory : QuestionFactory
                     .addCodeSection(CodeTextFormatter.objectColour, "ChildType();\n")
                     .addCodeSection(CodeTextFormatter.codeColour, "VariableName.SelectedMethod();")
                     .formattedString;
-            case Language.Python:
+            case Language.CSharp:
                 return new CodeTextFormatter().addCodeSection(CodeTextFormatter.codeColour, "VariableName = ")
                     .addCodeSection(CodeTextFormatter.objectColour, "ChildType()\n")
                     .addCodeSection(CodeTextFormatter.codeColour, "VariableName.SelectedMethod()")

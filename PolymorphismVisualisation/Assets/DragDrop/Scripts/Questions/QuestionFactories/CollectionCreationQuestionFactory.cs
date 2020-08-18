@@ -45,7 +45,7 @@ public class CollectionCreationQuestionFactory : QuestionFactory
         CodeTextFormatter formattedText;
         switch (codeLanguage)
         {
-            case Language.CSharp:
+            case Language.CPlusPlus:
                 
                 formattedText = new CodeTextFormatter();
                 if(containerType == 0)
@@ -98,7 +98,7 @@ public class CollectionCreationQuestionFactory : QuestionFactory
                 
                 return formattedText.formattedString;
 
-            case Language.Python:
+            case Language.CSharp:
                 formattedText = new CodeTextFormatter().addCodeSection(CodeTextFormatter.codeColour, "container = []");
                 for(int i = 1; i<3; i++)
                 {

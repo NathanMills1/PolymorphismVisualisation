@@ -3,5 +3,5 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum Language { 
-    Java, CSharp, Python
+    Java, CPlusPlus, CSharp
 }

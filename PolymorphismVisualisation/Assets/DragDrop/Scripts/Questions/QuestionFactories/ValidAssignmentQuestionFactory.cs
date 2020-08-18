@@ -42,7 +42,7 @@ public class ValidAssignmentQuestionFactory : QuestionFactory
     {
         switch (codeLanguage)
         {
-            case Language.CSharp:
+            case Language.CPlusPlus:
                 return new CodeTextFormatter().addCodeSection(CodeTextFormatter.variableTypeColour, "VariableType ")
                     .addCodeSection(CodeTextFormatter.codeColour, "*VariableName = new ")
                     .addCodeSection(CodeTextFormatter.objectColour, "selectedType();")
@@ -53,7 +53,7 @@ public class ValidAssignmentQuestionFactory : QuestionFactory
                     .addCodeSection(CodeTextFormatter.objectColour, "selectedType();")
                     .formattedString;
 
-            case Language.Python:
+            case Language.CSharp:
                 //defunct
 
             default:

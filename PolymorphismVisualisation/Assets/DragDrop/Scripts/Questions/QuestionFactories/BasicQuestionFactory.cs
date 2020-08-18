@@ -29,7 +29,7 @@ public class BasicQuestionFactory : QuestionFactory
     {
         switch (codeLanguage)
         {
-            case Language.CSharp:
+            case Language.CPlusPlus:
                 return new CodeTextFormatter().addCodeSection(CodeTextFormatter.variableTypeColour, "VariableType ")
                     .addCodeSection(CodeTextFormatter.codeColour, "*VariableName = new ")
                     .addCodeSection(CodeTextFormatter.objectColour, "ObjectType();")
@@ -39,7 +39,7 @@ public class BasicQuestionFactory : QuestionFactory
                     .addCodeSection(CodeTextFormatter.codeColour, "VariableName = new ")
                     .addCodeSection(CodeTextFormatter.objectColour, "ObjectType();")
                     .formattedString;
-            case Language.Python:
+            case Language.CSharp:
                 //Question doesnt work in python as can't set typing
                 return "";
             default:

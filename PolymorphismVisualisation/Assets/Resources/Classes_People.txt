@@ -1,7 +1,7 @@
 ID	Class	Fields	Methods	Parent ID
 0	Person	"age:18-65,gender:male/female"	"sleep,eat,walk,talk"	
 1	Student	yearLevel:1-6	"study,cram,viewLecture"	0
-2	UniStaff	campus:city/grafton/manukau	"accessRoom,manage"	0
+2	UniStaff	campus:city/grafton/manukau	"lockUp,manage"	0
 3	Workforce	"paymentType:salary/wage,workAmount:partTime/fullTime,unionMember:true/false"	"goToWork,clockIn,clockOut"	0
 4	Engineer	"specialisation:software/civil/mechanical/electrical/compsys/mechatronics, practicalHours:0-800"	"doMaths,getIdea,buildDesign"	1
 5	MedStudent	"specialised:true/false,placement:northShore/middlemore/tauranga/hamilton"	"diagnose,doCPR,wrapWound"	1

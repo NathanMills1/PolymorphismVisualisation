@@ -28,12 +28,12 @@ public class ValidInsertionQuestionFactory : QuestionFactory
         int objectPosition = -1;
         if (containerType.Equals(0))
         {
-            variablePosition = codeLanguage == Language.Python ? -1 : 1;
+            variablePosition = codeLanguage == Language.CSharp ? -1 : 1;
             //objectPosition = codeLanguage == Language.Java ? 8 : codeLanguage == Language.CSharp ? 6 : 3;
         }
         else
         {
-            variablePosition = codeLanguage == Language.Python ? -1 : 0;
+            variablePosition = codeLanguage == Language.CSharp ? -1 : 0;
             //objectPosition = codeLanguage == Language.Java ? 7 : codeLanguage == Language.CSharp ? 4 : 3;
         }
         
@@ -55,7 +55,7 @@ public class ValidInsertionQuestionFactory : QuestionFactory
         CodeTextFormatter formattedText;
         switch (codeLanguage)
         {
-            case Language.CSharp:
+            case Language.CPlusPlus:
                 
                 formattedText = new CodeTextFormatter();
                 if(containerType == 0)
@@ -100,7 +100,7 @@ public class ValidInsertionQuestionFactory : QuestionFactory
                     .addCodeSection(CodeTextFormatter.codeColour, variablePart);
                 return formattedText.formattedString;
 
-            case Language.Python:
+            case Language.CSharp:
                 return new CodeTextFormatter().addCodeSection(CodeTextFormatter.codeColour, "VariableNames = []\nVariableNames.append(")
                     .addCodeSection(CodeTextFormatter.objectColour, "InsertedType()")
                     .addCodeSection(CodeTextFormatter.codeColour, ")")
