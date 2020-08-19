@@ -47,7 +47,10 @@ public class TextAnimation : MonoBehaviour
 
         yield return new WaitForSeconds(0.3f);
 
-        shakeSound.Play();
+        if (!GameManager.muted)
+        {
+            shakeSound.Play();
+        }
 
         while (maxOffset > 3f)
         {
@@ -144,7 +147,10 @@ public class TextAnimation : MonoBehaviour
         Color32[] newVertexColors;
 
         yield return new WaitForSeconds(0.3f);
-        glowSound.Play();
+        if (!GameManager.muted)
+        {
+            glowSound.Play();
+        }
 
         //Calculate the transformed vertices
         for (int charPos = firstCharacter; charPos <= lastCharacter; charPos++)

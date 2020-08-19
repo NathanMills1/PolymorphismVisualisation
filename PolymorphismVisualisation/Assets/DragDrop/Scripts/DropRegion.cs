@@ -181,7 +181,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             bool screenIsParent = objectEntity.determineIfChildOf(screenEntity);
             if (!screenIsParent && screenEntity.generation > objectEntity.generation)
             {
-                parentTypeError.GetComponent<RectTransform>().sizeDelta = new Vector2(410, (screenEntity.height - objectEntity.height));
+                parentTypeError.GetComponent<RectTransform>().sizeDelta = new Vector2(410, (screenEntity.height - objectEntity.height - 8));
                 parentTypeError.transform.localPosition = new Vector3(0, objectImage.rectTransform.localPosition.y - (objectEntity.height), 0);
             }
             parentTypeError.SetActive(!screenIsParent && screenEntity.generation > objectEntity.generation);
@@ -263,7 +263,11 @@ public class DropRegion : MonoBehaviour, IDropHandler {
 
         screen.transform.localPosition = screenEndPosition;
         bottomScreen.transform.localPosition = screenEndPosition - new Vector2(-9, 9);
-        thudSound.Play();
+        if (!GameManager.muted)
+        {
+            thudSound.Play();
+        }
+        
         questionManager.screenPlaced(screenEntity);
     }
 
@@ -277,7 +281,10 @@ public class DropRegion : MonoBehaviour, IDropHandler {
 
         GameObject page = objectImage.gameObject;
 
-        paperSound.Play();
+        if (!GameManager.muted)
+        {
+            paperSound.Play();
+        }
         while (currentTime <= DURATION)
         {
             float alpha = currentTime / DURATION;

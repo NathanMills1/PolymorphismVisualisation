@@ -3437,7 +3437,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 220682949}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1699976507}
+        m_MethodName: goToMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &220682949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15846,7 +15857,18 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1699976507}
+        m_MethodName: adjustVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1226175352
 GameObject:
   m_ObjectHideFlags: 0
@@ -19267,7 +19289,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Volume
+  m_Text: Muted
 --- !u!222 &1518483759
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -21588,6 +21610,7 @@ GameObject:
   - component: {fileID: 1699976504}
   - component: {fileID: 1699976506}
   - component: {fileID: 1699976505}
+  - component: {fileID: 1699976507}
   m_Layer: 0
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -21657,6 +21680,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1699976503}
   m_CullTransparentMesh: 0
+--- !u!114 &1699976507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699976503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29666e685d593d04fab463f16cfb440d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 1221714960}
+  muteButton: {fileID: 1900800788}
+  completedValue: {fileID: 1090003085}
 --- !u!1 &1709364344
 GameObject:
   m_ObjectHideFlags: 0
@@ -24329,8 +24367,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
-  m_IsOn: 1
+      m_Calls:
+      - m_Target: {fileID: 1699976507}
+        m_MethodName: toggleMute
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_IsOn: 0
 --- !u!1 &1904257403
 GameObject:
   m_ObjectHideFlags: 0

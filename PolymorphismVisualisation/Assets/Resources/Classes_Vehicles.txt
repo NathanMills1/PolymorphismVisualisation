@@ -3,11 +3,11 @@ ID	Class	Fields	Methods	Parent ID
 1	Car	"seats:2-8,make:Ferari/Holden/Audi/Toyota/Jaguar"	"steer,openBoot"	0
 2	Plane	"engines:2-8,landingWheels:2-7,commercial:true/false"	"lowerWheels,radioControl,takeOff"	0
 3	Helicopter	"rotors:2-4,Pilots:1-2"	"ascend,spinRotors,winch"	0
-4	SportsCar	"boostType:turbo/nitro,engineSize:6L/8L/10L"	"activateBoost,openRoof,cruiseMode"	1
-5	Ute	"bootCapactiy:40-100,wheelDrive:fwd/rwd/4wd"	"storeInBack,activateSuspension,traverseTerrarin"	1
-6	Minivan	"slidingDoor:true/false,removableSeats:true/false"	"removeSeats,foldDownSeats,pickupFamily"	1
-7	StealthBomber	"bombs:2-12,cloaking:true/false"	"dropBombs,activateStealth,fireMissiles"	2
+4	SportsCar	"boostType:turbo/nitro,engineSize:6L/8L/10L"	"useBoost,openRoof,cruiseMode"	1
+5	Ute	"bootCapactiy:40-100,wheelDrive:fwd/rwd/4wd"	"storeInBack,useSuspension,traverseHill"	1
+6	Minivan	"slidingDoor:true/false,removableSeats:true/false"	"removeSeats,foldDownSeat,pickupFamily"	1
+7	StealthBomber	"bombs:2-12,cloaking:true/false"	"dropBombs,useStealth,fireMissiles"	2
 8	PassengerJet	"topClass:Business/premium/economyPlus,crew:6-14"	"beginBoarding,serveFood,playMoive"	2
 9	Sesna	"wingspan:3-7,gildeDuration:15-75"	"glide,radioBase"	2
-10	Robinson R-22	"passengerComms:true/false,maxAltitude:800-2400"	"pickupLoad,whinchStretcher"	3
+10	Robinson R-22	"passengerComms:true/false,maxAltitude:800-2400"	"pickupLoad,useWhinch"	3
 11	Apache	"guns:1-2,Rounds:200-800"	"fireGuns,airSupport"	3

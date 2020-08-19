@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class QuestionManager : MonoBehaviour
@@ -17,6 +18,7 @@ public class QuestionManager : MonoBehaviour
     public AudioSource incorrectSound;
 
     private Question currentQuestion;
+    private QuestionFactory previousQuestionFactory;
     private System.Random randomGen = new System.Random();
 
     private Dictionary<int, List<Entity>> entities;
@@ -44,9 +46,14 @@ public class QuestionManager : MonoBehaviour
 
         int numberOfQuestionTypes = questionList.Count;
         int selectedType = randomGen.Next(numberOfQuestionTypes);
-
         QuestionFactory factory = questionList[selectedType];
+        while(previousQuestionFactory != null && factory.GetType().Equals(previousQuestionFactory.GetType()))
+        {
+            selectedType = randomGen.Next(numberOfQuestionTypes);
+            factory = questionList[selectedType];
+        }
 
+        previousQuestionFactory = factory;
         Question question = factory.getQuestion();
         this.currentQuestion = question;
         question.loadQuestion();
@@ -88,14 +95,30 @@ public class QuestionManager : MonoBehaviour
 
     private void correctAnswerProcedure()
     {
-        correctSound.Play();
+
+        if (!GameManager.muted)
+        {
+            correctSound.Play();
+        }
+
         clearQuestionRegion();
-        generateQuestion();
+        if (GameManager.updateSectionProgress())
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            generateQuestion();
+        }
+        
     }
 
     private void wrongAnswerProcedure()
     {
-        incorrectSound.Play();
+        if (!GameManager.muted)
+        {
+            incorrectSound.Play();
+        }
     }
 
     public void updateQuestion()

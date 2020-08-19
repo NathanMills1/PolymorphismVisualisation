@@ -13,17 +13,25 @@ public class MenuManager : MonoBehaviour
     public TMP_Dropdown languageDropDown;
     public TMP_Dropdown themeDropDown;
     public Button[] activityButtons;
+    public Slider volumeSlider;
+    public Toggle soundToggle;
+
 
     public void Awake()
     {
         GameManager.initialiseGameState();
-        
-
     }
 
     public void Start()
     {
         setAvailableSections();
+        
+    }
+
+    public void Update()
+    {
+        volumeSlider.value = GameManager.volumeLevel;
+        soundToggle.isOn = !GameManager.muted;
     }
 
 
@@ -88,5 +96,15 @@ public class MenuManager : MonoBehaviour
 
         }
         GameManager.theme = theme;
+    }
+
+    public void toggleSound()
+    {
+        GameManager.muted = !soundToggle.isOn;
+    }
+
+    public void adjustVolume()
+    {
+        GameManager.updateVolume(volumeSlider.value);
     }
 }

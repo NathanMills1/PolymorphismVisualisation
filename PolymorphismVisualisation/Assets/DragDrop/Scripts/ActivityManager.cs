@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ActivityManager : MonoBehaviour
 {
@@ -16,7 +17,6 @@ public class ActivityManager : MonoBehaviour
     public void Start()
     {
         loadActivitySection(GameManager.activeActivity, GameManager.theme, GameManager.codingLanguage);
-
     }
 
     public void Update()
@@ -31,11 +31,6 @@ public class ActivityManager : MonoBehaviour
     {
         pauseMenu.SetActive(paused);
         pauseFade.SetActive(paused);
-    }
-
-    public void loadActivity()
-    {
-        loadActivitySection(GameManager.activeActivity, GameManager.theme, GameManager.codingLanguage);
     }
 
     private void loadActivitySection(int activitySection, Theme theme, Language language)
