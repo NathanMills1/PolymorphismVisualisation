@@ -1764,7 +1764,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &429054185
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2193,7 +2193,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 635005986}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1998637963}
+        m_MethodName: loadActivitySection
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &635005986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2422,7 +2433,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 758996024}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1998637963}
+        m_MethodName: loadActivitySection
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &758996024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4310,7 +4332,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1845000986}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1998637963}
+        m_MethodName: loadActivitySection
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1845000986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4644,7 +4677,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1998637962
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4686,8 +4719,11 @@ MonoBehaviour:
   settingsMenu: {fileID: 429054184}
   languageDropDown: {fileID: 1147266703}
   themeDropDown: {fileID: 1202580748}
-  activityScene:
-    m_Handle: 0
+  activityButtons:
+  - {fileID: 2079126282}
+  - {fileID: 635005985}
+  - {fileID: 1845000985}
+  - {fileID: 758996023}
 --- !u!1 &2003867845
 GameObject:
   m_ObjectHideFlags: 0
@@ -4987,7 +5023,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 2079126283}
   m_OnClick:
     m_PersistentCalls:

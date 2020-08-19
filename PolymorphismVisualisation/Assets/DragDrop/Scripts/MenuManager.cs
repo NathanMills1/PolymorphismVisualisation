@@ -7,26 +7,32 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    public static int activitySection { get; private set; }
-    public static Theme theme { get; private set; }
-    public static Language codingLanguage { get; private set; }
-    public static bool volumeOn { get; private set; }
-    public static float volumeLevel { get; set; }
-
-    public static bool activity1Complete = false;
-    public static bool activity2Complete = false;
-    public static bool activity3Complete = false;
 
     public GameObject mainMenu;
     public GameObject settingsMenu;
     public TMP_Dropdown languageDropDown;
     public TMP_Dropdown themeDropDown;
+    public Button[] activityButtons;
+
+    public void Awake()
+    {
+        GameManager.initialiseGameState();
+        
+
+    }
 
     public void Start()
     {
-        volumeLevel = 1;
-        codingLanguage = Language.CPlusPlus;
-        theme = Theme.Animals;
+        setAvailableSections();
+    }
+
+
+    private void setAvailableSections()
+    {
+        for (int i = 0; i < activityButtons.Length; i++)
+        {
+            activityButtons[i].interactable = GameManager.sectionsComplete[i];
+        }
     }
 
     public void swapMenu()
@@ -37,12 +43,13 @@ public class MenuManager : MonoBehaviour
 
     public void loadActivitySection(int section)
     {
-        activitySection = section;
+        GameManager.activeActivity = section;
         SceneManager.LoadScene(1);
     }
 
     public void setCodeLanguage()
     {
+        Language codingLanguage;
         switch (languageDropDown.value)
         {
             case 0:
@@ -58,10 +65,12 @@ public class MenuManager : MonoBehaviour
                 codingLanguage = Language.CPlusPlus;
                 break;
         }
+        GameManager.codingLanguage = codingLanguage;
     }
 
     public void setTheme()
     {
+        Theme theme;
         switch (themeDropDown.value)
         {
             case 0:
@@ -78,5 +87,6 @@ public class MenuManager : MonoBehaviour
                 break;
 
         }
+        GameManager.theme = theme;
     }
 }

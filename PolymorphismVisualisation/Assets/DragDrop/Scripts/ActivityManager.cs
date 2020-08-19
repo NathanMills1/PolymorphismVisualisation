@@ -8,21 +8,55 @@ public class ActivityManager : MonoBehaviour
     public TreeManager treeGenerator;
     public QuestionManager questionManager;
     public DropRegion dropRegion;
+    public GameObject pauseMenu;
+    public GameObject pauseFade;
+
+    private bool paused = false;
 
     public void Start()
     {
+        loadActivitySection(GameManager.activeActivity, GameManager.theme, GameManager.codingLanguage);
+
     }
 
-    public void Awake()
+    public void Update()
     {
-        loadActivitySection(MenuManager.activitySection, MenuManager.theme, MenuManager.codingLanguage);
+        if (Input.GetKeyDown("escape"))
+        {
+            paused = togglePause();
+        }
     }
 
-    public void loadActivitySection(int activitySection, Theme theme, Language language)
+    public void OnGUI()
+    {
+        pauseMenu.SetActive(paused);
+        pauseFade.SetActive(paused);
+    }
+
+    public void loadActivity()
+    {
+        loadActivitySection(GameManager.activeActivity, GameManager.theme, GameManager.codingLanguage);
+    }
+
+    private void loadActivitySection(int activitySection, Theme theme, Language language)
     {
         inheritanceGenerator.setupEntities(activitySection, theme);
         treeGenerator.loadInheritanceTree(activitySection);
         questionManager.setupQuestionManager(activitySection, language);
         dropRegion.adjustForActivitySection(activitySection);
+    }
+
+    private bool togglePause()
+    {
+        if (Time.timeScale == 0f)
+        {
+            Time.timeScale = 1f;
+            return (false);
+        }
+        else
+        {
+            Time.timeScale = 0f;
+            return (true);
+        }
     }
 }
