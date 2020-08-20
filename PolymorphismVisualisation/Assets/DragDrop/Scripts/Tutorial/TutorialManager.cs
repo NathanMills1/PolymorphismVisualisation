@@ -89,6 +89,10 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
             default:
+                if(currentTutorial.currentPos == 1)
+                {
+                    FindObjectOfType<QuestionManager>().generateQuestion();
+                }
                 break;
         }
     }

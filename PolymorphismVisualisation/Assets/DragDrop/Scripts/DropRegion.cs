@@ -221,7 +221,11 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         this.objectImage.gameObject.SetActive(false);
         this.parentTypeError.SetActive(false);
         this.screenShadow.gameObject.SetActive(false);
-        StopCoroutine(fadeRoutine);
+        if(fadeRoutine != null)
+        {
+            StopCoroutine(fadeRoutine);
+        }
+
         Color colour = this.topFade.GetComponent<Image>().color;
         Color invisColour = new Color(colour.r, colour.g, colour.b, 0);
         this.topFade.GetComponent<Image>().color = invisColour;
