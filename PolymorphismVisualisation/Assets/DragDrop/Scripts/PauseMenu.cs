@@ -21,6 +21,8 @@ public class PauseMenu : MonoBehaviour
 
     public void goToMenu()
     {
+        ActivityManager.togglePause();
+        ActivityManager.paused = false;
         SceneManager.LoadScene(0);
     }
 

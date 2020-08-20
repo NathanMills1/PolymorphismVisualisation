@@ -203,7 +203,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1372136620}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99900943
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9431,10 +9431,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - 'Welcome to Polymorphism Visualisation This tool aims to assist students in their
-    understanding of concepts relating to polymorphism, and their ability to visualise
-    the relationship between variable type and the type of the object assigned to
-    the variable. '
+  - 'Welcome to Polymorphism Visualisation. This tool aims to assist students in
+    their understanding of concepts relating to polymorphism, and their ability to
+    visualise the relationship between variable type and the type of the object assigned
+    to that variable. '
   nextSectionOnDialogueComplete: 1
   highlightedComponents: []
 --- !u!1 &712290764
@@ -10753,7 +10753,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.9999842}
+  m_AnchoredPosition: {x: 0, y: -0.00001579523}
   m_SizeDelta: {x: 0, y: 1}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &797456929
@@ -10986,7 +10986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - As we can see, the object now fully fits in the variable type, but as an extra
+  - As we can see, the object now fully fits in the variable type, but has an extra
     section at the bottom. All required methods and fields of the parent class can
     be accessed, but those of the child will be ignored, as the machine follows the
     guide of the parent screen.
@@ -12980,8 +12980,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - This left-hand section contains screens which represent the variable type. Each
-    of different shapes represents a different class. The slots in the screen represent
-    where it expects fields and methods to be for the class.
+    of the different shapes represent a different class. The slots in the screen
+    represent where it expects fields and methods to be for the class.
   nextSectionOnDialogueComplete: 1
   highlightedComponents:
   - {fileID: 1524805097}
@@ -15729,7 +15729,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -161.2}
+  m_AnchoredPosition: {x: 0, y: -350}
   m_SizeDelta: {x: 1137.9955, y: 257.42026}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1114386772
@@ -17642,9 +17642,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - In OOP, the variable types are fixed at compile time, while multiple objects
-    can be passed in to the variable at run time, each with different values for
-    their fields. Likewise, in this tool, the variable type must be placed first,
-    and is fixed, while different objects can be swapped in and out from it.
+    can be passed into the variable at run time, each with different values for their
+    fields. Likewise, in this tool, the variable type must be placed first, and is
+    fixed, while different objects can be swapped in and out from it.
   nextSectionOnDialogueComplete: 1
   highlightedComponents: []
 --- !u!4 &1270095947
@@ -19541,7 +19541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - Now place the object whose type is the parent of the variable type you have placed.
+  - Now place an object whose type is the parent of the variable type you have placed.
   nextSectionOnDialogueComplete: 0
   highlightedComponents:
   - {fileID: 1319060534}
@@ -22990,10 +22990,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - In this section the classes involved now include inheritance. If you look closely
-    at the screens, some will be the as others, but with an extra section added on
-    to them.
-  - This represents the idea on inheritance, in which classes that extend other classes
+  - In this section, the classes involved now include inheritance. If you look closely
+    at the screens, some will have the same shape as others, but with an extra section
+    added on to the bottom.
+  - This represents the idea of inheritance, in which classes that extend other classes
     gain all the functionality of the parent class, along with adding new parts of
     their own.
   nextSectionOnDialogueComplete: 1
@@ -23273,8 +23273,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - Now place a variable type of a class that is a parent of other classes, along
-    with a object that is off a class that inherits from the variable type
+  - Now place a variable type of a class that is a parent of another class, along
+    with an object that is of a class that inherits from the variable type.
   nextSectionOnDialogueComplete: 0
   highlightedComponents:
   - {fileID: 1524805097}
@@ -24786,11 +24786,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - As we can see, although the object fits into the screen for the variable type,
-    it does not take up the entire space, and there are some gaps in the screen that
-    are empty. When the machine tries to get the information from these sections,
+    it does not take up the entire space, and there are some slots in the screen
+    that are empty. When the machine tries to get the information from these sections,
     there would be nothing there, causing it to error.
-  - Similarly in polymorphism, objects of a parent type cannot be used in place of
-    objects of a child type, as they do not contain all the functionality of the
+  - Similarly, in polymorphism, objects of a parent type cannot be used in place
+    of objects of a child type, as they do not contain all the functionality of that
     child type.
   nextSectionOnDialogueComplete: 1
   highlightedComponents:
@@ -25852,7 +25852,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - Begin by dragging one of the variable types that inherit from another type here.
+  - Begin by dragging one of the variable types that inherit from another type into
+    the central area.
   nextSectionOnDialogueComplete: 0
   highlightedComponents:
   - {fileID: 1524805097}

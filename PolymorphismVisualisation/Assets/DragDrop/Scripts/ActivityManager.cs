@@ -15,7 +15,7 @@ public class ActivityManager : MonoBehaviour
     public GameObject pauseFade;
     
 
-    private bool paused = false;
+    public static bool paused = false;
 
     public void Start()
     {
@@ -45,7 +45,7 @@ public class ActivityManager : MonoBehaviour
         tutorialManager.loadTutorial();
     }
 
-    private bool togglePause()
+    public static bool togglePause()
     {
         if (Time.timeScale == 0f)
         {
