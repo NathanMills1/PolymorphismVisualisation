@@ -42,7 +42,7 @@ public static class GameManager
     public static void completeSection(int section)
     {
         sectionsComplete[section] = true;
-        
+        sectionProgress[activeActivity - 1] = 0;
     }
 
     public static bool updateSectionProgress()

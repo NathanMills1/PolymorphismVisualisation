@@ -19,7 +19,7 @@ public class ValidMethodCallQuestionFactory : QuestionFactory
         Entity selectedEntity = generateVariable(generationWeighting);
         Entity selectedChild = selectChild(selectedEntity);
 
-        int methodCallGeneration = randomGen.Next(2);
+        int methodCallGeneration = RandomGen.next(2);
         Entity entityToGetMethodFor;
         bool correctAnswer;
 

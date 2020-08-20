@@ -19,7 +19,6 @@ public class QuestionManager : MonoBehaviour
 
     private Question currentQuestion;
     private QuestionFactory previousQuestionFactory;
-    private System.Random randomGen = new System.Random();
 
     private Dictionary<int, List<Entity>> entities;
 
@@ -42,11 +41,11 @@ public class QuestionManager : MonoBehaviour
     {
 
         int numberOfQuestionTypes = questionList.Count;
-        int selectedType = randomGen.Next(numberOfQuestionTypes);
+        int selectedType = RandomGen.next(numberOfQuestionTypes);
         QuestionFactory factory = questionList[selectedType];
         while(previousQuestionFactory != null && factory.GetType().Equals(previousQuestionFactory.GetType()))
         {
-            selectedType = randomGen.Next(numberOfQuestionTypes);
+            selectedType = RandomGen.next(numberOfQuestionTypes);
             factory = questionList[selectedType];
         }
 

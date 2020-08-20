@@ -20,7 +20,6 @@ public class InheritanceGenerator : MonoBehaviour
 
     public Theme theme = Theme.Animals;
 
-    private System.Random randomGen = new System.Random();
     private List<Entity> allEntities;
     private List<Identity> parentIdentities;
     public static Dictionary<int, List<Entity>> selectedEntitiesByGeneration { get; private set; }
@@ -157,11 +156,11 @@ public class InheritanceGenerator : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            int entityPos = randomGen.Next(entitiesByGeneration[1].Count);
+            int entityPos = RandomGen.next(entitiesByGeneration[1].Count);
             chosenEntity = entitiesByGeneration[1][entityPos];
             while (chosenEntities.Contains(chosenEntity))
             {
-                entityPos = randomGen.Next(entitiesByGeneration[1].Count);
+                entityPos = RandomGen.next(entitiesByGeneration[1].Count);
                 chosenEntity = entitiesByGeneration[1][entityPos];
             }
 
@@ -180,11 +179,11 @@ public class InheritanceGenerator : MonoBehaviour
 
         for (int i = 0; i < 2; i++)
         {
-            int entityPos = randomGen.Next(entitiesByGeneration[1].Count);
+            int entityPos = RandomGen.next(entitiesByGeneration[1].Count);
             chosenEntity = entitiesByGeneration[1][entityPos];
             while (chosenEntities.Contains(chosenEntity))
             {
-                entityPos = randomGen.Next(entitiesByGeneration[1].Count);
+                entityPos = RandomGen.next(entitiesByGeneration[1].Count);
                 chosenEntity = entitiesByGeneration[1][entityPos];
             }
 
@@ -192,11 +191,11 @@ public class InheritanceGenerator : MonoBehaviour
 
             for (int j = 0; j < 2; j++)
             {
-                int childPos = randomGen.Next(chosenEntity.children.Count);
+                int childPos = RandomGen.next(chosenEntity.children.Count);
                 Entity childEntity = chosenEntity.children[childPos];
                 while (chosenEntities.Contains(childEntity))
                 {
-                    childPos = randomGen.Next(chosenEntity.children.Count);
+                    childPos = RandomGen.next(chosenEntity.children.Count);
                     childEntity = chosenEntity.children[childPos];
                 }
 
@@ -215,11 +214,11 @@ public class InheritanceGenerator : MonoBehaviour
 
         for(int i = 0; i<2; i++)
         {
-            int entityPos = randomGen.Next(entitiesByGeneration[3].Count);
+            int entityPos = RandomGen.next(entitiesByGeneration[3].Count);
             chosenEntity = entitiesByGeneration[3][entityPos];
             while (chosenEntities.Contains(chosenEntity.parent))
             {
-                entityPos = randomGen.Next(entitiesByGeneration[3].Count);
+                entityPos = RandomGen.next(entitiesByGeneration[3].Count);
                 chosenEntity = entitiesByGeneration[3][entityPos];
             }
 

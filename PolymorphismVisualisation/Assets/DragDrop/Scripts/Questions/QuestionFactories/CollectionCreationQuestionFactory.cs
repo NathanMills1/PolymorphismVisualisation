@@ -17,14 +17,14 @@ public class CollectionCreationQuestionFactory : QuestionFactory
         Entity selectedEntity = generateVariable(generationWeighting);
         List<Entity> descendants = new List<Entity>();
         addChildrenToList(descendants, selectedEntity);
-        Entity child1 = descendants[randomGen.Next(descendants.Count)];
-        Entity child2 = descendants[randomGen.Next(descendants.Count)];
+        Entity child1 = descendants[RandomGen.next(descendants.Count)];
+        Entity child2 = descendants[RandomGen.next(descendants.Count)];
         while (child2.Equals(child1))
         {
-            child2 = descendants[randomGen.Next(descendants.Count)];
+            child2 = descendants[RandomGen.next(descendants.Count)];
         }
 
-        int containerType = randomGen.Next(2);
+        int containerType = RandomGen.next(2);
         int variablePosition = -1;
         int objectPosition = -1;
         

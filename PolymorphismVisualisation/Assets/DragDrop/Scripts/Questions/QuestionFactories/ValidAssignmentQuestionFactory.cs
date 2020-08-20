@@ -22,7 +22,7 @@ public class ValidAssignmentQuestionFactory : QuestionFactory
 
         bool correctAnswer = selectedEntity.determineIfChildOf(variableTypeEntity);
 
-        containerType = randomGen.Next(2);
+        containerType = RandomGen.next(2);
 
         int variablePosition = 0;
         int objectPosition = -1;

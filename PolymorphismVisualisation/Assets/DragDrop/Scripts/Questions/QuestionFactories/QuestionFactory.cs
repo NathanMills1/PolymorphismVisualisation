@@ -11,7 +11,6 @@ public abstract class QuestionFactory
     protected string questionText;
     protected int[] generationWeighting;
     protected Dictionary<int, List<Entity>> entities;
-    protected System.Random randomGen = new System.Random();
 
     public abstract Question getQuestion();
 
@@ -22,12 +21,12 @@ public abstract class QuestionFactory
     protected virtual Entity generateVariable(int[] weighting)
     {
         int total = weighting[0] + weighting[1] + weighting[2];
-        int weightingResult = randomGen.Next(total);
+        int weightingResult = RandomGen.next(total);
 
         int chosenGeneration = weightingResult < weighting[0] ? 1 : (weightingResult < weighting[0] + weighting[1]) ? 2 : 3;
 
         int entityCount = entities[chosenGeneration].Count;
-        int chosenEntityIndex = randomGen.Next(entityCount);
+        int chosenEntityIndex = RandomGen.next(entityCount);
 
         return entities[chosenGeneration][chosenEntityIndex];
     }
@@ -35,14 +34,14 @@ public abstract class QuestionFactory
     protected Entity selectChild(Entity entity)
     {
         int childrenCount = entity.children.Count;
-        int childIndex = randomGen.Next(childrenCount);
+        int childIndex = RandomGen.next(childrenCount);
         return entity.children[childIndex];
     }
 
     protected string selectMethod(Entity entity)
     {
         int methodCount = entity.identity.methods.Length;
-        int selectedIndex = randomGen.Next(methodCount);
+        int selectedIndex = RandomGen.next(methodCount);
         string method = entity.identity.methods[selectedIndex];
         return method;
     }
