@@ -18,6 +18,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     public QuestionManager questionManager;
     public AudioSource thudSound;
     public AudioSource paperSound;
+    public TutorialManager tutorialManager;
 
     public Entity screenEntity { get; private set; }
     public Entity objectEntity { get; private set; }
@@ -269,6 +270,11 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         }
         
         questionManager.screenPlaced(screenEntity);
+
+        if(GameManager.activeActivity == 1)
+        {
+            tutorialManager.actionMade(6);
+        }
     }
 
     public IEnumerator slideObjectIn()
@@ -310,7 +316,12 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         {
             screenSheetErrorRoutine = StartCoroutine(ejectBadSheet());
         }
-        
+
+        if (GameManager.activeActivity == 1)
+        {
+            tutorialManager.actionMade(7);
+        }
+
     }
 
     private void setFadePositions()
@@ -358,7 +369,6 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         const float INITIAL_WAIT_PERIOD = 1.3f;
         const float MAX_OFFSET = 10f;
         const float NUMBER_OF_SHAKES = 5f;
-        const float DECREASE_RATE = 0.9f;
         const float SHAKE_SPEED = 5f;
 
         yield return new WaitForSeconds(INITIAL_WAIT_PERIOD);
@@ -409,6 +419,11 @@ public class DropRegion : MonoBehaviour, IDropHandler {
 
             sheetMovement += moveDistance;
             yield return new WaitForSeconds(SHEET_MOVE_TIME/ DIVISIONS);
+        }
+
+        if (GameManager.activeActivity == 1)
+        {
+            tutorialManager.actionMade(8);
         }
 
     }

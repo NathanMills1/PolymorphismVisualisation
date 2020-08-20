@@ -128,7 +128,11 @@ public class QuestionManager : MonoBehaviour
 
     public void screenPlaced(Entity screen)
     {
-        currentQuestion.screenPlaced(screen);
+        if(currentQuestion != null) 
+        {
+            currentQuestion.screenPlaced(screen);
+        }
+        
     }
 
     public void objectPlaced(Entity objectEntity)

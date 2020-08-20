@@ -1558,7 +1558,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1811152935}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -1707,7 +1707,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1811152935}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -1782,12 +1782,12 @@ RectTransform:
   - {fileID: 1740813370}
   - {fileID: 188881667}
   m_Father: {fileID: 525155182}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -290}
-  m_SizeDelta: {x: 1920, y: 250}
+  m_SizeDelta: {x: 1460, y: 250}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &94753900
 MonoBehaviour:
@@ -1984,7 +1984,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &101851018
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2355,7 +2355,7 @@ RectTransform:
   m_Children:
   - {fileID: 1555516439}
   m_Father: {fileID: 1811152935}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -3724,6 +3724,13 @@ Transform:
   - {fileID: 677995862}
   - {fileID: 920105176}
   - {fileID: 637722325}
+  - {fileID: 1270095947}
+  - {fileID: 1316684166}
+  - {fileID: 856677129}
+  - {fileID: 276886932}
+  - {fileID: 939366306}
+  - {fileID: 960886224}
+  - {fileID: 475214408}
   m_Father: {fileID: 447586321}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3743,6 +3750,13 @@ MonoBehaviour:
   - {fileID: 677995863}
   - {fileID: 920105177}
   - {fileID: 637722326}
+  - {fileID: 1270095946}
+  - {fileID: 1316684165}
+  - {fileID: 856677128}
+  - {fileID: 276886931}
+  - {fileID: 939366305}
+  - {fileID: 960886223}
+  - {fileID: 475214409}
 --- !u!1 &260431949
 GameObject:
   m_ObjectHideFlags: 0
@@ -3929,7 +3943,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1811152935}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -4051,6 +4065,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 268783137}
   m_CullTransparentMesh: 0
+--- !u!1 &276886930
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 276886932}
+  - component: {fileID: 276886931}
+  m_Layer: 0
+  m_Name: Section7
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &276886931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276886930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc72d073a43e76a40b0cd9cded173fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+  - Now place the matching object from the list on the right into the middle too.
+  nextSectionOnDialogueComplete: 0
+  highlightedComponents:
+  - {fileID: 1811152934}
+  - {fileID: 1319060534}
+--- !u!4 &276886932
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276886930}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 249581312}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &278627178
 GameObject:
   m_ObjectHideFlags: 0
@@ -4546,7 +4609,7 @@ RectTransform:
   - {fileID: 769878961}
   - {fileID: 1411063680}
   m_Father: {fileID: 1811152935}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -5305,7 +5368,7 @@ RectTransform:
   m_Children:
   - {fileID: 1455541592}
   m_Father: {fileID: 525155182}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5862,6 +5925,8 @@ MonoBehaviour:
   - {fileID: 249581313}
   dialogueManager: {fileID: 339550958}
   focusedObjectHolder: {fileID: 1512365179}
+  tutorialFade: {fileID: 209843208}
+  tutorialBox: {fileID: 1114386770}
 --- !u!1 &450769170
 GameObject:
   m_ObjectHideFlags: 0
@@ -6174,6 +6239,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474362852}
   m_CullTransparentMesh: 0
+--- !u!1 &475214407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 475214408}
+  - component: {fileID: 475214409}
+  m_Layer: 0
+  m_Name: Section10
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &475214408
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475214407}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 249581312}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &475214409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475214407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc72d073a43e76a40b0cd9cded173fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+  - Questions will appear at the top region of the screen, with their relevant code
+    snippet at the bottom of the screen. Questions will either get you to recreate
+    the scenario in the code snippet, or ask you a question about the snippet shown.
+  - Before you answer the question, recreate the scenario using the screen and objects
+    available to assist you in answering it.
+  nextSectionOnDialogueComplete: 1
+  highlightedComponents:
+  - {fileID: 94753898}
+  - {fileID: 1976928902}
 --- !u!1 &496345775
 GameObject:
   m_ObjectHideFlags: 0
@@ -6715,7 +6833,6 @@ RectTransform:
   m_Children:
   - {fileID: 1790019671}
   - {fileID: 1200668372}
-  - {fileID: 2076840475}
   - {fileID: 1811152935}
   - {fileID: 94753899}
   - {fileID: 1976928903}
@@ -8603,8 +8720,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - Final test section
-  nextSectionOnDialogueComplete: 0
+  - The right-hand section contains sheets, which represents the objects which are
+    assigned to the variables. They contain the fields of the different objects along
+    with references to the methods for a class. The shape of an object will match
+    up with the shape of the same variable type.
+  nextSectionOnDialogueComplete: 1
   highlightedComponents:
   - {fileID: 1319060534}
 --- !u!1 &639196470
@@ -9246,11 +9366,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - Welcome to the Polymorphism Visualiser\n\nThis tool aims to help students visualise
-    the interaction between vairbale type and object type, and how this plays a part
-    in polymorphism.
-  - This tutorial will go through the basics of how to use this tool, along with
-    an explanation of what each part represents in terms of OOP.
+  - 'Welcome to Polymorphism Visualisation This tool aims to assist students in their
+    understanding of concepts relating to polymorphism, and their ability to visualise
+    the relationship between variable type and the type of the object assigned to
+    the variable. '
   nextSectionOnDialogueComplete: 1
   highlightedComponents: []
 --- !u!1 &712290764
@@ -11224,6 +11343,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 850561032}
   m_CullTransparentMesh: 0
+--- !u!1 &856677127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 856677129}
+  - component: {fileID: 856677128}
+  m_Layer: 0
+  m_Name: Section6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &856677128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856677127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc72d073a43e76a40b0cd9cded173fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+  - Begin by dragging one of the variable types, and placing it in the region in
+    the centre
+  nextSectionOnDialogueComplete: 0
+  highlightedComponents:
+  - {fileID: 1524805097}
+  - {fileID: 1811152934}
+--- !u!4 &856677129
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856677127}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 249581312}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &862987297
 GameObject:
   m_ObjectHideFlags: 0
@@ -12683,9 +12852,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - The column on the left contains screens. Each screen represents a variable type
-    for a variable
-  - 'Extra test dialogue, get them to '
+  - This left-hand section contains screens which represent the variable type. Each
+    of different shapes represents a different class. The slots in the screen represent
+    where it expects fields and methods to be for the class.
   nextSectionOnDialogueComplete: 1
   highlightedComponents:
   - {fileID: 1524805097}
@@ -13001,6 +13170,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 933036153}
   m_CullTransparentMesh: 0
+--- !u!1 &939366304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 939366306}
+  - component: {fileID: 939366305}
+  m_Layer: 0
+  m_Name: Section8
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &939366305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939366304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc72d073a43e76a40b0cd9cded173fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+  - These sheets represent instructions to be read by a machine, which uses the screen
+    as a guide for where it should find the pieces of information. Similarly in OOP,
+    the variable type acts as a guide telling the compiler what functionality and
+    fields to expect of the object assigned to the variable.
+  - The Tinted gaps represent private fields of the object. They cannot be directly
+    accessed by an outside source such as the machine, but can instead be accessed
+    by going through methods of the object. The non-tinted gaps represent the methods
+    of the objects.
+  - "Now try to place an object that doesn\u2019t match the variable type."
+  nextSectionOnDialogueComplete: 0
+  highlightedComponents:
+  - {fileID: 1811152934}
+  - {fileID: 1319060534}
+--- !u!4 &939366306
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939366304}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 249581312}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &947853938
 GameObject:
   m_ObjectHideFlags: 0
@@ -13231,6 +13457,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 954279194}
   m_CullTransparentMesh: 0
+--- !u!1 &960886222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 960886224}
+  - component: {fileID: 960886223}
+  m_Layer: 0
+  m_Name: Section9
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &960886223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960886222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc72d073a43e76a40b0cd9cded173fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+  - "As we can see variables and objects that aren\u2019t the same type don\u2019t
+    fit together, and will be rejected. This is due to them having different expectations
+    of available fields and methods, which don\u2019t match up."
+  nextSectionOnDialogueComplete: 1
+  highlightedComponents:
+  - {fileID: 1811152934}
+--- !u!4 &960886224
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960886222}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 249581312}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &965260789
 GameObject:
   m_ObjectHideFlags: 0
@@ -13263,7 +13539,7 @@ RectTransform:
   m_Children:
   - {fileID: 175611778}
   m_Father: {fileID: 525155182}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16003,7 +16279,7 @@ RectTransform:
   - {fileID: 1325687818}
   - {fileID: 1977930589}
   m_Father: {fileID: 1811152935}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -17046,8 +17322,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 48.244}
-  m_SizeDelta: {x: -878.2, y: 65}
+  m_AnchoredPosition: {x: 0, y: 48.244003}
+  m_SizeDelta: {x: -400.00003, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1257091051
 MonoBehaviour:
@@ -17208,6 +17484,56 @@ RectTransform:
   m_AnchoredPosition: {x: -4.9999847, y: 0}
   m_SizeDelta: {x: -20, y: -1.68}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1270095945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1270095947}
+  - component: {fileID: 1270095946}
+  m_Layer: 0
+  m_Name: Section4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1270095946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270095945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc72d073a43e76a40b0cd9cded173fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+  - In OOP, the variable types are fixed at compile time, while multiple objects
+    can be passed in to the variable at run time, each with different values for
+    their fields. Likewise, in this tool, the variable type must be placed first,
+    and is fixed, while different objects can be swapped in and out from it.
+  nextSectionOnDialogueComplete: 1
+  highlightedComponents: []
+--- !u!4 &1270095947
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270095945}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 249581312}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1271846079
 GameObject:
   m_ObjectHideFlags: 0
@@ -17866,6 +18192,55 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -0.5, y: -20}
   m_Pivot: {x: 0, y: 1}
+--- !u!1 &1316684164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1316684166}
+  - component: {fileID: 1316684165}
+  m_Layer: 0
+  m_Name: Section5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1316684165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316684164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc72d073a43e76a40b0cd9cded173fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+  - If you want to place a different variable type, press the clear button to remove
+    the current selection.
+  nextSectionOnDialogueComplete: 1
+  highlightedComponents:
+  - {fileID: 412411065}
+--- !u!4 &1316684166
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316684164}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 249581312}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1319060534
 GameObject:
   m_ObjectHideFlags: 0
@@ -17899,7 +18274,7 @@ RectTransform:
   - {fileID: 885591139}
   - {fileID: 1603291843}
   m_Father: {fileID: 525155182}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -20117,7 +20492,7 @@ RectTransform:
   - {fileID: 1535980167}
   - {fileID: 409369192}
   m_Father: {fileID: 525155182}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
@@ -23565,7 +23940,7 @@ RectTransform:
   - {fileID: 496345776}
   - {fileID: 903849079}
   m_Father: {fileID: 1811152935}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -23989,6 +24364,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 2076840475}
   - {fileID: 1778130425}
   - {fileID: 89141347}
   - {fileID: 94731313}
@@ -23997,7 +24373,7 @@ RectTransform:
   - {fileID: 115942813}
   - {fileID: 1193315492}
   m_Father: {fileID: 525155182}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -24026,6 +24402,7 @@ MonoBehaviour:
   questionManager: {fileID: 94753900}
   thudSound: {fileID: 1089527504}
   paperSound: {fileID: 639196472}
+  tutorialManager: {fileID: 447586322}
 --- !u!114 &1811152937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25994,7 +26371,7 @@ RectTransform:
   m_Children:
   - {fileID: 19002331}
   m_Father: {fileID: 525155182}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -27258,8 +27635,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 525155182}
-  m_RootOrder: 2
+  m_Father: {fileID: 1811152935}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}

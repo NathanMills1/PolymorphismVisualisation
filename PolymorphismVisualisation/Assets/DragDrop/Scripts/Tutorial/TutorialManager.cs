@@ -7,6 +7,8 @@ public class TutorialManager : MonoBehaviour
     public Tutorial[] tutorials;
     public DialogueManager dialogueManager;
     public GameObject focusedObjectHolder;
+    public GameObject tutorialFade;
+    public GameObject tutorialBox;
 
     private Tutorial currentTutorial;
     private bool tutorialComplete = false;
@@ -21,11 +23,14 @@ public class TutorialManager : MonoBehaviour
         else
         {
             //instead load question as normal
+            tutorialComplete = true;
         }
     }
 
     private void beginTutorial()
     {
+        tutorialFade.SetActive(true);
+        tutorialBox.SetActive(true);
         TutorialSection section = currentTutorial.getCurrentSection();
         dialogueManager.StartDialogue(section.dialogue, section.nextSectionOnDialogueComplete);
         highlightObjects(section);
@@ -34,7 +39,7 @@ public class TutorialManager : MonoBehaviour
 
     public void actionMade(int tutorialPart)
     {
-        if(currentTutorial != null && currentTutorial.currentPos.Equals(tutorialPart))
+        if(!tutorialComplete && currentTutorial.currentPos.Equals(tutorialPart - 1))
         {
             loadNextSection();
         }
@@ -48,6 +53,8 @@ public class TutorialManager : MonoBehaviour
         if(section == null)
         {
             tutorialComplete = true;
+            tutorialFade.SetActive(false);
+            tutorialBox.SetActive(false);
         }
         else
         {
@@ -64,7 +71,7 @@ public class TutorialManager : MonoBehaviour
             int objectPosition = currentObject.transform.GetSiblingIndex();
             section.originalPositions[i] = objectPosition;
             section.componentParents[i] = currentObject.transform.parent;
-            currentObject.transform.parent = focusedObjectHolder.transform;
+            currentObject.transform.SetParent(focusedObjectHolder.transform);
 
         }
     }
@@ -76,7 +83,7 @@ public class TutorialManager : MonoBehaviour
         for(int i = section.highlightedComponents.Length - 1; i>= 0; i--)
         {
             Transform currentObject = section.highlightedComponents[i].transform;
-            currentObject.parent = section.componentParents[i];
+            currentObject.SetParent(section.componentParents[i]);
             currentObject.SetSiblingIndex(section.originalPositions[i]);
         }
     }
