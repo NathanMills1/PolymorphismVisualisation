@@ -23,7 +23,6 @@ public class QuestionManager : MonoBehaviour
 
     private Dictionary<int, List<Entity>> entities;
 
-    private int activitySection;
     private List<QuestionFactory> questionList;
 
     // Start is called before the first frame update
@@ -35,10 +34,8 @@ public class QuestionManager : MonoBehaviour
     public void setupQuestionManager(int activitySection, Language codeLanguage)
     {
         Question.setGameObjects(codeBox, questionTextBox, statusMessageBox, checkButton, yesButton, noButton, dropRegion);
-        this.activitySection = activitySection;
         QuestionFactory.setCodeLanguage(codeLanguage);
         questionList = QuestionListFactory.generateQuestionList(activitySection);
-        generateQuestion();
     }
 
     public void generateQuestion()
@@ -123,7 +120,10 @@ public class QuestionManager : MonoBehaviour
 
     public void updateQuestion()
     {
-        currentQuestion.loadQuestion();
+        if(currentQuestion != null)
+        {
+            currentQuestion.loadQuestion();
+        }
     }
 
     public void screenPlaced(Entity screen)
@@ -137,7 +137,10 @@ public class QuestionManager : MonoBehaviour
 
     public void objectPlaced(Entity objectEntity)
     {
-        currentQuestion.objectPlaced(objectEntity);
+        if (currentQuestion != null)
+        {
+            currentQuestion.objectPlaced(objectEntity);
+        }
     }
 
     

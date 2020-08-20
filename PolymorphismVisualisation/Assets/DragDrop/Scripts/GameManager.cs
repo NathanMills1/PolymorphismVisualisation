@@ -12,6 +12,7 @@ public static class GameManager
     public static float volumeLevel { get; private set; }
 
     public static bool[] sectionsComplete { get; private set; }
+    public static bool[] tutorialsComplete { get; private set; }
     public static int[] sectionProgress { get; private set; }
     private static int[] requiredNumberOfQuestions = new int[] { 5, 8, 8, 10000000 };
 
@@ -26,6 +27,7 @@ public static class GameManager
             codingLanguage = Language.CPlusPlus;
 
             sectionsComplete = new bool[] { true, false, false, false };
+            tutorialsComplete = new bool[] { false, false, false };
             sectionProgress = new int[] { 0, 0, 0, 0 };
             volumeLevel = 1;
             muted = false;

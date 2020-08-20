@@ -1,6 +1,3 @@
-Create code for selecting different themes
-Create menu
-Add count to sections before it goes to next one?
 Create tutorials for the sections
 Pop-up explaining why its wrong on question answer
 fix status bar

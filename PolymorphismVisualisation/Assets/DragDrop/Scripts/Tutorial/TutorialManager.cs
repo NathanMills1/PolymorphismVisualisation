@@ -15,7 +15,7 @@ public class TutorialManager : MonoBehaviour
 
     public void loadTutorial()
     {
-        if(GameManager.activeActivity <= 3)
+        if(GameManager.activeActivity <= 3 && !GameManager.tutorialsComplete[GameManager.activeActivity - 1])
         {
             currentTutorial = tutorials[GameManager.activeActivity - 1];
             beginTutorial();
@@ -24,6 +24,7 @@ public class TutorialManager : MonoBehaviour
         {
             //instead load question as normal
             tutorialComplete = true;
+            FindObjectOfType<QuestionManager>().generateQuestion();
         }
     }
 
@@ -52,14 +53,28 @@ public class TutorialManager : MonoBehaviour
         TutorialSection section = currentTutorial.getNextSection();
         if(section == null)
         {
-            tutorialComplete = true;
-            tutorialFade.SetActive(false);
-            tutorialBox.SetActive(false);
+            completeTutorial();
         }
         else
         {
             highlightObjects(section);
             dialogueManager.StartDialogue(section.dialogue, section.nextSectionOnDialogueComplete);
+        }
+
+        determineQuestionLoad();
+    }
+
+    private void determineQuestionLoad()
+    {
+        switch (GameManager.activeActivity)
+        {
+            case 1:
+                if(currentTutorial.currentPos == 9){
+                    FindObjectOfType<QuestionManager>().generateQuestion();
+                }
+                break;
+            default:
+                break;
         }
     }
 
@@ -86,5 +101,14 @@ public class TutorialManager : MonoBehaviour
             currentObject.SetParent(section.componentParents[i]);
             currentObject.SetSiblingIndex(section.originalPositions[i]);
         }
+    }
+
+    private void completeTutorial()
+    {
+        tutorialComplete = true;
+        tutorialFade.SetActive(false);
+        tutorialBox.SetActive(false);
+        GameManager.tutorialsComplete[GameManager.activeActivity - 1] = true;
+        FindObjectOfType<DropRegion>().clearSelected();
     }
 }
