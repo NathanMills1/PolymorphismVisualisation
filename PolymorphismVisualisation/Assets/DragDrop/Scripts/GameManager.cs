@@ -26,7 +26,7 @@ public static class GameManager
             theme = Theme.Animals;
             codingLanguage = Language.CPlusPlus;
 
-            sectionsComplete = new bool[] { true, false, false, false };
+            sectionsComplete = new bool[] { true, true, false, false };
             tutorialsComplete = new bool[] { false, false, false };
             sectionProgress = new int[] { 0, 0, 0, 0 };
             volumeLevel = 1;

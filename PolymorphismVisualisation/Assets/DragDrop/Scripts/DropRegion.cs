@@ -274,6 +274,12 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         if(GameManager.activeActivity == 1)
         {
             tutorialManager.actionMade(6);
+        } else if(GameManager.activeActivity == 2)
+        {
+            if (screenEntity.generation == 2)
+            {
+                tutorialManager.actionMade(3);
+            }
         }
     }
 
@@ -320,7 +326,17 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         if (GameManager.activeActivity == 1)
         {
             tutorialManager.actionMade(7);
+        } else if(GameManager.activeActivity == 2)
+        {
+            if(screenEntity.determineIfChildOf(objectEntity) && objectEntity.generation == 1)
+            {
+                tutorialManager.actionMade(4);
+            } else if(objectEntity.determineIfChildOf(screenEntity) && objectEntity.generation == 2 && screenEntity.generation == 1)
+            {
+                tutorialManager.actionMade(6);
+            }
         }
+
 
     }
 

@@ -59,6 +59,10 @@ public class TutorialManager : MonoBehaviour
         {
             highlightObjects(section);
             dialogueManager.StartDialogue(section.dialogue, section.nextSectionOnDialogueComplete);
+            if(GameManager.activeActivity == 2 && currentTutorial.currentPos == 5)
+            {
+                FindObjectOfType<DropRegion>().clearSelected();
+            }
         }
 
         determineQuestionLoad();
@@ -73,6 +77,12 @@ public class TutorialManager : MonoBehaviour
                     FindObjectOfType<QuestionManager>().generateQuestion();
                 }
                 break;
+            case 2:
+                if(currentTutorial.currentPos == 6)
+                {
+                    FindObjectOfType<QuestionManager>().generateQuestion();
+                }
+                break;
             default:
                 break;
         }
@@ -80,6 +90,9 @@ public class TutorialManager : MonoBehaviour
 
     private void highlightObjects(TutorialSection section)
     {
+        section.componentParents = new Transform[section.highlightedComponents.Length];
+        section.originalPositions = new int[section.highlightedComponents.Length];
+
         for (int i = 0; i < section.highlightedComponents.Length; i++)
         {
             GameObject currentObject = section.highlightedComponents[i];

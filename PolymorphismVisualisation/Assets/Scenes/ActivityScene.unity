@@ -3757,6 +3757,69 @@ MonoBehaviour:
   - {fileID: 939366305}
   - {fileID: 960886223}
   - {fileID: 475214409}
+--- !u!1 &250008979
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 250008980}
+  - component: {fileID: 250008981}
+  m_Layer: 0
+  m_Name: Tutorial2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &250008980
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250008979}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1698102593}
+  - {fileID: 1979463587}
+  - {fileID: 1899137542}
+  - {fileID: 1425641453}
+  - {fileID: 1814541254}
+  - {fileID: 1725228981}
+  - {fileID: 806362185}
+  m_Father: {fileID: 447586321}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &250008981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250008979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b9ea673d931aef4294c817ac8901e1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialSections:
+  - {fileID: 1698102594}
+  - {fileID: 1979463588}
+  - {fileID: 1899137543}
+  - {fileID: 1425641454}
+  - {fileID: 1814541255}
+  - {fileID: 1725228982}
+  - {fileID: 806362186}
 --- !u!1 &260431949
 GameObject:
   m_ObjectHideFlags: 0
@@ -5901,6 +5964,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 249581312}
+  - {fileID: 250008980}
   m_Father: {fileID: 79197620}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5923,6 +5987,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorials:
   - {fileID: 249581313}
+  - {fileID: 250008981}
   dialogueManager: {fileID: 339550958}
   focusedObjectHolder: {fileID: 1512365179}
   tutorialFade: {fileID: 209843208}
@@ -10872,6 +10937,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 805961730}
   m_CullTransparentMesh: 0
+--- !u!1 &806362184
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 806362185}
+  - component: {fileID: 806362186}
+  m_Layer: 0
+  m_Name: Section7
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &806362185
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806362184}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 250008980}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &806362186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806362184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc72d073a43e76a40b0cd9cded173fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+  - As we can see, the object now fully fits in the variable type, but as an extra
+    section at the bottom. All required methods and fields of the parent class can
+    be accessed, but those of the child will be ignored, as the machine follows the
+    guide of the parent screen.
+  - Similarly, in polymorphism, if a child object is passed to a variable type of
+    a class that is the parent of that object, only the methods and fields defined
+    in the parent can be accessed. Those in the child are ignored, as it treats it
+    as an object of the parent.
+  - Questions will now ask you about parent and child classes and the relationship
+    between the two.
+  nextSectionOnDialogueComplete: 1
+  highlightedComponents:
+  - {fileID: 1811152934}
 --- !u!1 &817860204
 GameObject:
   m_ObjectHideFlags: 0
@@ -19365,6 +19492,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1411063679}
   m_CullTransparentMesh: 0
+--- !u!1 &1425641452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1425641453}
+  - component: {fileID: 1425641454}
+  m_Layer: 0
+  m_Name: Section4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1425641453
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425641452}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 250008980}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1425641454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425641452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc72d073a43e76a40b0cd9cded173fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+  - Now place the object whose type is the parent of the variable type you have placed.
+  nextSectionOnDialogueComplete: 0
+  highlightedComponents:
+  - {fileID: 1319060534}
+  - {fileID: 1811152934}
 --- !u!1 &1455541591
 GameObject:
   m_ObjectHideFlags: 0
@@ -22760,6 +22941,64 @@ MonoBehaviour:
   - {fileID: 307947986}
   parentMembers:
   - {fileID: 1050413529}
+--- !u!1 &1698102592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1698102593}
+  - component: {fileID: 1698102594}
+  m_Layer: 0
+  m_Name: Section1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1698102593
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698102592}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 250008980}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1698102594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698102592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc72d073a43e76a40b0cd9cded173fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+  - In this section the classes involved now include inheritance. If you look closely
+    at the screens, some will be the as others, but with an extra section added on
+    to them.
+  - This represents the idea on inheritance, in which classes that extend other classes
+    gain all the functionality of the parent class, along with adding new parts of
+    their own.
+  nextSectionOnDialogueComplete: 1
+  highlightedComponents:
+  - {fileID: 1524805097}
 --- !u!1 &1699976503
 GameObject:
   m_ObjectHideFlags: 0
@@ -22985,6 +23224,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1712175049}
   m_CullTransparentMesh: 0
+--- !u!1 &1725228980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1725228981}
+  - component: {fileID: 1725228982}
+  m_Layer: 0
+  m_Name: Section6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1725228981
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725228980}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 250008980}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1725228982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725228980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc72d073a43e76a40b0cd9cded173fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+  - Now place a variable type of a class that is a parent of other classes, along
+    with a object that is off a class that inherits from the variable type
+  nextSectionOnDialogueComplete: 0
+  highlightedComponents:
+  - {fileID: 1524805097}
+  - {fileID: 1319060534}
+  - {fileID: 1811152934}
+  - {fileID: 412411065}
 --- !u!1 &1737028125
 GameObject:
   m_ObjectHideFlags: 0
@@ -24440,6 +24736,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811152934}
   m_CullTransparentMesh: 0
+--- !u!1 &1814541253
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1814541254}
+  - component: {fileID: 1814541255}
+  m_Layer: 0
+  m_Name: Section5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1814541254
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814541253}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 250008980}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1814541255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814541253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc72d073a43e76a40b0cd9cded173fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+  - As we can see, although the object fits into the screen for the variable type,
+    it does not take up the entire space, and there are some gaps in the screen that
+    are empty. When the machine tries to get the information from these sections,
+    there would be nothing there, causing it to error.
+  - Similarly in polymorphism, objects of a parent type cannot be used in place of
+    objects of a child type, as they do not contain all the functionality of the
+    child type.
+  nextSectionOnDialogueComplete: 1
+  highlightedComponents:
+  - {fileID: 1319060534}
+  - {fileID: 1811152934}
 --- !u!1 &1828492530
 GameObject:
   m_ObjectHideFlags: 0
@@ -25447,6 +25803,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1876568124}
   m_CullTransparentMesh: 0
+--- !u!1 &1899137541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1899137542}
+  - component: {fileID: 1899137543}
+  m_Layer: 0
+  m_Name: Section3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1899137542
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899137541}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 250008980}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1899137543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899137541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc72d073a43e76a40b0cd9cded173fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+  - Begin by dragging one of the variable types that inherit from another type here.
+  nextSectionOnDialogueComplete: 0
+  highlightedComponents:
+  - {fileID: 1524805097}
+  - {fileID: 1811152934}
 --- !u!1 &1900800786
 GameObject:
   m_ObjectHideFlags: 0
@@ -26453,6 +26863,62 @@ RectTransform:
   m_AnchoredPosition: {x: -5.289978, y: 271.82}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1979463586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1979463587}
+  - component: {fileID: 1979463588}
+  m_Layer: 0
+  m_Name: Section2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1979463587
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979463586}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 250008980}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1979463588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979463586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc72d073a43e76a40b0cd9cded173fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+  - The inheritance tree button at the top will bring up a diagram showing the inheritance
+    structure of the classes used in this question. If you are unsure what inherits
+    from what, take a look at this diagram.
+  nextSectionOnDialogueComplete: 1
+  highlightedComponents:
+  - {fileID: 965260789}
+  - {fileID: 278627178}
 --- !u!1 &1981435729
 GameObject:
   m_ObjectHideFlags: 0

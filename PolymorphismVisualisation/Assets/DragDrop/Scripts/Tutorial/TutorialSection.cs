@@ -13,7 +13,6 @@ public class TutorialSection : MonoBehaviour
 
     public void Start()
     {
-        componentParents = new Transform[highlightedComponents.Length];
-        originalPositions = new int[highlightedComponents.Length];
+        
     }
 }
