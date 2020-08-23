@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Permissions;
+using System.Text.RegularExpressions;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -17,6 +19,10 @@ public class InheritanceGenerator : MonoBehaviour
     public InheritanceTreeGenerator treeGenerator;
     public QuestionManager questionManager;
     public int activitySection;
+    public TextAsset peopleTheme;
+    public TextAsset animalTheme;
+    public TextAsset vehicleTheme;
+    public TextAsset images;
 
     public Theme theme = Theme.Animals;
 
@@ -30,9 +36,9 @@ public class InheritanceGenerator : MonoBehaviour
         this.activitySection = activitySection;
         this.theme = theme;
 
-
-        allEntities = loadEntities();
         parentIdentities = loadIdentities();
+        allEntities = loadEntities();
+        
         
         List<Entity> selectedEntities = selectEntities(allEntities);
         selectedEntitiesByGeneration = sortEntitiesByGeneration(selectedEntities);
@@ -58,10 +64,14 @@ public class InheritanceGenerator : MonoBehaviour
     {
         Dictionary<string, Identity> identities = new Dictionary<string, Identity>();
         List<Identity> parentIdentities = new List<Identity>();
-        string[] lines = System.IO.File.ReadAllLines(Application.dataPath + @"\Resources\Classes_" + this.theme + ".txt");
+        TextAsset themeTxt = this.theme == Theme.Animals ? this.animalTheme : this.theme == Theme.People ? this.peopleTheme : this.vehicleTheme;
+        string[] lines = themeTxt.text.Trim().Replace("\r", "").Split('\n');
         foreach (string line in lines.Skip(1))
         {
+            line.Trim();
+            Debug.Log(line + "");
             string[] details = line.Split('\t');
+            
             string fields = details[2].Replace("\"","");
             string methods = details[3].Replace("\"", "");
             Identity temp;
@@ -88,7 +98,7 @@ public class InheritanceGenerator : MonoBehaviour
     {
         Dictionary<string, Entity> entityById = new Dictionary<string, Entity>();
         List<Entity> entities = new List<Entity>();
-        string[] lines = System.IO.File.ReadAllLines(Application.dataPath + @"\Resources\Images.txt");
+        string[] lines = images.text.Trim().Replace("\r", "").Split('\n');
         foreach (string line in lines)
         {
             string[] details = line.Split('\t');
