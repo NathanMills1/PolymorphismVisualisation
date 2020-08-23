@@ -58,7 +58,7 @@ public class InheritanceGenerator : MonoBehaviour
     {
         Dictionary<string, Identity> identities = new Dictionary<string, Identity>();
         List<Identity> parentIdentities = new List<Identity>();
-        string[] lines = System.IO.File.ReadAllLines(@"Assets\Resources\Classes_" + this.theme + ".txt");
+        string[] lines = System.IO.File.ReadAllLines(Application.dataPath + @"\Resources\Classes_" + this.theme + ".txt");
         foreach (string line in lines.Skip(1))
         {
             string[] details = line.Split('\t');
@@ -88,7 +88,7 @@ public class InheritanceGenerator : MonoBehaviour
     {
         Dictionary<string, Entity> entityById = new Dictionary<string, Entity>();
         List<Entity> entities = new List<Entity>();
-        string[] lines = System.IO.File.ReadAllLines(@"Assets\Resources\Images.txt");
+        string[] lines = System.IO.File.ReadAllLines(Application.dataPath + @"\Resources\Images.txt");
         foreach (string line in lines)
         {
             string[] details = line.Split('\t');
