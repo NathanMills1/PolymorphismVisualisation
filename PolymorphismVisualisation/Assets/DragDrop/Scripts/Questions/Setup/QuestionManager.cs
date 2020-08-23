@@ -9,13 +9,12 @@ public class QuestionManager : MonoBehaviour
 {
     public GameObject codeBox;
     public GameObject questionTextBox;
-    public GameObject statusMessageBox;
+    public GameObject statusText;
     public GameObject checkButton;
     public GameObject yesButton;
     public GameObject noButton;
     public DropRegion dropRegion;
-    public AudioSource correctSound;
-    public AudioSource incorrectSound;
+
 
     private Question currentQuestion;
     private QuestionFactory previousQuestionFactory;
@@ -32,7 +31,7 @@ public class QuestionManager : MonoBehaviour
 
     public void setupQuestionManager(int activitySection, Language codeLanguage)
     {
-        Question.setGameObjects(codeBox, questionTextBox, statusMessageBox, checkButton, yesButton, noButton, dropRegion);
+        Question.setGameObjects(codeBox, questionTextBox, statusText, checkButton, yesButton, noButton, dropRegion);
         QuestionFactory.setCodeLanguage(codeLanguage);
         questionList = QuestionListFactory.generateQuestionList(activitySection);
     }
@@ -59,7 +58,6 @@ public class QuestionManager : MonoBehaviour
     {
         dropRegion.clearSelected();
 
-        statusMessageBox.SetActive(false);
         checkButton.SetActive(false);
         yesButton.SetActive(false);
         noButton.SetActive(false);
@@ -67,35 +65,18 @@ public class QuestionManager : MonoBehaviour
 
     public void checkQuestion()
     {
-        if (currentQuestion.checkCorrectness())
-        {
-            correctAnswerProcedure();
-        }
-        else
-        {
-            wrongAnswerProcedure();
-        }
+        currentQuestion.checkCorrectness();
+
     }
 
     public void answerBoolQuestion(bool answer)
     {
-        if (currentQuestion.checkYesNoAnswer(answer))
-        {
-            correctAnswerProcedure();
-        }
-        else
-        {
-            wrongAnswerProcedure();
-        }
+        currentQuestion.checkYesNoAnswer(answer);
+
     }
 
-    private void correctAnswerProcedure()
+    public void correctAnswerProcedure()
     {
-
-        if (!GameManager.muted)
-        {
-            correctSound.Play();
-        }
 
         clearQuestionRegion();
         if (GameManager.updateSectionProgress())
@@ -107,14 +88,6 @@ public class QuestionManager : MonoBehaviour
             generateQuestion();
         }
         
-    }
-
-    private void wrongAnswerProcedure()
-    {
-        if (!GameManager.muted)
-        {
-            incorrectSound.Play();
-        }
     }
 
     public void updateQuestion()

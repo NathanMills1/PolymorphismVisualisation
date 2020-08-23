@@ -22,6 +22,7 @@ public class CollectionCreationQuestion : Question
         variableCodePosition = variablePosition;
         objectCodePosition = objectPosition;
 
+        this.usesCheckButton = true;
     }
 
     public override void loadQuestion()
@@ -29,8 +30,8 @@ public class CollectionCreationQuestion : Question
         codeBox.GetComponentInChildren<TextMeshProUGUI>().text = createCodeText();
         questionTextBox.GetComponentInChildren<TextMeshProUGUI>().text = createQuestionText();
 
-        statusMessageBox.SetActive(true);
-        checkButton.SetActive(true);
+        statusText.GetComponent<TextMeshProUGUI>().text = "";
+        statusText.GetComponent<TextMeshProUGUI>().ForceMeshUpdate();
     }
 
     protected override string createQuestionText()
@@ -50,33 +51,28 @@ public class CollectionCreationQuestion : Question
 
     protected override bool performQuestionSpecificCheck()
     {
-        string status;
-        Color colour;
+        string status = "";
+        bool result = false;
         if(dropRegion.screenEntity != null)
         {
             if (!child1.determineIfChildOf(dropRegion.screenEntity))
             {
                 status = "Status: " + child1.identity.name + " does not inherit from " + dropRegion.screenEntity.identity.name;
-                colour = Color.red;
-                statusMessageBox.GetComponent<StatusHandler>().updateStatus(status, colour);
-                return false;
             } 
             else if (!child2.determineIfChildOf(dropRegion.screenEntity))
             {
                 status = "Status: " + child2.identity.name + " does not inherit from " + dropRegion.screenEntity.identity.name;
-                colour = Color.red;
-                statusMessageBox.GetComponent<StatusHandler>().updateStatus(status, colour);
-                return false;
             }
             else
             {
                 status = "Status: " + "All objects inherit from container type";
-                colour = new Color32(33,171,74,255);
-                statusMessageBox.GetComponent<StatusHandler>().updateStatus(status, colour);
-                return true;
+                result = true;
             }
+
+            statusText.GetComponent<StatusHandler>().updateStatus(status, result);
+
         }
-        return false;
+        return result;
         
     }
 

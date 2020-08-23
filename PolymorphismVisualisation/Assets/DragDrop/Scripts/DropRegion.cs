@@ -15,6 +15,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     public GameObject topFade;
     public GameObject bottomFade;
     public GameObject parentTypeError;
+    public GameObject checkButton;
     public QuestionManager questionManager;
     public AudioSource thudSound;
     public AudioSource paperSound;
@@ -239,6 +240,8 @@ public class DropRegion : MonoBehaviour, IDropHandler {
         {
             method.gameObject.SetActive(false);
         }
+
+        checkButton.SetActive(false);
 
         questionManager.updateQuestion();
     }

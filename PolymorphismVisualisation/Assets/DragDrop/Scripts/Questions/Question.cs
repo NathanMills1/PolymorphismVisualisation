@@ -16,14 +16,16 @@ public abstract class Question
 
     protected int variableCodePosition { get; set; }
     protected int objectCodePosition { get; set; }
+    protected bool usesCheckButton { get; set; } = false;
 
     protected static GameObject codeBox;
     protected static GameObject questionTextBox;
-    protected static GameObject statusMessageBox;
+    protected static GameObject statusText;
     protected static GameObject checkButton;
     protected static GameObject yesButton;
     protected static GameObject noButton;
     protected static DropRegion dropRegion;
+
 
     public abstract void loadQuestion();
 
@@ -79,7 +81,7 @@ public abstract class Question
     {
         Question.codeBox = codeBox;
         Question.questionTextBox = questionTextBox;
-        Question.statusMessageBox = statusMessageBox;
+        Question.statusText = statusMessageBox;
         Question.checkButton = checkButton;
         Question.yesButton = yesButton;
         Question.noButton = noButton;
@@ -88,18 +90,20 @@ public abstract class Question
 
     public bool checkCorrectness()
     {
-        string status;
-        Color colour;
-        if (dropRegion.screenEntity == null)
+        string status = "";
+        bool result = false;
+        if(variableType != null && !dropRegion.screenEntity.Equals(variableType))
         {
-            //#TODO make popup box for no screen
-        } 
-        else if (dropRegion.objectEntity != null && !dropRegion.objectEntity.determineIfChildOf(dropRegion.screenEntity))
+            status = "Selected screen does not match variable type of code snippet";
+            statusText.GetComponent<StatusHandler>().updateStatus(status, result);
+        }
+        else if (!dropRegion.objectEntity.determineIfChildOf(dropRegion.screenEntity))
         {
             status = "Compiler Error: " + dropRegion.objectEntity.identity.name + " does not inherit from " + dropRegion.screenEntity.identity.name;
-            colour = Color.red;
-            statusMessageBox.GetComponent<StatusHandler>().updateStatus(status, colour);
+            statusText.GetComponent<StatusHandler>().updateStatus(status, result);
         }
+
+        
 
         return performQuestionSpecificCheck();
     }
@@ -158,6 +162,10 @@ public abstract class Question
     {
         yesButton.GetComponent<Button>().interactable = setInteractable;
         noButton.GetComponent<Button>().interactable = setInteractable;
+        if (usesCheckButton)
+        {
+            checkButton.SetActive(true);
+        }
     }
 
     protected virtual bool activateButtonsCondition(Entity objectRepresentation)

@@ -32,6 +32,9 @@ public class ValidMethodCallQuestion : Question
 
         yesButton.SetActive(true);
         noButton.SetActive(true);
+
+        statusText.GetComponent<TextMeshProUGUI>().text = "";
+        statusText.GetComponent<TextMeshProUGUI>().ForceMeshUpdate();
     }
 
     protected override string createQuestionText()
@@ -46,6 +49,27 @@ public class ValidMethodCallQuestion : Question
 
     public override bool checkYesNoAnswer(bool userAnswer)
     {
-        return userAnswer == correctAnswer;
+        string status = "";
+        bool result = false;
+
+        if (correctAnswer != userAnswer)
+        {
+            status = "Incorrect. \n Ensure that the given method appears within the screen of the given variable type.";
+        }
+        else
+        {
+            if (correctAnswer)
+            {
+                status = "Correct. Given method can be called";
+            }
+            else
+            {
+                status = "Correct. Given method cannot be called, due to being a method of the child class";
+            }
+            result = true;
+        }
+        statusText.GetComponent<StatusHandler>().updateStatus(status, result);
+
+        return result;
     }
 }
