@@ -16,14 +16,19 @@ public abstract class Question
 
     protected int variableCodePosition { get; set; }
     protected int objectCodePosition { get; set; }
+    protected bool usesCheckButton { get; set; } = false;
 
     protected static GameObject codeBox;
     protected static GameObject questionTextBox;
-    protected static GameObject statusMessageBox;
+    protected static GameObject statusText;
     protected static GameObject checkButton;
     protected static GameObject yesButton;
     protected static GameObject noButton;
+    protected static GameObject continueButton;
     protected static DropRegion dropRegion;
+    protected static AudioSource correctSound;
+    protected static AudioSource incorrectSound;
+
 
     public abstract void loadQuestion();
 
@@ -75,32 +80,22 @@ public abstract class Question
         codeBox.GetComponent<RectTransform>().sizeDelta = new Vector2(codeBox.GetComponent<RectTransform>().rect.width, height);
     }
 
-    public static void setGameObjects(GameObject codeBox, GameObject questionTextBox, GameObject statusMessageBox, GameObject checkButton, GameObject yesButton, GameObject noButton, DropRegion dropRegion)
+    public static void setGameObjects(GameObject codeBox, GameObject questionTextBox, GameObject statusMessageBox, GameObject checkButton, GameObject yesButton, GameObject noButton, GameObject continueButton, DropRegion dropRegion, AudioSource correctSound, AudioSource incorrectSound)
     {
         Question.codeBox = codeBox;
         Question.questionTextBox = questionTextBox;
-        Question.statusMessageBox = statusMessageBox;
+        Question.statusText = statusMessageBox;
         Question.checkButton = checkButton;
         Question.yesButton = yesButton;
         Question.noButton = noButton;
+        Question.continueButton = continueButton;
         Question.dropRegion = dropRegion;
+        Question.correctSound = correctSound;
+        Question.incorrectSound = incorrectSound;
     }
 
     public bool checkCorrectness()
     {
-        string status;
-        Color colour;
-        if (dropRegion.screenEntity == null)
-        {
-            //#TODO make popup box for no screen
-        } 
-        else if (dropRegion.objectEntity != null && !dropRegion.objectEntity.determineIfChildOf(dropRegion.screenEntity))
-        {
-            status = "Compiler Error: " + dropRegion.objectEntity.identity.name + " does not inherit from " + dropRegion.screenEntity.identity.name;
-            colour = Color.red;
-            statusMessageBox.GetComponent<StatusHandler>().updateStatus(status, colour);
-        }
-
         return performQuestionSpecificCheck();
     }
 
@@ -158,6 +153,10 @@ public abstract class Question
     {
         yesButton.GetComponent<Button>().interactable = setInteractable;
         noButton.GetComponent<Button>().interactable = setInteractable;
+        if (usesCheckButton)
+        {
+            checkButton.SetActive(true);
+        }
     }
 
     protected virtual bool activateButtonsCondition(Entity objectRepresentation)
@@ -167,6 +166,39 @@ public abstract class Question
             return true;
         }
         return false;
+    }
+
+    protected void updateStatus(string status, bool correct)
+    {
+
+        if (!GameManager.muted)
+        {
+            if (correct)
+            {
+                correctSound.Play();
+            }
+            else
+            {
+                incorrectSound.Play();
+            }
+
+        }
+
+        TextMeshProUGUI textBox = statusText.GetComponent<TextMeshProUGUI>();
+
+        textBox.gameObject.SetActive(true);
+        textBox.text = status;
+        textBox.color = correct ? new Color32(0, 225, 0, 255) : new Color32(255, 0, 0, 255);
+
+        textBox.ForceMeshUpdate();
+
+        if (correct)
+        {
+            yesButton.SetActive(false);
+            noButton.SetActive(false);
+            continueButton.SetActive(true);
+        }
+
     }
 
 

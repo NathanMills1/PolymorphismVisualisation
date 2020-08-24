@@ -7,7 +7,7 @@ ID	Class	Fields	Methods	Parent ID
 5	Lion	"claws:6-10,prideSize:7-24,prideLeader:yes/no"	"huntPrey,lickWounds,playFight"	1
 6	Human	"hairColour:blonde/brunette/black/ginger,eyeColour:blue/green/brown"	"opposeThumbs,speak,program"	1
 7	Chicken	"gender:rooster/hen,status:freeRange/caged"	"cluck,cockFight,goToCoop"	2
-8	falcon	topSpeed:220-370	"diveBomb,scanForPrey,diveOnPrey"	2
+8	Falcon	topSpeed:220-370	"diveBomb,scanForPrey,diveOnPrey"	2
 9	Penguin	"Location:antarctica/artic/New Zealand,maxDive:5-25"	"slide,warmEgg,dance"	2
 10	Shark	"type:hammer/great white/tiger/whale,favouriteFood:seal/dolphin/human/sealion"	"circlePrey,attack,followScent"	3
 11	Stingray	"poisonous:true/false,barbed:true/false"	"sting,glide,thrash"	3

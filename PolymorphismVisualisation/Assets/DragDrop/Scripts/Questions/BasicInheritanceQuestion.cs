@@ -15,6 +15,8 @@ public class BasicInheritanceQuestion : Question
         this.variableType = variableType;
         variableCodePosition = 0;
         objectCodePosition = -1;
+
+        this.usesCheckButton = true;
     }
 
     public override void loadQuestion()
@@ -22,10 +24,8 @@ public class BasicInheritanceQuestion : Question
         codeBox.GetComponentInChildren<TextMeshProUGUI>().text = createCodeText();
         questionTextBox.GetComponentInChildren<TextMeshProUGUI>().text = createQuestionText();
 
-        statusMessageBox.GetComponentInChildren<TextMeshProUGUI>().text = "Status: ";
-        statusMessageBox.GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
-        statusMessageBox.SetActive(true);
-        checkButton.SetActive(true);
+        statusText.GetComponent<TextMeshProUGUI>().text = "";
+        statusText.GetComponent<TextMeshProUGUI>().ForceMeshUpdate();
     }
 
     protected override string createQuestionText()
@@ -36,27 +36,21 @@ public class BasicInheritanceQuestion : Question
     protected override bool performQuestionSpecificCheck()
     {
         string status;
-        Color colour;
-        try
+        if (variableType.Equals(dropRegion.screenEntity) && dropRegion.objectEntity.determineIfChildOf(dropRegion.screenEntity) && dropRegion.objectEntity != variableType)
         {
-            if (dropRegion.objectEntity == null)
-            {
-                status = "Compiler Error: Null reference to object";
-                colour = Color.red;
-                statusMessageBox.GetComponent<StatusHandler>().updateStatus(status, colour);
-            }
-             else if (variableType.Equals(dropRegion.screenEntity) && dropRegion.objectEntity.determineIfChildOf(dropRegion.screenEntity) && dropRegion.objectEntity != variableType)
-            {
-                status = "Status: Valid object placed in screen";
-                colour = new Color32(33, 171, 74, 255);
-                statusMessageBox.GetComponent<StatusHandler>().updateStatus(status, colour);
-                return true;
-            }
-
-        } catch (System.NullReferenceException)
-        {
-            //Screen or object not placed, can't be correct
+            status = "Status: Valid object assigned to variable type";
+            updateStatus(status, true);
+            return true;
         }
+        else if (!dropRegion.screenEntity.Equals(variableType))
+        {
+            status = "Selected screen does not match variable type of code snippet";
+        }
+        else if (dropRegion.screenEntity != dropRegion.objectEntity)
+        {
+            status = "Selected object is not compatible with variable type";
+        }
+
         return false;
     }
 

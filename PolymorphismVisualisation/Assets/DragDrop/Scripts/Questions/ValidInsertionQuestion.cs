@@ -28,9 +28,10 @@ public class ValidInsertionQuestion : Question
         questionTextBox.GetComponentInChildren<TextMeshProUGUI>().text = createQuestionText();
 
         yesButton.SetActive(true);
-        yesButton.GetComponent<Button>().interactable = false;
         noButton.SetActive(true);
-        noButton.GetComponent<Button>().interactable = false;
+
+        statusText.GetComponent<TextMeshProUGUI>().text = "";
+        statusText.GetComponent<TextMeshProUGUI>().ForceMeshUpdate();
     }
 
     protected override string createQuestionText()
@@ -46,6 +47,28 @@ public class ValidInsertionQuestion : Question
 
     public override bool checkYesNoAnswer(bool userAnswer)
     {
-        return userAnswer == correctAnswer;
+        string status = "";
+        bool result = false;
+
+        if (correctAnswer != userAnswer)
+        {
+            status = "Incorrect. \nTry and see if the object inherits from the variable type";
+        }
+        else
+        {
+            if (correctAnswer)
+            {
+                status = "Correct. " + objectType.identity.name + " can be assigned to variable type of " + variableType.identity.name;
+            }
+            else
+            {
+                status = "Correct. " + objectType.identity.name + " cannot be assigned to variable type of " + variableType.identity.name;
+            }
+
+            result = true;
+        }
+        updateStatus(status, result);
+
+        return result;
     }
 }

@@ -15,6 +15,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
     public GameObject topFade;
     public GameObject bottomFade;
     public GameObject parentTypeError;
+    public GameObject checkButton;
     public QuestionManager questionManager;
     public AudioSource thudSound;
     public AudioSource paperSound;
@@ -240,6 +241,8 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             method.gameObject.SetActive(false);
         }
 
+        checkButton.SetActive(false);
+
         questionManager.updateQuestion();
     }
 
@@ -327,7 +330,7 @@ public class DropRegion : MonoBehaviour, IDropHandler {
             screenSheetErrorRoutine = StartCoroutine(ejectBadSheet());
         }
 
-        if (GameManager.activeActivity == 1)
+        if (GameManager.activeActivity == 1 && objectEntity.determineIfChildOf(screenEntity))
         {
             tutorialManager.actionMade(7);
         } else if(GameManager.activeActivity == 2)

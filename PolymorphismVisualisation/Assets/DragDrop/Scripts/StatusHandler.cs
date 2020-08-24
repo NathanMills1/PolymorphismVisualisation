@@ -3,44 +3,51 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class StatusHandler : MonoBehaviour
+public class StatusHandler : MonoBehaviour  
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private Coroutine statusCoroutine;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public AudioSource correctSound;
+    public AudioSource incorrectSound;
 
-    private IEnumerator statusUpdate(string status, Color textColour)
+    private IEnumerator statusUpdate(string status, bool correct)
     {
-        TextMeshProUGUI textBox = this.gameObject.GetComponentInChildren<TextMeshProUGUI>();
-        for (int i = 0; i < 2; i++)
+
+        if (!GameManager.muted)
         {
-            if (i == 0)
+            if (correct)
             {
-                textBox.text = status;
-                textBox.color = textColour;
-                textBox.ForceMeshUpdate();
-                yield return new WaitForSeconds(4.0f);
+                correctSound.Play();
             }
             else
             {
-                textBox.text = "Status: ";
-                textBox.color = Color.black;
-                textBox.ForceMeshUpdate();
-                yield return new WaitForSeconds(4.0f);
+                incorrectSound.Play();
             }
+            
         }
+
+        TextMeshProUGUI textBox = this.gameObject.GetComponent<TextMeshProUGUI>();
+
+        textBox.text = status;
+        textBox.color = correct ? new Color32(0, 225, 0, 255) : new Color32(255, 0, 0, 255);
+        
+        textBox.ForceMeshUpdate();
+        yield return new WaitForSeconds(2.0f);
+
+        if (correct)
+        {
+            FindObjectOfType<QuestionManager>().correctAnswerProcedure();
+        }
+        
     }
 
-    public void updateStatus(string status, Color textColour)
+    public void updateStatus(string status, bool correct)
     {
-        StartCoroutine(statusUpdate(status, textColour));
+        if(statusCoroutine != null)
+        {
+            StopCoroutine(statusCoroutine);
+        }
+        
+        statusCoroutine = StartCoroutine(statusUpdate(status, correct));
     }
 }
