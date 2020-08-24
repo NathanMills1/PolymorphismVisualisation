@@ -109,11 +109,11 @@ public class InheritanceGenerator : MonoBehaviour
             if (!details[2].Trim().Equals(""))
             {
                 Entity parent = entityById[details[2]];
-                temp = new Entity(parent, int.Parse(details[0]), int.Parse(details[1]), screenImage, objectImage, shadowImage, details[4]);
+                temp = new Entity(parent, int.Parse(details[0]), int.Parse(details[1]), screenImage, objectImage, shadowImage);
             }
             else //Has no parent
             {
-                temp = new Entity(int.Parse(details[0]), int.Parse(details[1]), screenImage, objectImage, shadowImage, details[4]);
+                temp = new Entity(int.Parse(details[0]), int.Parse(details[1]), screenImage, objectImage, shadowImage);
             }
             entities.Add(temp);
             entityById.Add(details[0], temp);

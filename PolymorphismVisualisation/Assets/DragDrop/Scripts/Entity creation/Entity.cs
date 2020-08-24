@@ -21,19 +21,18 @@ public class Entity
     public static float SCALE_FACTOR { get; private set; }
     public int generation { get; set; }
     public int id { get;  }
-    public string objectColour { get; }
     public Identity identity { get; private set; }
 
     protected bool gameObjectMade = false;
 
-    public Entity(Entity parent, int id, int height, Sprite image, Sprite objectImage, Sprite shadow, string objectColour) : this(id, height, image, objectImage, shadow, objectColour)
+    public Entity(Entity parent, int id, int height, Sprite image, Sprite objectImage, Sprite shadow) : this(id, height, image, objectImage, shadow)
     {
         this.parent = parent;
         parent.addChild(this);
         generation = this.parent.generation + 1;
     }
 
-    public Entity(int id,int height, Sprite image, Sprite objectImage, Sprite shadow, string objectColour)
+    public Entity(int id,int height, Sprite image, Sprite objectImage, Sprite shadow)
     {
         this.id = id;
         this.height = height;
@@ -41,7 +40,6 @@ public class Entity
         this.objectImage = objectImage;
         this.shadow = shadow;
         this.children = new List<Entity>();
-        this.objectColour = objectColour.Replace("\"", "");
         generation = 1;
 
     }
@@ -153,7 +151,6 @@ public class Entity
         {
             
             int pos;
-            string[] colours;
             int generationOfSlot = int.Parse(text.name.Substring(0,1));
 
             if (generation >= generationOfSlot)
@@ -175,8 +172,6 @@ public class Entity
                     text.text = entity.identity.methods[pos] + "()";
                 }
 
-                colours = entity.objectColour.Split(',');
-                text.color = new Color32(byte.Parse(colours[0]), byte.Parse(colours[1]), byte.Parse(colours[2]), 255);
                 text.gameObject.SetActive(true);
             }
             else
