@@ -51,7 +51,7 @@ public class ValidAssignmentQuestion : Question
 
         if (correctAnswer != userAnswer)
         {
-            status = "Incorrect. \n Try and see if the object inherits from the variable type";
+            status = "Incorrect. \nTry and see if the object inherits from the variable type";
         }
         else
         {
@@ -66,8 +66,12 @@ public class ValidAssignmentQuestion : Question
 
             result = true;
         }
-        statusText.GetComponent<StatusHandler>().updateStatus(status, result);
-
+        updateStatus(status, result);
         return result;
+    }
+
+    public void newMethod()
+    {
+        //hi
     }
 }

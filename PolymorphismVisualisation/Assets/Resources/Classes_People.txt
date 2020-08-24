@@ -10,4 +10,4 @@ ID	Class	Fields	Methods	Parent ID
 8	LabTech	headLabTech:true/false	"setupLab,teachSafety,mixSolution"	2
 9	Cleaner	"area:bathrooms/classrooms/grounds,shift:morning/night"	"getTools,clean,dispose"	2
 10	BusDriver	"route:70/72c/72m/500/81/83/801,shift:morning/afternoon/night"	"stopBus,dropOff,pickUp,openDoors"	3
-11	foodWorker	foodPlace:Subway/McDonalds/BurgerKing/PizzaHut/Dominoes	"cookFood,takeOrder,manDriveThru"	3
+11	FoodWorker	foodPlace:Subway/McDonalds/BurgerKing/PizzaHut/Dominoes	"cookFood,takeOrder,manDriveThru"	3

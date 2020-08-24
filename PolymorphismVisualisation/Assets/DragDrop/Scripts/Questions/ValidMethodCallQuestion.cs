@@ -54,7 +54,7 @@ public class ValidMethodCallQuestion : Question
 
         if (correctAnswer != userAnswer)
         {
-            status = "Incorrect. \n Ensure that the given method appears within the screen of the given variable type.";
+            status = "Incorrect. \nEnsure that the given method appears within the screen of the given variable type.";
         }
         else
         {
@@ -68,7 +68,7 @@ public class ValidMethodCallQuestion : Question
             }
             result = true;
         }
-        statusText.GetComponent<StatusHandler>().updateStatus(status, result);
+        updateStatus(status, result);
 
         return result;
     }

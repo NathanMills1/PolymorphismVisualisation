@@ -39,8 +39,16 @@ public class BasicInheritanceQuestion : Question
         if (variableType.Equals(dropRegion.screenEntity) && dropRegion.objectEntity.determineIfChildOf(dropRegion.screenEntity) && dropRegion.objectEntity != variableType)
         {
             status = "Status: Valid object assigned to variable type";
-            statusText.GetComponent<StatusHandler>().updateStatus(status, true);
+            updateStatus(status, true);
             return true;
+        }
+        else if (!dropRegion.screenEntity.Equals(variableType))
+        {
+            status = "Selected screen does not match variable type of code snippet";
+        }
+        else if (dropRegion.screenEntity != dropRegion.objectEntity)
+        {
+            status = "Selected object is not compatible with variable type";
         }
 
         return false;

@@ -24,7 +24,10 @@ public abstract class Question
     protected static GameObject checkButton;
     protected static GameObject yesButton;
     protected static GameObject noButton;
+    protected static GameObject continueButton;
     protected static DropRegion dropRegion;
+    protected static AudioSource correctSound;
+    protected static AudioSource incorrectSound;
 
 
     public abstract void loadQuestion();
@@ -77,7 +80,7 @@ public abstract class Question
         codeBox.GetComponent<RectTransform>().sizeDelta = new Vector2(codeBox.GetComponent<RectTransform>().rect.width, height);
     }
 
-    public static void setGameObjects(GameObject codeBox, GameObject questionTextBox, GameObject statusMessageBox, GameObject checkButton, GameObject yesButton, GameObject noButton, DropRegion dropRegion)
+    public static void setGameObjects(GameObject codeBox, GameObject questionTextBox, GameObject statusMessageBox, GameObject checkButton, GameObject yesButton, GameObject noButton, GameObject continueButton, DropRegion dropRegion, AudioSource correctSound, AudioSource incorrectSound)
     {
         Question.codeBox = codeBox;
         Question.questionTextBox = questionTextBox;
@@ -85,26 +88,14 @@ public abstract class Question
         Question.checkButton = checkButton;
         Question.yesButton = yesButton;
         Question.noButton = noButton;
+        Question.continueButton = continueButton;
         Question.dropRegion = dropRegion;
+        Question.correctSound = correctSound;
+        Question.incorrectSound = incorrectSound;
     }
 
     public bool checkCorrectness()
     {
-        string status = "";
-        bool result = false;
-        if(variableType != null && !dropRegion.screenEntity.Equals(variableType))
-        {
-            status = "Selected screen does not match variable type of code snippet";
-            statusText.GetComponent<StatusHandler>().updateStatus(status, result);
-        }
-        else if (!dropRegion.objectEntity.determineIfChildOf(dropRegion.screenEntity))
-        {
-            status = "Compiler Error: " + dropRegion.objectEntity.identity.name + " does not inherit from " + dropRegion.screenEntity.identity.name;
-            statusText.GetComponent<StatusHandler>().updateStatus(status, result);
-        }
-
-        
-
         return performQuestionSpecificCheck();
     }
 
@@ -175,6 +166,39 @@ public abstract class Question
             return true;
         }
         return false;
+    }
+
+    protected void updateStatus(string status, bool correct)
+    {
+
+        if (!GameManager.muted)
+        {
+            if (correct)
+            {
+                correctSound.Play();
+            }
+            else
+            {
+                incorrectSound.Play();
+            }
+
+        }
+
+        TextMeshProUGUI textBox = statusText.GetComponent<TextMeshProUGUI>();
+
+        textBox.gameObject.SetActive(true);
+        textBox.text = status;
+        textBox.color = correct ? new Color32(0, 225, 0, 255) : new Color32(255, 0, 0, 255);
+
+        textBox.ForceMeshUpdate();
+
+        if (correct)
+        {
+            yesButton.SetActive(false);
+            noButton.SetActive(false);
+            continueButton.SetActive(true);
+        }
+
     }
 
 

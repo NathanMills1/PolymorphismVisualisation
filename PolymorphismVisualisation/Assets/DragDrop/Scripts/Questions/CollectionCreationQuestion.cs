@@ -69,7 +69,7 @@ public class CollectionCreationQuestion : Question
                 result = true;
             }
 
-            statusText.GetComponent<StatusHandler>().updateStatus(status, result);
+            updateStatus(status, result);
 
         }
         return result;

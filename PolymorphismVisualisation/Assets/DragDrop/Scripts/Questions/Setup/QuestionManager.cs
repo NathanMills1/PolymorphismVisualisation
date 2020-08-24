@@ -13,7 +13,10 @@ public class QuestionManager : MonoBehaviour
     public GameObject checkButton;
     public GameObject yesButton;
     public GameObject noButton;
+    public GameObject continueButton;
     public DropRegion dropRegion;
+    public AudioSource correctSound;
+    public AudioSource incorrectSound;
 
 
     private Question currentQuestion;
@@ -31,7 +34,7 @@ public class QuestionManager : MonoBehaviour
 
     public void setupQuestionManager(int activitySection, Language codeLanguage)
     {
-        Question.setGameObjects(codeBox, questionTextBox, statusText, checkButton, yesButton, noButton, dropRegion);
+        Question.setGameObjects(codeBox, questionTextBox, statusText, checkButton, yesButton, noButton, continueButton, dropRegion, correctSound, incorrectSound);
         QuestionFactory.setCodeLanguage(codeLanguage);
         questionList = QuestionListFactory.generateQuestionList(activitySection);
     }
@@ -61,6 +64,7 @@ public class QuestionManager : MonoBehaviour
         checkButton.SetActive(false);
         yesButton.SetActive(false);
         noButton.SetActive(false);
+        continueButton.SetActive(false);
     }
 
     public void checkQuestion()

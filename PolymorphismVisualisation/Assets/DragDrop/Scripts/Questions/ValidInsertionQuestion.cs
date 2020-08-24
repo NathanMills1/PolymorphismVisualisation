@@ -52,7 +52,7 @@ public class ValidInsertionQuestion : Question
 
         if (correctAnswer != userAnswer)
         {
-            status = "Incorrect. \n Try and see if the object inherits from the variable type";
+            status = "Incorrect. \nTry and see if the object inherits from the variable type";
         }
         else
         {
@@ -67,7 +67,7 @@ public class ValidInsertionQuestion : Question
 
             result = true;
         }
-        statusText.GetComponent<StatusHandler>().updateStatus(status, result);
+        updateStatus(status, result);
 
         return result;
     }

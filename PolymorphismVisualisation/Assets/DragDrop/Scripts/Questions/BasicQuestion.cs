@@ -46,8 +46,11 @@ public class BasicQuestion : Question
         } else if (!dropRegion.screenEntity.Equals(variableType))
         {
             status = "Selected screen does not match variable type of code snippet";
+        } else if(dropRegion.screenEntity != dropRegion.objectEntity)
+        {
+            status = "Selected object is not compatible with variable type";
         }
-        statusText.GetComponent<StatusHandler>().updateStatus(status, result);
+        updateStatus(status, result);
 
         return result;
     }
