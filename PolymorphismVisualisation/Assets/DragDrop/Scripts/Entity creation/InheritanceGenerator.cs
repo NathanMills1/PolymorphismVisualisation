@@ -69,7 +69,6 @@ public class InheritanceGenerator : MonoBehaviour
         foreach (string line in lines.Skip(1))
         {
             line.Trim();
-            Debug.Log(line + "");
             string[] details = line.Split('\t');
             
             string fields = details[2].Replace("\"","");
