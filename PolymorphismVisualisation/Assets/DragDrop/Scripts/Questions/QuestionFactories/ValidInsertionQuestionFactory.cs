@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ValidInsertionQuestionFactory : QuestionFactory
 {
-    private int containerType { get; set; }
     private int[] containerWeighting;
 
     public ValidInsertionQuestionFactory(int[] generationWeighting, int[] containerWeighting)
@@ -22,89 +21,69 @@ public class ValidInsertionQuestionFactory : QuestionFactory
 
         bool correctAnswer = selectedEntity.determineIfChildOf(containerEntity);
 
-        containerType = RandomGen.next(2);
-
         int variablePosition;
         int objectPosition = -1;
-        if (containerType.Equals(0))
-        {
-            variablePosition = codeLanguage == Language.CSharp ? -1 : 1;
-            //objectPosition = codeLanguage == Language.Java ? 8 : codeLanguage == Language.CSharp ? 6 : 3;
-        }
-        else
-        {
-            variablePosition = codeLanguage == Language.CSharp ? -1 : 0;
-            //objectPosition = codeLanguage == Language.Java ? 7 : codeLanguage == Language.CSharp ? 4 : 3;
-        }
+
+        variablePosition = codeLanguage == Language.CSharp ? -1 : 1;
+        objectPosition = codeLanguage == Language.CSharp ? 6 : 8;
         
 
         
 
 
-        return new ValidInsertionQuestion(getCodeText(containerType), getQuestionText(), 2, containerEntity, selectedEntity, correctAnswer, variablePosition, objectPosition);
+        return new ValidInsertionQuestion(getCodeText(), getQuestionText(), 2, containerEntity, selectedEntity, correctAnswer, variablePosition, objectPosition);
     }
     protected override string getQuestionText()
     {
-        string type = containerType == 0 ? "list" : "array";
-        return "Can the object type shown be added to the given " + type + " type";
+        string type = codeLanguage == Language.CPlusPlus ? "vector" : "ArrayList";
+        return "Can the object type shown be added to the given " + type + "?";
     }
 
-    protected string getCodeText(int containerType)
+    protected override string getCodeText()
     {
-        string variablePart = "";
-        CodeTextFormatter formattedText;
+        CodeTextFormatter formattedText = new CodeTextFormatter();
         switch (codeLanguage)
         {
             case Language.CPlusPlus:
-                
-                formattedText = new CodeTextFormatter();
-                if(containerType == 0)
-                {
-                    formattedText.addCodeSection(CodeTextFormatter.codeColour, "list<");
-                }
-                formattedText.addCodeSection(CodeTextFormatter.variableTypeColour, "VariableType");
 
-                variablePart = containerType == 0 ? ">" : "[]";
-                formattedText.addCodeSection(CodeTextFormatter.codeColour, variablePart + " VariableNames;\nVariableNames");
+                formattedText.addCodeSection(CodeTextFormatter.codeColour, "vector<")
+                    .addCodeSection(CodeTextFormatter.variableTypeColour, "VariableType*")
+                    .addCodeSection(CodeTextFormatter.codeColour, "> VariableNames;")
+                    .addCodeSection(CodeTextFormatter.objectColour, "\nInsertedType ")
+                    .addCodeSection(CodeTextFormatter.codeColour, "*insertedName = new ")
+                    .addCodeSection(CodeTextFormatter.objectColour, "InsertedType")
+                    .addCodeSection(CodeTextFormatter.codeColour, "();\nVariableNames.push_back(insertedName);");
 
-                variablePart = containerType == 0 ? ".push_back(" : "[0] = ";
-                formattedText.addCodeSection(CodeTextFormatter.codeColour, variablePart)
-                    .addCodeSection(CodeTextFormatter.objectColour, "InsertedType ")
-                    .addCodeSection(CodeTextFormatter.codeColour, "InsertedName()");
-
-                variablePart = containerType == 0 ? ");" : ";";
-                formattedText.addCodeSection(CodeTextFormatter.codeColour, variablePart);
                 return formattedText.formattedString;
 
+
             case Language.Java:
-                formattedText = new CodeTextFormatter();
-                if (containerType == 0)
-                {
-                    formattedText.addCodeSection(CodeTextFormatter.codeColour, "List<");
-                }
-                formattedText.addCodeSection(CodeTextFormatter.variableTypeColour, "VariableType");
 
-                variablePart = containerType == 0 ? ">" : "[]";
-                formattedText.addCodeSection(CodeTextFormatter.codeColour, variablePart + " = new ");
+                formattedText.addCodeSection(CodeTextFormatter.codeColour, "ArrayList<")
+                    .addCodeSection(CodeTextFormatter.variableTypeColour, "VariableType")
+                    .addCodeSection(CodeTextFormatter.codeColour, "> VariableNames = new ArrayList<")
+                    .addCodeSection(CodeTextFormatter.variableTypeColour, "VariableType")
+                    .addCodeSection(CodeTextFormatter.codeColour, ">();")
+                    .addCodeSection(CodeTextFormatter.objectColour, "\nInsertedType ")
+                    .addCodeSection(CodeTextFormatter.codeColour, "insertedName = new ")
+                    .addCodeSection(CodeTextFormatter.objectColour, "InsertedType")
+                    .addCodeSection(CodeTextFormatter.codeColour, "();\nVariableNames.add(insertedName);");
 
-                variablePart = containerType == 0 ? "List<" : "";
-                formattedText.addCodeSection(CodeTextFormatter.codeColour, variablePart);
-
-                variablePart = containerType == 0 ? ">()" : "[]";
-                string variablePart2 = containerType == 0 ? ".add(" : "[0] = ";
-                formattedText.addCodeSection(CodeTextFormatter.codeColour, "VariableType" + variablePart + ";\nVariableNames" + variablePart2);
-
-                 variablePart = containerType == 0 ? ");" : ";";
-                formattedText.addCodeSection(CodeTextFormatter.codeColour, "new ")
-                    .addCodeSection(CodeTextFormatter.objectColour, "InsertedType()")
-                    .addCodeSection(CodeTextFormatter.codeColour, variablePart);
                 return formattedText.formattedString;
 
             case Language.CSharp:
-                return new CodeTextFormatter().addCodeSection(CodeTextFormatter.codeColour, "VariableNames = []\nVariableNames.append(")
-                    .addCodeSection(CodeTextFormatter.objectColour, "InsertedType()")
-                    .addCodeSection(CodeTextFormatter.codeColour, ")")
-                    .formattedString;
+
+                formattedText.addCodeSection(CodeTextFormatter.codeColour, "ArrayList<")
+                    .addCodeSection(CodeTextFormatter.variableTypeColour, "VariableType")
+                    .addCodeSection(CodeTextFormatter.codeColour, "> VariableNames = new ArrayList<")
+                    .addCodeSection(CodeTextFormatter.variableTypeColour, "VariableType")
+                    .addCodeSection(CodeTextFormatter.codeColour, ">();")
+                    .addCodeSection(CodeTextFormatter.objectColour, "\nInsertedType ")
+                    .addCodeSection(CodeTextFormatter.codeColour, "insertedName = new ")
+                    .addCodeSection(CodeTextFormatter.objectColour, "InsertedType")
+                    .addCodeSection(CodeTextFormatter.codeColour, "();\nVariableNames.Add(insertedName);");
+
+                return formattedText.formattedString;
 
             default:
                 return "";
@@ -112,7 +91,4 @@ public class ValidInsertionQuestionFactory : QuestionFactory
         
     }
 
-    protected override string getCodeText() {
-        return getCodeText(0);
-    }
 }

@@ -42,7 +42,7 @@ public class ValidInsertionQuestion : Question
     protected override string performQuestionSpecificCodeSwaps(string newCodeText)
     {
         string insertedName = camelCase(objectType);
-        return newCodeText.Replace("InsertedType",objectType.identity.name).Replace("InsertedName", insertedName);
+        return newCodeText.Replace("InsertedType",objectType.identity.name).Replace("insertedName", insertedName);
     }
 
     public override bool checkYesNoAnswer(bool userAnswer)

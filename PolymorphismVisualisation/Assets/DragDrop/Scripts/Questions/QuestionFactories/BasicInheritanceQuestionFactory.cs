@@ -22,7 +22,7 @@ public class BasicInheritanceQuestionFactory : QuestionFactory
     }
     protected override string getQuestionText()
     {
-        return "Place the shown variable type, along with an object that inherits from said variable type";
+        return "Place the shown variable type, along with an instance that inherits from said variable type";
     }
 
     protected override string getCodeText()

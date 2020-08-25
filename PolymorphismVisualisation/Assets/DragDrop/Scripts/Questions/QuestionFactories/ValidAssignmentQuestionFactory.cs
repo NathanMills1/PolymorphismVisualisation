@@ -47,14 +47,13 @@ public class ValidAssignmentQuestionFactory : QuestionFactory
                     .addCodeSection(CodeTextFormatter.codeColour, "*VariableName = new ")
                     .addCodeSection(CodeTextFormatter.objectColour, "selectedType();")
                     .formattedString;
+
+            case Language.CSharp:
             case Language.Java:
                 return new CodeTextFormatter().addCodeSection(CodeTextFormatter.variableTypeColour, "VariableType ")
                     .addCodeSection(CodeTextFormatter.codeColour, "VariableName = new ")
                     .addCodeSection(CodeTextFormatter.objectColour, "selectedType();")
                     .formattedString;
-
-            case Language.CSharp:
-                //defunct
 
             default:
                 return "";

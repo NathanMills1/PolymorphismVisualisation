@@ -202,7 +202,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1372136621}
   m_HandleRect: {fileID: 1372136620}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4172,7 +4172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - Now place the matching object from the list on the right into the middle too.
+  - Now also place the matching instance from the list on the right into the middle.
   nextSectionOnDialogueComplete: 0
   highlightedComponents:
   - {fileID: 1811152934}
@@ -5045,7 +5045,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000017642975}
+  m_AnchoredPosition: {x: 0, y: -0.00010764599}
   m_SizeDelta: {x: 0, y: 1}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &380605605
@@ -5066,7 +5066,7 @@ MonoBehaviour:
     m_Top: 10
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 10
+  m_Spacing: 15
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -6364,11 +6364,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - Questions will appear at the top region of the screen, with their relevant code
-    snippet at the bottom of the screen. Questions will either get you to recreate
-    the scenario in the code snippet, or ask you a question about the snippet shown.
-  - Before you answer the question, recreate the scenario using the screen and objects
-    available to assist you in answering it.
+  - Questions will appear at the top of the app, with the associated code snippet
+    at the bottom. Questions will either get you to recreate the scenario in the
+    code snippet, or ask you a question about the code shown.
+  - Before you answer the question, recreate the scenario using the screen covers
+    and instances available to assist you in answering it.
   nextSectionOnDialogueComplete: 1
   highlightedComponents:
   - {fileID: 94753898}
@@ -8806,10 +8806,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - The right-hand section contains sheets, which represents the objects which are
-    assigned to the variables. They contain the fields of the different objects along
-    with references to the methods for a class. The shape of an object will match
-    up with the shape of the same variable type.
+  - The blue section on the right contains a number of paper sheets, each of which
+    represents an instance of some class type. They contain the fields of the different
+    objects along with references to the methods for a class. The shape of an instance
+    will match up with the shape of the same variable type.
   nextSectionOnDialogueComplete: 1
   highlightedComponents:
   - {fileID: 1319060534}
@@ -9452,10 +9452,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - 'Welcome to Polymorphism Visualisation. This tool aims to assist students in
-    their understanding of concepts relating to polymorphism, and their ability to
-    visualise the relationship between variable type and the type of the object assigned
-    to that variable. '
+  - Welcome to Polymorphism Visualisation. This tool aims to help you understand
+    of polymorphism concepts, and visualise the relationship between the declared
+    variable type and the type of the instance assigned to that variable.
   nextSectionOnDialogueComplete: 1
   highlightedComponents: []
 --- !u!1 &712290764
@@ -9722,7 +9721,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.0000076293945, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 183.5, y: 20}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &736843951
@@ -9755,7 +9754,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Vehicle
 --- !u!222 &736843952
@@ -10774,7 +10773,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00001579523}
+  m_AnchoredPosition: {x: 0, y: -0.000021457672}
   m_SizeDelta: {x: 0, y: 1}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &797456929
@@ -10795,7 +10794,7 @@ MonoBehaviour:
     m_Top: 10
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 10
+  m_Spacing: 15
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -11007,14 +11006,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - As we can see, the object now fully fits in the variable type, but has an extra
-    section at the bottom. All required methods and fields of the parent class can
-    be accessed, but those of the child will be ignored, as the machine follows the
-    guide of the parent screen.
-  - Similarly, in polymorphism, if a child object is passed to a variable type of
-    a class that is the parent of that object, only the methods and fields defined
-    in the parent can be accessed. Those in the child are ignored, as it treats it
-    as an object of the parent.
+  - "As we can see, the instance now fully fits within the variable type. The instance
+    appears to have extras extruding the screen, but that\u2019s not a problem. 
+    What\u2019s important is that all the required methods and fields of the parent
+    class can be accessed, and any \u201Cchild-type extras\u201D on the instance
+    will be ignored. In other words, the machine only cares about following the guide
+    of the parent screen."
+  - Similarly, in polymorphism, if a child-type instance is assigned to a parent-type
+    variable, only the methods and fields defined in the parent may be accessed by
+    the compiler. The extras in the child-type instance are ignored, as the compiler
+    only sees guides for the parent type.
   - Questions will now ask you about parent and child classes and the relationship
     between the two.
   nextSectionOnDialogueComplete: 1
@@ -11396,7 +11397,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Objects
+  m_text: Instances
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11465,7 +11466,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 850561034}
-    characterCount: 7
+    characterCount: 9
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
@@ -12528,7 +12529,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1023926792}
   m_HandleRect: {fileID: 1023926791}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -13005,9 +13006,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - This left-hand section contains screens which represent the variable type. Each
-    of the different shapes represent a different class. The slots in the screen
-    represent where it expects fields and methods to be for the class.
+  - "The orange section on the left contains a number of \u201Cscreen\u201D shapes,
+    each of which represents a variable type. Each of the different shapes represents
+    a different class. The slots in the screen represent where it expects fields
+    and methods to be for that particular class type."
   nextSectionOnDialogueComplete: 1
   highlightedComponents:
   - {fileID: 1524805097}
@@ -13354,13 +13356,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - These sheets represent instructions to be read by a machine, which uses the screen
-    as a guide for where it should find the pieces of information. Similarly in OOP,
-    the variable type acts as a guide telling the compiler what functionality and
-    fields to expect of the object assigned to the variable.
-  - The Tinted gaps represent private fields of the object. They cannot be directly
-    accessed by an outside source such as the machine, but can instead be accessed
-    by going through methods of the object. The non-tinted gaps represent the methods
-    of the objects.
+    as a guide for where it should find the expected pieces of information. Similarly
+    in OOP, the variable type acts as a guide telling the compiler what functionality
+    and fields to expect of the instance assigned to the variable.
+  - "The tinted gaps represent private fields of the object. They cannot be directly
+    accessed by an \u201Coutside source\u201D, but can instead be accessed by going
+    through the public methods represented by the non-tinted gaps in the cover."
   - "Now try to place an object that doesn\u2019t match the variable type."
   nextSectionOnDialogueComplete: 0
   highlightedComponents:
@@ -17595,10 +17596,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - In OOP, the variable types are fixed at compile time, while multiple objects
-    can be passed into the variable at run time, each with different values for their
-    fields. Likewise, in this tool, the variable type must be placed first, and is
-    fixed, while different objects can be swapped in and out from it.
+  - In OOP, the declared variable types are fixed at compile time. At runtime, multiple
+    instances may be assigned to the variable, each with different values for their
+    fields. Likewise, in this app, the variable type must be placed first, and is
+    fixed, while different instances can be swapped in and out from it.
   nextSectionOnDialogueComplete: 1
   highlightedComponents: []
 --- !u!4 &1270095947
@@ -19495,7 +19496,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - Now place an object whose type is the parent of the variable type you have placed.
+  - Now place an instance whose type is the parent of the variable type you have
+    placed.
   nextSectionOnDialogueComplete: 0
   highlightedComponents:
   - {fileID: 1319060534}
@@ -22310,7 +22312,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Vehicle
 --- !u!222 &1666489790
@@ -24401,8 +24403,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 7, y: -35}
-  m_SizeDelta: {x: 410, y: 681}
+  m_AnchoredPosition: {x: 13, y: -96}
+  m_SizeDelta: {x: 410, y: 700}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!225 &1790019672
 CanvasGroup:
@@ -24870,12 +24872,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - As we can see, although the object fits into the screen for the variable type,
-    it does not take up the entire space, and there are some slots in the screen
+  - "Although the instance seems to \u201Cfit\u201D under the screen for the variable
+    type, it does not fill up the entire space. There are some slots in the screen
     that are empty. When the machine tries to get the information from these sections,
-    there would be nothing there, causing it to error.
-  - Similarly, in polymorphism, objects of a parent type cannot be used in place
-    of objects of a child type, as they do not contain all the functionality of that
+    there would be nothing there, causing it to error."
+  - Similarly, in polymorphism, instances of a parent type cannot be placed inside
+    a variable of a child type, as they do not contain all the functionality of that
     child type.
   nextSectionOnDialogueComplete: 1
   highlightedComponents:
@@ -27578,7 +27580,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1477028323}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

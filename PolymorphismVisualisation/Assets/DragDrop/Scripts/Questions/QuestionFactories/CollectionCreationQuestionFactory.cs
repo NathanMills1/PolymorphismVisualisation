@@ -24,7 +24,6 @@ public class CollectionCreationQuestionFactory : QuestionFactory
             child2 = descendants[RandomGen.next(descendants.Count)];
         }
 
-        int containerType = RandomGen.next(2);
         int variablePosition = -1;
         int objectPosition = -1;
         
@@ -32,90 +31,67 @@ public class CollectionCreationQuestionFactory : QuestionFactory
         
 
 
-        return new CollectionCreationQuestion(getCodeText(containerType), getQuestionText(), 3, child1, child2, variablePosition, objectPosition);
+        return new CollectionCreationQuestion(getCodeText(), getQuestionText(), 3, child1, child2, variablePosition, objectPosition);
     }
     protected override string getQuestionText()
     {
-        return "Add the correct variable type for the container to allow both objects to be added";
+        return "Add the correct variable type for the container to allow both instances to be added";
     }
 
-    protected string getCodeText(int containerType)
+    protected override string getCodeText()
     {
-        string variablePart = "";
-        CodeTextFormatter formattedText;
+        CodeTextFormatter formattedText = new CodeTextFormatter();
         switch (codeLanguage)
         {
             case Language.CPlusPlus:
-                
-                formattedText = new CodeTextFormatter();
-                if(containerType == 0)
-                {
-                    formattedText.addCodeSection(CodeTextFormatter.codeColour, "list<");
-                }
-                formattedText.addCodeSection(CodeTextFormatter.variableTypeColour, "ContainerType");
 
-                variablePart = containerType == 0 ? ">" : "[]";
-                formattedText.addCodeSection(CodeTextFormatter.codeColour, variablePart + " container;");
+                formattedText.addCodeSection(CodeTextFormatter.codeColour, "vector<")
+                    .addCodeSection(CodeTextFormatter.variableTypeColour, "ContainerType*")
+                    .addCodeSection(CodeTextFormatter.codeColour, "> container;");
 
                 for(int i = 1; i<3; i++)
                 {
-                    variablePart = containerType == 0 ? ".push_back(" : "[" + i + "] = ";
-                    formattedText.addCodeSection(CodeTextFormatter.codeColour, "\ncontainer" + variablePart)
-                        .addCodeSection(CodeTextFormatter.objectColour, "Child" + i + "Type ")
-                        .addCodeSection(CodeTextFormatter.codeColour, "Child" + i + "Name()");
+                    formattedText.addCodeSection(CodeTextFormatter.codeColour, "\ncontainer.push_back(new ")
+                        .addCodeSection(CodeTextFormatter.objectColour, "Child" + i + "Type()")
+                        .addCodeSection(CodeTextFormatter.codeColour, ");");
+                }
 
-                    variablePart = containerType == 0 ? ");" : ";";
-                    formattedText.addCodeSection(CodeTextFormatter.codeColour, variablePart);
+                return formattedText.formattedString;
+
+            case Language.CSharp:
+
+                formattedText.addCodeSection(CodeTextFormatter.codeColour, "ArrayList<")
+                    .addCodeSection(CodeTextFormatter.variableTypeColour, "ContainerType*")
+                    .addCodeSection(CodeTextFormatter.codeColour, "> container = new ArrayList<ContainerType>();");
+
+                for (int i = 1; i < 3; i++)
+                {
+                    formattedText.addCodeSection(CodeTextFormatter.codeColour, "\ncontainer.Add(new ")
+                        .addCodeSection(CodeTextFormatter.objectColour, "Child" + i + "Type()")
+                        .addCodeSection(CodeTextFormatter.codeColour, ");");
                 }
 
                 return formattedText.formattedString;
 
             case Language.Java:
-                formattedText = new CodeTextFormatter();
-                if (containerType == 0)
+
+                formattedText.addCodeSection(CodeTextFormatter.codeColour, "ArrayList<")
+                    .addCodeSection(CodeTextFormatter.variableTypeColour, "ContainerType*")
+                    .addCodeSection(CodeTextFormatter.codeColour, "> container = new ArrayList<ContainerType>();");
+
+                for (int i = 1; i < 3; i++)
                 {
-                    formattedText.addCodeSection(CodeTextFormatter.codeColour, "List<");
-                }
-                formattedText.addCodeSection(CodeTextFormatter.variableTypeColour, "ContainerType");
-
-                variablePart = containerType == 0 ? ">" : "[]";
-                formattedText.addCodeSection(CodeTextFormatter.codeColour, variablePart + " = new ");
-
-                variablePart = containerType == 0 ? "List<" : "";
-                formattedText.addCodeSection(CodeTextFormatter.codeColour, variablePart);
-
-                variablePart = containerType == 0 ? ">()" : "[]";
-                formattedText.addCodeSection(CodeTextFormatter.codeColour, "ContainerType" + variablePart + ";");
-
-                for(int i = 1; i<3; i++)
-                {
-                    variablePart = containerType == 0 ? ".add(" : "[" + i + "] = ";
-                    string variablePart2 = containerType == 0 ? ");" : ";";
-                    formattedText.addCodeSection(CodeTextFormatter.codeColour, "\ncontainer" + variablePart + "new ")
+                    formattedText.addCodeSection(CodeTextFormatter.codeColour, "\ncontainer.add(new ")
                         .addCodeSection(CodeTextFormatter.objectColour, "Child" + i + "Type()")
-                        .addCodeSection(CodeTextFormatter.codeColour, variablePart2);
+                        .addCodeSection(CodeTextFormatter.codeColour, ");");
                 }
-                
-                return formattedText.formattedString;
 
-            case Language.CSharp:
-                formattedText = new CodeTextFormatter().addCodeSection(CodeTextFormatter.codeColour, "container = []");
-                for(int i = 1; i<3; i++)
-                {
-                    formattedText.addCodeSection(CodeTextFormatter.codeColour, "\ncontainer.append(")
-                    .addCodeSection(CodeTextFormatter.objectColour, "Child" + i + "Type()")
-                    .addCodeSection(CodeTextFormatter.codeColour, ")");
-                }
                 return formattedText.formattedString;
 
             default:
                 return "";
         }
         
-    }
-
-    protected override string getCodeText() {
-        return getCodeText(0);
     }
 
     private void addChildrenToList(List<Entity> descendants, Entity parent)

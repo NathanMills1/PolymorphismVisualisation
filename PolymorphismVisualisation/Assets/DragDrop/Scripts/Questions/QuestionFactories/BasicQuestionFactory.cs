@@ -22,7 +22,7 @@ public class BasicQuestionFactory : QuestionFactory
     }
     protected override string getQuestionText()
     {
-        return "Place a screen and object to make this statement a valid call";
+        return "Place a variable type and instance to make the code snippet a valid call";
     }
 
     protected override string getCodeText()
@@ -34,14 +34,12 @@ public class BasicQuestionFactory : QuestionFactory
                     .addCodeSection(CodeTextFormatter.codeColour, "*VariableName = new ")
                     .addCodeSection(CodeTextFormatter.objectColour, "ObjectType();")
                     .formattedString;
+            case Language.CSharp:
             case Language.Java:
                 return new CodeTextFormatter().addCodeSection(CodeTextFormatter.variableTypeColour, "VariableType ")
                     .addCodeSection(CodeTextFormatter.codeColour, "VariableName = new ")
                     .addCodeSection(CodeTextFormatter.objectColour, "ObjectType();")
                     .formattedString;
-            case Language.CSharp:
-                //Question doesnt work in python as can't set typing
-                return "";
             default:
                 return "";
         }
