@@ -21,14 +21,10 @@ public class ValidInsertionQuestionFactory : QuestionFactory
 
         bool correctAnswer = selectedEntity.determineIfChildOf(containerEntity);
 
-        int variablePosition;
+        int variablePosition = codeLanguage == Language.CSharp ? -1 : 1;
         int objectPosition = -1;
 
-        variablePosition = codeLanguage == Language.CSharp ? -1 : 1;
-        objectPosition = codeLanguage == Language.CSharp ? 6 : 8;
-        
 
-        
 
 
         return new ValidInsertionQuestion(getCodeText(), getQuestionText(), 2, containerEntity, selectedEntity, correctAnswer, variablePosition, objectPosition);

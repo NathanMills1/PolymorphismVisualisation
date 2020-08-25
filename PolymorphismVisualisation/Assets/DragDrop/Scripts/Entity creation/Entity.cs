@@ -60,6 +60,7 @@ public class Entity
     public void constructGameObject(GameObject screenList, GameObject objectList, int activitySection)
     {
         SCALE_FACTOR = activitySection == 1 ? 0.5f : 0.35f;
+        SCALE_FACTOR = SCALE_FACTOR * (900f / 1080f);
         if (gameObjectMade == false)
         {
             if (parent != null && parent.gameObjectMade == false)

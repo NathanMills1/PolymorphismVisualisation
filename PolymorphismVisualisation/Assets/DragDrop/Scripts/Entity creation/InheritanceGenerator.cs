@@ -46,18 +46,12 @@ public class InheritanceGenerator : MonoBehaviour
         correctMethodCounts();
         Entity.setTemplates(parentIdentities, screenTemplate, objectTemplate);
 
-        float totalHeight = 0;
-
         foreach (Entity entity in selectedEntities)
         {
             entity.constructGameObject(screenList, objectList, activitySection);
-            totalHeight += 20 + entity.height * Entity.SCALE_FACTOR;
         }
 
-        screenList.GetComponent<RectTransform>().sizeDelta = new Vector2(0, totalHeight + 10);
-        objectList.GetComponent<RectTransform>().sizeDelta = new Vector2(0, totalHeight);
 
-        
     }
 
     private List<Identity> loadIdentities()
