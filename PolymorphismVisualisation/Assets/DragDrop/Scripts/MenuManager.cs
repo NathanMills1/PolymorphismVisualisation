@@ -15,7 +15,8 @@ public class MenuManager : MonoBehaviour
     public Button[] activityButtons;
     public Slider volumeSlider;
     public Toggle soundToggle;
-
+    public GameObject fade;
+    public GameObject themeSelection;
 
     public void Awake()
     {
@@ -25,6 +26,8 @@ public class MenuManager : MonoBehaviour
     public void Start()
     {
         setAvailableSections();
+        fade.SetActive(!GameManager.themeSet);
+        themeSelection.SetActive(!GameManager.themeSet);
         
     }
 

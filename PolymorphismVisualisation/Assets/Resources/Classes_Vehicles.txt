@@ -8,6 +8,6 @@ ID	Class	Fields	Methods	Parent ID
 6	Minivan	"slidingDoor:true/false,removableSeats:true/false"	"removeSeats,foldDownSeat,pickupFamily"	1
 7	StealthBomber	"bombs:2-12,cloaking:true/false"	"dropBombs,useStealth,fireMissiles"	2
 8	PassengerJet	"topClass:Business/premium/economyPlus,crew:6-14"	"beginBoarding,serveFood,playMoive"	2
-9	Sesna	"wingspan:3-7,gildeDuration:15-75"	"glide,radioBase"	2
+9	Cessna	"wingspan:3-7,gildeDuration:15-75"	"glide,radioBase"	2
 10	Robinson R-22	"passengerComms:true/false,maxAltitude:800-2400"	"pickupLoad,useWhinch"	3
 11	Apache	"guns:1-2,Rounds:200-800"	"fireGuns,airSupport"	3

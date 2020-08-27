@@ -17,6 +17,7 @@ public static class GameManager
     private static int[] requiredNumberOfQuestions = new int[] { 5, 8, 8, 10000000 };
 
     private static bool initialised = false;
+    public static bool themeSet = false;
 
 
     public static void initialiseGameState()
