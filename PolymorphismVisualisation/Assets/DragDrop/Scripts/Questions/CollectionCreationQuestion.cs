@@ -9,8 +9,9 @@ public class CollectionCreationQuestion : Question
     private bool correctAnswer;
     private Entity child1;
     private Entity child2;
+    private Entity selected;
 
-    public CollectionCreationQuestion(string codeText, string questionText, int numberOfCodeLines, Entity child1, Entity child2, int variablePosition, int objectPosition)
+    public CollectionCreationQuestion(string codeText, string questionText, int numberOfCodeLines, Entity selected, Entity child1, Entity child2, int variablePosition, int objectPosition)
     {
         this.questionID = 3;
         this.codeText = codeText;
@@ -19,6 +20,7 @@ public class CollectionCreationQuestion : Question
         this.objectType = objectType;
         this.child1 = child1;
         this.child2 = child2;
+        this.selected = selected;
 
         variableCodePosition = variablePosition;
         objectCodePosition = objectPosition;
@@ -79,7 +81,7 @@ public class CollectionCreationQuestion : Question
 
     public override string getExpectedScreenAndObject()
     {
-        return child1.parent.identity.name + ",any";
+        return selected.identity.name + ",any";
     }
 
 }

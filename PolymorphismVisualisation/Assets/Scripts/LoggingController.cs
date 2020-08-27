@@ -13,12 +13,13 @@ public class LoggingController : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        StartCoroutine(GetToken());
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(GetToken());
+        
     }
 
     // Update is called once per frame
@@ -116,7 +117,8 @@ public class LoggingController : MonoBehaviour
     IEnumerator SectionsCompleted()
     {
         string URL = baseURL + "/sections-completed?token=" + token;
-        string completed = 0;
+        string completed = "0";
+
 
         using (UnityWebRequest www = UnityWebRequest.Get(URL))
         {
@@ -130,9 +132,11 @@ public class LoggingController : MonoBehaviour
             {
                 if (www.isDone)
                 {
+                    
                     // handle the result
                     completed = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data);
-                    Debug.Log(token);
+                    GameManager.setActivitiesCompleted(completed);
+                    Debug.Log(completed);
                 }
                 else
                 {
@@ -172,10 +176,11 @@ public class LoggingController : MonoBehaviour
         StartCoroutine(CompleteSection(section));
     }
 
-    IEnumerator CompleteScetion(int section)
+    IEnumerator CompleteSection(int section)
     {
         string URL = baseURL + "/complete?token=" + token;
 
+        Debug.Log(section);
         WWWForm form = new WWWForm();
         form.AddField("section", section.ToString());
 

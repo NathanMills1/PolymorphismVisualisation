@@ -8771,6 +8771,7 @@ MonoBehaviour:
   soundToggle: {fileID: 26035086}
   fade: {fileID: 298644381}
   themeSelection: {fileID: 239798871}
+  loggingController: {fileID: 1519126171}
 --- !u!1 &2003867845
 GameObject:
   m_ObjectHideFlags: 0

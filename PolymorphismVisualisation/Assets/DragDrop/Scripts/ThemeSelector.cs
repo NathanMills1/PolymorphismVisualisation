@@ -63,6 +63,7 @@ public class ThemeSelector : MonoBehaviour
 
     public void clickContinueButton()
     {
+        GameManager.logTheme();
         fade.SetActive(false);
         this.gameObject.SetActive(false);
         GameManager.themeSet = true;
