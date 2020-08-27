@@ -57,10 +57,8 @@ public class LoggingController : MonoBehaviour
         }
     }
 
-    //public void AttemptReq(int section, int questionId, string userAnswer, string correctAnswer)
     public void AttemptReq(int section, int questionId, string userAnswer, string correctAnswer)
     {
-        //StartCoroutine(Attempt(section, questionId, userAnswer, correctAnswer));
         StartCoroutine(Attempt(section, questionId, userAnswer, correctAnswer));
     }
 
@@ -85,10 +83,8 @@ public class LoggingController : MonoBehaviour
         }
     }
 
-    //public void QuestionReq(int section, int questionId, int timeTaken)
     public void QuestionReq(int section, int questionId, int timeTaken)
     {
-        //StartCoroutine(Question(section, questionId, timeTaken));
         StartCoroutine(Question(section, questionId, timeTaken));
     }
 
@@ -100,6 +96,88 @@ public class LoggingController : MonoBehaviour
         form.AddField("section", section.ToString());
         form.AddField("questionId", questionId.ToString());
         form.AddField("timeTaken", timeTaken.ToString());
+
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+
+        yield return www.SendWebRequest();
+
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.LogError(www.error);
+            yield break;
+        }
+    }
+
+    public void SectionsCompletedReq()
+    {
+        StartCoroutine(SectionsCompleted());
+    }
+
+    IEnumerator SectionsCompleted()
+    {
+        string URL = baseURL + "/sections-completed?token=" + token;
+        string completed = 0;
+
+        using (UnityWebRequest www = UnityWebRequest.Get(URL))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.isNetworkError)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                if (www.isDone)
+                {
+                    // handle the result
+                    completed = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data);
+                    Debug.Log(token);
+                }
+                else
+                {
+                    //handle the problem
+                    Debug.Log("Error! data couldn't get.");
+                }
+            }
+        }
+    }
+
+    public void ConfigReq(string theme, string language)
+    {
+        StartCoroutine(Config(theme, language));
+    }
+
+    IEnumerator Config(string theme, string language)
+    {
+        string URL = baseURL + "/config?token=" + token;
+
+        WWWForm form = new WWWForm();
+        form.AddField("theme", theme);
+        form.AddField("language", language);
+
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+
+        yield return www.SendWebRequest();
+
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.LogError(www.error);
+            yield break;
+        }
+    }
+
+    public void CompleteSectionReq(int section)
+    {
+        StartCoroutine(CompleteSection(section));
+    }
+
+    IEnumerator CompleteScetion(int section)
+    {
+        string URL = baseURL + "/complete?token=" + token;
+
+        WWWForm form = new WWWForm();
+        form.AddField("section", section.ToString());
 
         UnityWebRequest www = UnityWebRequest.Post(URL, form);
 
