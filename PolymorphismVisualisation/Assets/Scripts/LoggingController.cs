@@ -6,7 +6,8 @@ using UnityEngine.Networking;
 public class LoggingController : MonoBehaviour
 {
 
-    private readonly string baseURL = "https://oop-visualisation.herokuapp.com/stats";
+    // private readonly string baseURL = "https://oop-visualisation.herokuapp.com/stats";
+    private readonly string baseURL = "localhost:3000/stats";
     private string token = "";
 
     // Start is called before the first frame update
@@ -18,12 +19,13 @@ public class LoggingController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     IEnumerator GetToken()
     {
-        string URL = "https://oop-visualisation.herokuapp.com/token";
+        // string URL = "https://oop-visualisation.herokuapp.com/token";
+        string URL = "localhost:3000/token";
 
         using (UnityWebRequest www = UnityWebRequest.Get(URL))
         {
@@ -50,22 +52,57 @@ public class LoggingController : MonoBehaviour
         }
     }
 
-    public void MakeWebReq()
+    //public void AttemptReq(int section, int questionId, string userAnswer, string correctAnswer)
+    public void AttemptReq()
     {
-        StartCoroutine(Inc());
+        //StartCoroutine(Attempt(section, questionId, userAnswer, correctAnswer));
+        StartCoroutine(Attempt(1, 1, "yes", "no"));
     }
 
-    IEnumerator Inc()
+    IEnumerator Attempt(int section, int questionId, string userAnswer, string correctAnswer)
     {
-        string URL = baseURL + "/correct?token=" + token;
+        string URL = baseURL + "/attempt?token=" + token;
 
-        UnityWebRequest req = UnityWebRequest.Get(URL);
+        WWWForm form = new WWWForm();
+        form.AddField("section", section.ToString());
+        form.AddField("questionId", questionId.ToString());
+        form.AddField("userAnswer", userAnswer);
+        form.AddField("correctAnswer", correctAnswer);
 
-        yield return req.SendWebRequest();
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
 
-        if (req.isNetworkError || req.isHttpError)
+        yield return www.SendWebRequest();
+
+        if (www.isNetworkError || www.isHttpError)
         {
-            Debug.LogError(req.error);
+            Debug.LogError(www.error);
+            yield break;
+        }
+    }
+
+    //public void QuestionReq(int section, int questionId, int timeTaken)
+    public void QuestionReq()
+    {
+        //StartCoroutine(Question(section, questionId, timeTaken));
+        StartCoroutine(Question(1, 1, 420));
+    }
+
+    IEnumerator Question(int section, int questionId, int timeTaken)
+    {
+        string URL = baseURL + "/question?token=" + token;
+
+        WWWForm form = new WWWForm();
+        form.AddField("section", section.ToString());
+        form.AddField("questionId", questionId.ToString());
+        form.AddField("timeTaken", timeTaken.ToString());
+
+        UnityWebRequest www = UnityWebRequest.Post(URL, form);
+
+        yield return www.SendWebRequest();
+
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.LogError(www.error);
             yield break;
         }
     }
