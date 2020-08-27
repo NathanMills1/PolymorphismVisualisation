@@ -18,7 +18,9 @@ public static class GameManager
 
     private static bool initialised = false;
     public static bool themeSet = false;
+    public static bool progressLoaded = false;
     public static LoggingController loggingController;
+
 
 
     public static void initialiseGameState(GameObject loggingController)
@@ -26,9 +28,9 @@ public static class GameManager
         if (!initialised)
         {
             GameManager.loggingController = loggingController.GetComponent<LoggingController>();
+            GameManager.loggingController.SectionsCompletedReq();
 
-
-            sectionsComplete = new bool[] { true, false, false, false };
+            sectionsComplete = new bool[] { false, false, false, false };
             tutorialsComplete = new bool[] { false, false, false };
             sectionProgress = new int[] { 0, 0, 0, 0 };
             volumeLevel = 1;
@@ -45,6 +47,8 @@ public static class GameManager
     {
         sectionsComplete[section] = true;
         sectionProgress[activeActivity - 1] = 0;
+        Debug.Log("Completed " + section);
+        loggingController.CompleteSectionReq(section);
     }
 
     public static bool updateSectionProgress()
@@ -80,5 +84,22 @@ public static class GameManager
     public static LoggingController getLoggingController()
     {
         return loggingController;
+    }
+
+    public static void setActivitiesCompleted(string sectionsCompleted)
+    {
+        int sections = int.Parse(sectionsCompleted);
+        Debug.Log(sections);
+        for(int i = 0; i<= sections; i++)
+        {
+            sectionsComplete[i] = true;
+        }
+        Debug.Log(sectionsComplete[0].ToString());
+        progressLoaded = true;
+    }
+
+    public static void logTheme()
+    {
+        loggingController.ConfigReq(theme.ToString(), codingLanguage.ToString());
     }
 }

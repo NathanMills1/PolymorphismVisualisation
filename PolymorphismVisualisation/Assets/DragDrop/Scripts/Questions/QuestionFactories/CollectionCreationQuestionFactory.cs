@@ -31,7 +31,7 @@ public class CollectionCreationQuestionFactory : QuestionFactory
         
 
 
-        return new CollectionCreationQuestion(getCodeText(), getQuestionText(), 3, child1, child2, variablePosition, objectPosition);
+        return new CollectionCreationQuestion(getCodeText(), getQuestionText(), 3, selectedEntity, child1, child2, variablePosition, objectPosition);
     }
     protected override string getQuestionText()
     {

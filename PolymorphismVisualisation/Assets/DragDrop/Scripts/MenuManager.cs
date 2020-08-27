@@ -21,12 +21,13 @@ public class MenuManager : MonoBehaviour
 
     public void Awake()
     {
-        GameManager.initialiseGameState(loggingController);
+        
     }
 
     public void Start()
     {
-        setAvailableSections();
+        GameManager.initialiseGameState(loggingController);
+
         fade.SetActive(!GameManager.themeSet);
         themeSelection.SetActive(!GameManager.themeSet);
         
@@ -36,15 +37,20 @@ public class MenuManager : MonoBehaviour
     {
         volumeSlider.value = GameManager.volumeLevel;
         soundToggle.isOn = !GameManager.muted;
+        setAvailableSections();
     }
 
 
     private void setAvailableSections()
     {
-        for (int i = 0; i < activityButtons.Length; i++)
+        if (GameManager.progressLoaded)
         {
-            activityButtons[i].interactable = GameManager.sectionsComplete[i];
+            for (int i = 0; i < activityButtons.Length; i++)
+            {
+                activityButtons[i].interactable = GameManager.sectionsComplete[i];
+            }
         }
+        
     }
 
     public void swapMenu()
