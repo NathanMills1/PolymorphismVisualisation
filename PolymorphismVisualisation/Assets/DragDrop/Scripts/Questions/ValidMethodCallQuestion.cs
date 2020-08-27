@@ -12,6 +12,7 @@ public class ValidMethodCallQuestion : Question
 
     public ValidMethodCallQuestion(string codeText, string questionText, int numberOfCodeLines, Entity variableType, Entity childType, string selectedMethod, bool correctAnswer)
     {
+        this.questionID = 6;
         this.codeText = codeText;
         this.questionText = questionText;
         this.numberOfCodeLines = numberOfCodeLines;

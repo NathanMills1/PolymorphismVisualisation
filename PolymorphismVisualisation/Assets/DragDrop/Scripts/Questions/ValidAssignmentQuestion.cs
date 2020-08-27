@@ -10,6 +10,7 @@ public class ValidAssignmentQuestion : Question
 
     public ValidAssignmentQuestion(string codeText, string questionText, int numberOfCodeLines, Entity variableType, Entity objectType, bool correctAnswer, int variablePosition, int objectPosition)
     {
+        this.questionID = 4;
         this.codeText = codeText;
         this.questionText = questionText;
         this.numberOfCodeLines = numberOfCodeLines;
@@ -70,8 +71,4 @@ public class ValidAssignmentQuestion : Question
         return result;
     }
 
-    public void newMethod()
-    {
-        //hi
-    }
 }

@@ -10,6 +10,7 @@ public class ValidInsertionQuestion : Question
 
     public ValidInsertionQuestion(string codeText, string questionText, int numberOfCodeLines, Entity variableType, Entity objectType, bool correctAnswer, int variablePosition, int objectPosition)
     {
+        this.questionID = 5;
         this.codeText = codeText;
         this.questionText = questionText;
         this.numberOfCodeLines = numberOfCodeLines;

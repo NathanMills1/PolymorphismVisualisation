@@ -17,10 +17,11 @@ public class MenuManager : MonoBehaviour
     public Toggle soundToggle;
     public GameObject fade;
     public GameObject themeSelection;
+    public GameObject loggingController;
 
     public void Awake()
     {
-        GameManager.initialiseGameState();
+        GameManager.initialiseGameState(loggingController);
     }
 
     public void Start()

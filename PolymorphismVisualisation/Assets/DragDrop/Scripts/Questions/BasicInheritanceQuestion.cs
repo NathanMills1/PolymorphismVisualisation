@@ -9,6 +9,7 @@ public class BasicInheritanceQuestion : Question
 
     public BasicInheritanceQuestion(string codeText, string questionText, int numberOfCodeLines, Entity variableType)
     {
+        this.questionID = 2;
         this.codeText = codeText;
         this.questionText = questionText;
         this.numberOfCodeLines = numberOfCodeLines;
@@ -52,6 +53,11 @@ public class BasicInheritanceQuestion : Question
         }
 
         return false;
+    }
+
+    public override string getExpectedScreenAndObject()
+    {
+        return variableType.identity.name + ",child";
     }
 
 }

@@ -12,6 +12,7 @@ public class CollectionCreationQuestion : Question
 
     public CollectionCreationQuestion(string codeText, string questionText, int numberOfCodeLines, Entity child1, Entity child2, int variablePosition, int objectPosition)
     {
+        this.questionID = 3;
         this.codeText = codeText;
         this.questionText = questionText;
         this.numberOfCodeLines = numberOfCodeLines;
@@ -74,6 +75,11 @@ public class CollectionCreationQuestion : Question
         }
         return result;
         
+    }
+
+    public override string getExpectedScreenAndObject()
+    {
+        return child1.parent.identity.name + ",any";
     }
 
 }

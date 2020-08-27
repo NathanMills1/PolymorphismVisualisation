@@ -132,5 +132,6 @@ public class TutorialManager : MonoBehaviour
         tutorialBox.SetActive(false);
         GameManager.tutorialsComplete[GameManager.activeActivity - 1] = true;
         FindObjectOfType<DropRegion>().clearSelected();
+        QuestionManager.resetTimer();
     }
 }

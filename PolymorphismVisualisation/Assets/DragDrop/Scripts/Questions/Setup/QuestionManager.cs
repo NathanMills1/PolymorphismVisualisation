@@ -26,10 +26,17 @@ public class QuestionManager : MonoBehaviour
 
     private List<QuestionFactory> questionList;
 
+    private static float time = 0;
+
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+
+    private void Update()
+    {
+        time += Time.deltaTime;
     }
 
     public void setupQuestionManager(int activitySection, Language codeLanguage)
@@ -55,6 +62,8 @@ public class QuestionManager : MonoBehaviour
         Question question = factory.getQuestion();
         this.currentQuestion = question;
         question.loadQuestion();
+
+        time = 0f;
     }
 
     private void clearQuestionRegion()
@@ -70,17 +79,20 @@ public class QuestionManager : MonoBehaviour
     public void checkQuestion()
     {
         currentQuestion.checkCorrectness();
-
+        string answer = dropRegion.screenEntity.identity.name + "," + dropRegion.objectEntity.identity.name;
+        GameManager.getLoggingController().AttemptReq(GameManager.activeActivity, currentQuestion.questionID, answer, currentQuestion.getExpectedScreenAndObject());
     }
 
     public void answerBoolQuestion(bool answer)
     {
-        currentQuestion.checkYesNoAnswer(answer);
-
+        bool correctAnswer = currentQuestion.checkYesNoAnswer(answer) ? answer : !answer;
+        GameManager.getLoggingController().AttemptReq(GameManager.activeActivity, currentQuestion.questionID, answer.ToString(), correctAnswer.ToString());
     }
 
     public void correctAnswerProcedure()
     {
+        int timeInSeconds = (int)(time % 60);
+        GameManager.getLoggingController().QuestionReq(GameManager.activeActivity, currentQuestion.questionID, timeInSeconds);
 
         clearQuestionRegion();
         if (GameManager.updateSectionProgress())
@@ -117,6 +129,11 @@ public class QuestionManager : MonoBehaviour
         {
             currentQuestion.objectPlaced(objectEntity);
         }
+    }
+
+    public static void resetTimer()
+    {
+        time = 0;
     }
 
     

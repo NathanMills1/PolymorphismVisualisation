@@ -18,14 +18,15 @@ public static class GameManager
 
     private static bool initialised = false;
     public static bool themeSet = false;
+    public static LoggingController loggingController;
 
 
-    public static void initialiseGameState()
+    public static void initialiseGameState(GameObject loggingController)
     {
         if (!initialised)
         {
-            theme = Theme.Animals;
-            codingLanguage = Language.CPlusPlus;
+            GameManager.loggingController = loggingController.GetComponent<LoggingController>();
+
 
             sectionsComplete = new bool[] { true, false, false, false };
             tutorialsComplete = new bool[] { false, false, false };
@@ -76,5 +77,8 @@ public static class GameManager
         volumeLevel = newVolumeLevel;
     }
 
-
+    public static LoggingController getLoggingController()
+    {
+        return loggingController;
+    }
 }

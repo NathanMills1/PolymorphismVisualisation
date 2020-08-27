@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public abstract class Question
 {
+    public int questionID { get; protected set; }
     protected Entity variableType { get; set; }
     protected Entity objectType { get; set; }
     protected Entity childVariableType { get; set; }
@@ -199,6 +200,11 @@ public abstract class Question
             continueButton.SetActive(true);
         }
 
+    }
+
+    public virtual string getExpectedScreenAndObject()
+    {
+        return null;
     }
 
 

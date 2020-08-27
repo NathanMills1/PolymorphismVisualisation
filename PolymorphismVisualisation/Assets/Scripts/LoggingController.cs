@@ -10,6 +10,11 @@ public class LoggingController : MonoBehaviour
     private readonly string baseURL = "localhost:3000/stats";
     private string token = "";
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,10 +58,10 @@ public class LoggingController : MonoBehaviour
     }
 
     //public void AttemptReq(int section, int questionId, string userAnswer, string correctAnswer)
-    public void AttemptReq()
+    public void AttemptReq(int section, int questionId, string userAnswer, string correctAnswer)
     {
         //StartCoroutine(Attempt(section, questionId, userAnswer, correctAnswer));
-        StartCoroutine(Attempt(1, 1, "yes", "no"));
+        StartCoroutine(Attempt(section, questionId, userAnswer, correctAnswer));
     }
 
     IEnumerator Attempt(int section, int questionId, string userAnswer, string correctAnswer)
@@ -81,10 +86,10 @@ public class LoggingController : MonoBehaviour
     }
 
     //public void QuestionReq(int section, int questionId, int timeTaken)
-    public void QuestionReq()
+    public void QuestionReq(int section, int questionId, int timeTaken)
     {
         //StartCoroutine(Question(section, questionId, timeTaken));
-        StartCoroutine(Question(1, 1, 420));
+        StartCoroutine(Question(section, questionId, timeTaken));
     }
 
     IEnumerator Question(int section, int questionId, int timeTaken)

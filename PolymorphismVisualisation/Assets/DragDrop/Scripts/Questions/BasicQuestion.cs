@@ -9,6 +9,7 @@ public class BasicQuestion : Question
 
     public BasicQuestion(string codeText, string questionText, int numberOfCodeLines, Entity variableType)
     {
+        this.questionID = 1;
         this.codeText = codeText;
         this.questionText = questionText;
         this.numberOfCodeLines = numberOfCodeLines;
@@ -53,6 +54,11 @@ public class BasicQuestion : Question
         updateStatus(status, result);
 
         return result;
+    }
+
+    public override string getExpectedScreenAndObject()
+    {
+        return variableType.identity.name + "," + variableType.identity.name;
     }
 
 }
