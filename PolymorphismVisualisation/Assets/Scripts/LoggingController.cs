@@ -6,8 +6,7 @@ using UnityEngine.Networking;
 public class LoggingController : MonoBehaviour
 {
 
-    // private readonly string baseURL = "https://oop-visualisation.herokuapp.com/stats";
-    private readonly string baseURL = "localhost:3000/stats";
+    private readonly string baseURL = "https://oop-visualisation.herokuapp.com/stats";
     private string token = "";
 
     private void Awake()
@@ -30,8 +29,7 @@ public class LoggingController : MonoBehaviour
 
     IEnumerator GetToken()
     {
-        // string URL = "https://oop-visualisation.herokuapp.com/token";
-        string URL = "localhost:3000/token";
+        string URL = "https://oop-visualisation.herokuapp.com/token";
 
         using (UnityWebRequest www = UnityWebRequest.Get(URL))
         {
