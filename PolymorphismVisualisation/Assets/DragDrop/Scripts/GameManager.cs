@@ -94,7 +94,7 @@ public static class GameManager
         {
             sectionsComplete[i] = true;
         }
-        Debug.Log(sectionsComplete[0].ToString());
+        Debug.Log("Sections completed are: " + sectionsComplete[0].ToString());
         progressLoaded = true;
     }
 
