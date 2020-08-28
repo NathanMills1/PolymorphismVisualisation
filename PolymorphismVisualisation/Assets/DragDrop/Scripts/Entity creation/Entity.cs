@@ -203,4 +203,9 @@ public class Entity
         }
         return (other.id.Equals(this.id));
     }
+
+    public override string ToString()
+    {
+        return identity.name;
+    }
 }

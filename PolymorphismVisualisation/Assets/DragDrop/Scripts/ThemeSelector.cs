@@ -34,7 +34,7 @@ public class ThemeSelector : MonoBehaviour
     private string[] randomiseArray(string[] array)
     {
         System.Random rnd = new System.Random();
-        string[] MyRandomArray = array.OrderBy(x => rnd.NextDouble()).ToArray();
+        string[] MyRandomArray = array.OrderBy(x => rnd.Next(1,1000)).ToArray();
         return MyRandomArray;
     }
 

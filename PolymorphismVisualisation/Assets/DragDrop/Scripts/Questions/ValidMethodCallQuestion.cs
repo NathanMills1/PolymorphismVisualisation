@@ -8,7 +8,6 @@ public class ValidMethodCallQuestion : Question
 {
     private bool correctAnswer;
     private string selectedMethod;
-    private Entity childType;
 
     public ValidMethodCallQuestion(string codeText, string questionText, int numberOfCodeLines, Entity variableType, Entity childType, string selectedMethod, bool correctAnswer)
     {
@@ -17,12 +16,12 @@ public class ValidMethodCallQuestion : Question
         this.questionText = questionText;
         this.numberOfCodeLines = numberOfCodeLines;
         this.variableType = variableType;
-        this.childType = childType;
+        this.objectType = childType;
         this.selectedMethod = selectedMethod;
         this.correctAnswer = correctAnswer;
 
         variableCodePosition = 0;
-        objectCodePosition = -1;
+        objectCodePosition = 3;
 
     }
 
@@ -30,9 +29,6 @@ public class ValidMethodCallQuestion : Question
     {
         codeBox.GetComponentInChildren<TextMeshProUGUI>().text = createCodeText();
         questionTextBox.GetComponentInChildren<TextMeshProUGUI>().text = createQuestionText();
-
-        yesButton.SetActive(true);
-        noButton.SetActive(true);
 
         statusText.GetComponent<TextMeshProUGUI>().text = "";
         statusText.GetComponent<TextMeshProUGUI>().ForceMeshUpdate();
@@ -45,17 +41,17 @@ public class ValidMethodCallQuestion : Question
 
     protected override string performQuestionSpecificCodeSwaps(string newCodeText)
     {
-        return newCodeText.Replace("SelectedMethod", selectedMethod).Replace("ChildType", childType.identity.name);
+        return newCodeText.Replace("SelectedMethod", selectedMethod).Replace("ChildType", objectType.ToString());
     }
 
     public override bool checkYesNoAnswer(bool userAnswer)
     {
-        string status = "";
+        string status;
         bool result = false;
 
         if (correctAnswer != userAnswer)
         {
-            status = "Incorrect. \nEnsure that the given method appears within the screen of the given variable type.";
+            status = "Incorrect. \nWe can only call methods that belong to the variable type.";
         }
         else
         {

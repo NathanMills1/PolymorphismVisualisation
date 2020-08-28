@@ -59,7 +59,7 @@ public class ValidMethodCallQuestionFactory : QuestionFactory
                 return new CodeTextFormatter().addCodeSection(CodeTextFormatter.variableTypeColour, "VariableType ")
                     .addCodeSection(CodeTextFormatter.codeColour, "VariableName = new ")
                     .addCodeSection(CodeTextFormatter.objectColour, "ChildType();\n")
-                    .addCodeSection(CodeTextFormatter.codeColour, "VariableName.SelectedMethod();")
+                    .addCodeSection(CodeTextFormatter.methodColour, "VariableName.SelectedMethod();")
                     .formattedString;
             default:
                 return "";

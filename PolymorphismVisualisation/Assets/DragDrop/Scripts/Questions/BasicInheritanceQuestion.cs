@@ -36,12 +36,13 @@ public class BasicInheritanceQuestion : Question
 
     protected override bool performQuestionSpecificCheck()
     {
-        string status;
+        string status = "";
+        bool result = false;
         if (variableType.Equals(dropRegion.screenEntity) && dropRegion.objectEntity.determineIfChildOf(dropRegion.screenEntity) && dropRegion.objectEntity != variableType)
         {
-            status = "Status: Valid object assigned to variable type";
-            updateStatus(status, true);
-            return true;
+            status = "Status: Valid instance assigned to variable type";
+            
+            result = true;
         }
         else if (!dropRegion.screenEntity.Equals(variableType))
         {
@@ -49,10 +50,14 @@ public class BasicInheritanceQuestion : Question
         }
         else if (dropRegion.screenEntity != dropRegion.objectEntity)
         {
-            status = "Selected object is not compatible with variable type";
+            status = "Selected instance is not compatible with variable type";
+        } else if(dropRegion.screenEntity == dropRegion.objectEntity)
+        {
+            status = "While the placement is valid, it is not what the question is asking";
         }
 
-        return false;
+        updateStatus(status, result);
+        return result;
     }
 
     public override string getExpectedScreenAndObject()

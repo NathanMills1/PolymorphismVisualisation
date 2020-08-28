@@ -9,6 +9,7 @@ public abstract class Question
     public int questionID { get; protected set; }
     protected Entity variableType { get; set; }
     protected Entity objectType { get; set; }
+    protected Entity object2Type { get; set; }
     protected Entity childVariableType { get; set; }
     protected int variableGeneration { get; set; }
     protected int numberOfCodeLines { get; set; }
@@ -16,7 +17,8 @@ public abstract class Question
     protected string questionText { get; set; }
 
     protected int variableCodePosition { get; set; }
-    protected int objectCodePosition { get; set; }
+    protected int objectCodePosition { get; set; } = -1;
+    protected int object2CodePosition { get; set; } = -1;
     protected bool usesCheckButton { get; set; } = false;
 
     protected static GameObject codeBox;
@@ -39,7 +41,7 @@ public abstract class Question
     {
         string newCodeText = performQuestionSpecificCodeSwaps(codeText);
 
-        if(variableType != null)
+        if (variableType != null)
         {
             string variableName = camelCase(variableType);
 
@@ -51,16 +53,16 @@ public abstract class Question
                 newCodeText = newCodeText.Replace("ParentType", variableType.parent.identity.name);
             }
         }
-        
+
 
         string objectType = (dropRegion.objectEntity != null) ?
             dropRegion.objectEntity.identity.name :
             "__________";
         newCodeText = newCodeText.Replace("ObjectType", objectType);
 
-        
 
-        if(childVariableType != null)
+
+        if (childVariableType != null)
         {
             newCodeText = newCodeText.Replace("ChildType", childVariableType.identity.name);
         }
@@ -116,7 +118,7 @@ public abstract class Question
         {
             if (!screenRepresentation.Equals(variableType))
             {
-                
+
                 textAnimator.StartCoroutine(textAnimator.shakeText(variableCodePosition));
             }
             else
@@ -131,16 +133,25 @@ public abstract class Question
         TextAnimation textAnimator = codeBox.GetComponentInChildren<TextAnimation>();
         if (objectCodePosition != -1)
         {
-            if (!objectRepresentation.Equals(objectType))
+            if (objectRepresentation.Equals(objectType))
             {
+                textAnimator.StartCoroutine(textAnimator.glowText(objectCodePosition));
 
-                textAnimator.StartCoroutine(textAnimator.shakeText(objectCodePosition));
+            } else if (object2Type != null && objectRepresentation.Equals(object2Type))
+            {
+                textAnimator.StartCoroutine(textAnimator.glowText(object2CodePosition));
             }
             else
             {
-                textAnimator.StartCoroutine(textAnimator.glowText(objectCodePosition));
+                textAnimator.StartCoroutine(textAnimator.shakeText(objectCodePosition));
+                if (object2Type != null)
+                {
+                    textAnimator.StartCoroutine(textAnimator.shakeText(object2CodePosition));
+                }
             }
         }
+
+        loadYesNoButtons();
         setButtonStatus(activateButtonsCondition(objectRepresentation));
     }
 
@@ -162,7 +173,7 @@ public abstract class Question
 
     protected virtual bool activateButtonsCondition(Entity objectRepresentation)
     {
-        if(objectRepresentation != null)
+        if (objectRepresentation != null)
         {
             return true;
         }
@@ -205,6 +216,27 @@ public abstract class Question
     public virtual string getExpectedScreenAndObject()
     {
         return null;
+    }
+
+    public void loadYesNoButtons()
+    {
+        if (!usesCheckButton)
+        {
+            bool isVisible = determineYesNoVisibility();
+            yesButton.SetActive(isVisible);
+            noButton.SetActive(isVisible);
+            
+        }
+    }
+
+    public virtual bool determineYesNoVisibility()
+    {
+        if (objectType.Equals(dropRegion.objectEntity) && variableType.Equals(dropRegion.screenEntity))
+        {
+            return true;
+        }
+
+        return false;
     }
 
 

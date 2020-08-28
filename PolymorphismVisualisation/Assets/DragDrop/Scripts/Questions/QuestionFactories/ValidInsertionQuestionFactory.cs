@@ -21,8 +21,8 @@ public class ValidInsertionQuestionFactory : QuestionFactory
 
         bool correctAnswer = selectedEntity.determineIfChildOf(containerEntity);
 
-        int variablePosition = codeLanguage == Language.CSharp ? -1 : 1;
-        int objectPosition = -1;
+        int variablePosition = 1;
+        int objectPosition = GameManager.codingLanguage == Language.CPlusPlus ? 6 : 9;
 
 
 

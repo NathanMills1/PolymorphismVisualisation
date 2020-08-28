@@ -137,6 +137,7 @@ namespace MaterialUI
 				listItem.transform.localPosition = new Vector3(listItem.transform.localPosition.x, listItem.transform.localPosition.y, 0f);
 				listItem.transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
 				listItem.GetComponentInChildren<Text>().text = listItems[i];
+				listItem.GetComponentInChildren<Text>().fontSize = 18;
 
 				SelectionListItemConfig tempConfig = listItem.GetComponent<SelectionListItemConfig>();
 				tempConfig.listId = i;

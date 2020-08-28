@@ -28,9 +28,6 @@ public class ValidAssignmentQuestion : Question
         codeBox.GetComponentInChildren<TextMeshProUGUI>().text = createCodeText();
         questionTextBox.GetComponentInChildren<TextMeshProUGUI>().text = createQuestionText();
 
-        yesButton.SetActive(true);
-        noButton.SetActive(true);
-
         statusText.GetComponent<TextMeshProUGUI>().text = "";
         statusText.GetComponent<TextMeshProUGUI>().ForceMeshUpdate();
     }
@@ -52,7 +49,7 @@ public class ValidAssignmentQuestion : Question
 
         if (correctAnswer != userAnswer)
         {
-            status = "Incorrect. \nTry and see if the object inherits from the variable type";
+            status = "Incorrect. \nTry and see if the instance inherits from the variable type";
         }
         else
         {

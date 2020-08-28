@@ -8850,9 +8850,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - The blue section on the right contains a number of paper sheets, each of which
-    represents an instance of some class type. They contain the fields of the different
-    objects along with references to the methods for a class. The shape of an instance
-    will match up with the shape of the same variable type.
+    represents an instance of some class type. They contain the fields of the objects
+    along with references to the methods for a class. The shape of an instance will
+    match up with the shape of the class it represents.
   nextSectionOnDialogueComplete: 1
   highlightedComponents:
   - {fileID: 1319060534}
@@ -9495,9 +9495,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - Welcome to Polymorphism Visualisation. This tool aims to help you understand
+  - 'Welcome to Polymorphism Visualisation. This tool aims to help you understand
     of polymorphism concepts, and visualise the relationship between the declared
-    variable type and the type of the instance assigned to that variable.
+    variable type and the type of the instance assigned to that variable. '
   nextSectionOnDialogueComplete: 1
   highlightedComponents: []
 --- !u!1 &712290764
@@ -11053,11 +11053,10 @@ MonoBehaviour:
     appears to have extras extruding the screen, but that\u2019s not a problem. 
     What\u2019s important is that all the required methods and fields of the parent
     class can be accessed, and any \u201Cchild-type extras\u201D on the instance
-    will be ignored. In other words, the machine only cares about following the guide
-    of the parent screen."
+    will be ignored. "
   - Similarly, in polymorphism, if a child-type instance is assigned to a parent-type
-    variable, only the methods and fields defined in the parent may be accessed by
-    the compiler. The extras in the child-type instance are ignored, as the compiler
+    variable, only the methods and fields defined in the parent class may be accessed
+    by the compiler. The extras in the child-type instance are ignored, as the compiler
     only sees guides for the parent type.
   - Questions will now ask you about parent and child classes and the relationship
     between the two.
@@ -11571,7 +11570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - Begin by dragging one of the variable types, and placing it in the region in
-    the centre
+    the centre.
   nextSectionOnDialogueComplete: 0
   highlightedComponents:
   - {fileID: 1524805097}
@@ -13398,14 +13397,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - These sheets represent instructions to be read by a machine, which uses the screen
-    as a guide for where it should find the expected pieces of information. Similarly
+  - These sheets represent data to be read by a machine, which uses the screen as
+    a guide for where it should find the expected pieces of information. Similarly
     in OOP, the variable type acts as a guide telling the compiler what functionality
     and fields to expect of the instance assigned to the variable.
   - "The tinted gaps represent private fields of the object. They cannot be directly
     accessed by an \u201Coutside source\u201D, but can instead be accessed by going
     through the public methods represented by the non-tinted gaps in the cover."
-  - "Now try to place an object that doesn\u2019t match the variable type."
+  - "Now try to place an instance that doesn\u2019t match the variable type."
   nextSectionOnDialogueComplete: 0
   highlightedComponents:
   - {fileID: 1811152934}
@@ -22035,7 +22034,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: No inheritance in fisrt activity
+  m_text: No inheritance in first activity
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -23273,7 +23272,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - Now place a variable type of a class that is a parent of another class, along
-    with an object that is of a class that inherits from the variable type.
+    with an object that is of a class that inherits from the variable type. If you
+    need to change your selection, press the clear button.
   nextSectionOnDialogueComplete: 0
   highlightedComponents:
   - {fileID: 1524805097}

@@ -43,9 +43,6 @@ public class BasicQuestionFactory : QuestionFactory
             default:
                 return "";
         }
-        
-
-        //snippet = codeColour + "VariableType VariableName = New </color>" + objectColour + "VariableType();</color>\n" + codeColour + "List<</color>" + variableTypeColour + "ParentType</color>" + codeColour + "> ParentTypes.add(VariableName);</color>";
-        //question = "Place the correct screen and object to represent this situation";
+       
     }
 }

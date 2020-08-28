@@ -7,6 +7,8 @@ public class CodeTextFormatter {
     public static Color codeColour { get; } = new Color32(152, 118, 159, 255);
     public static Color objectColour { get; } = new Color32(86, 156, 214, 255);
 
+    public static Color methodColour { get; } = new Color32(255, 255, 255, 255);
+
     public string formattedString { get; private set; }
     public CodeTextFormatter()
     {

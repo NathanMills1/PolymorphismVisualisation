@@ -25,13 +25,14 @@ public class CollectionCreationQuestionFactory : QuestionFactory
         }
 
         int variablePosition = -1;
-        int objectPosition = -1;
-        
-
-        
+        int objectPosition = GameManager.codingLanguage == Language.CPlusPlus ? 7 : 9;
+        int object2Position = GameManager.codingLanguage == Language.CPlusPlus ? 10 : 13;
 
 
-        return new CollectionCreationQuestion(getCodeText(), getQuestionText(), 3, selectedEntity, child1, child2, variablePosition, objectPosition);
+
+
+
+        return new CollectionCreationQuestion(getCodeText(), getQuestionText(), 3, selectedEntity, child1, child2, variablePosition, objectPosition, object2Position);
     }
     protected override string getQuestionText()
     {

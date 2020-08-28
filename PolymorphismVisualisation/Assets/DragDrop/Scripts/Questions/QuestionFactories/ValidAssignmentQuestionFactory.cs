@@ -25,7 +25,7 @@ public class ValidAssignmentQuestionFactory : QuestionFactory
         containerType = RandomGen.next(2);
 
         int variablePosition = 0;
-        int objectPosition = -1;
+        int objectPosition = 3;
         
 
         
@@ -35,7 +35,7 @@ public class ValidAssignmentQuestionFactory : QuestionFactory
     }
     protected override string getQuestionText()
     {
-        return "Can the object type shown be assigned to the variable type shown?";
+        return "Can the instance type shown be assigned to the variable type shown?";
     }
 
     protected override string getCodeText()
