@@ -30,7 +30,7 @@ public static class GameManager
             GameManager.loggingController = loggingController.GetComponent<LoggingController>();
             GameManager.loggingController.SectionsCompletedReq();
 
-            sectionsComplete = new bool[] { false, false, false, false };
+            sectionsComplete = new bool[] { true, true, true, true };
             tutorialsComplete = new bool[] { false, false, false };
             sectionProgress = new int[] { 0, 0, 0, 0 };
             volumeLevel = 1;
