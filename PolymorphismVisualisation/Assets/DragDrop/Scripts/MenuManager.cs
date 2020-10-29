@@ -50,13 +50,13 @@ public class MenuManager : MonoBehaviour
 
     private void setAvailableSections()
     {
-        if (GameManager.progressLoaded)
-        {
+        //if (GameManager.progressLoaded)
+        //{
             for (int i = 0; i < activityButtons.Length; i++)
             {
                 activityButtons[i].interactable = GameManager.sectionsComplete[i];
             }
-        }
+        //}
         
     }
 
