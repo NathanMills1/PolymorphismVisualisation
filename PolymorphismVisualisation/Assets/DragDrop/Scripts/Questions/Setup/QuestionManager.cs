@@ -79,20 +79,15 @@ public class QuestionManager : MonoBehaviour
     public void checkQuestion()
     {
         currentQuestion.checkCorrectness();
-        string answer = dropRegion.screenEntity.identity.name + "," + dropRegion.objectEntity.identity.name;
-        GameManager.getLoggingController().AttemptReq(GameManager.activeActivity, currentQuestion.questionID, answer, currentQuestion.getExpectedScreenAndObject());
     }
 
     public void answerBoolQuestion(bool answer)
     {
         bool correctAnswer = currentQuestion.checkYesNoAnswer(answer) ? answer : !answer;
-        GameManager.getLoggingController().AttemptReq(GameManager.activeActivity, currentQuestion.questionID, answer.ToString(), correctAnswer.ToString());
     }
 
     public void correctAnswerProcedure()
     {
-        int timeInSeconds = (int)(time % 60);
-        GameManager.getLoggingController().QuestionReq(GameManager.activeActivity, currentQuestion.questionID, timeInSeconds);
 
         clearQuestionRegion();
         if (GameManager.updateSectionProgress())

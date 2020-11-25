@@ -17,7 +17,6 @@ public class MenuManager : MonoBehaviour
     public Toggle soundToggle;
     public GameObject fade;
     public GameObject themeSelection;
-    public GameObject loggingController;
     public GameObject completionMessage;
 
     public void Awake()
@@ -27,7 +26,7 @@ public class MenuManager : MonoBehaviour
 
     public void Start()
     {
-        GameManager.initialiseGameState(loggingController);
+        GameManager.initialiseGameState();
 
         fade.SetActive(!GameManager.themeSet);
         themeSelection.SetActive(!GameManager.themeSet);
