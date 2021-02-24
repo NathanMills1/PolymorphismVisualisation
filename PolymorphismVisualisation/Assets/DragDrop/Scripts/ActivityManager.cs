@@ -19,7 +19,7 @@ public class ActivityManager : MonoBehaviour
 
     public void Start()
     {
-        loadActivitySection(GameManager.activeActivity, GameManager.theme, GameManager.codingLanguage);
+        loadActivitySection(GameManager.activeActivity, GameManager.theme, GameManager.codingLanguage, GameManager.skipTutorials);
     }
 
     public void Update()
@@ -36,13 +36,13 @@ public class ActivityManager : MonoBehaviour
         pauseFade.SetActive(paused);
     }
 
-    private void loadActivitySection(int activitySection, Theme theme, Language language)
+    private void loadActivitySection(int activitySection, Theme theme, Language language, bool skipTutorial)
     {
         inheritanceGenerator.setupEntities(activitySection, theme);
         treeGenerator.loadInheritanceTree(activitySection);
         questionManager.setupQuestionManager(activitySection, language);
         dropRegion.adjustForActivitySection(activitySection);
-        tutorialManager.loadTutorial();
+        tutorialManager.loadTutorial(skipTutorial);
     }
 
     public static bool togglePause()

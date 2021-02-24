@@ -15,9 +15,9 @@ public class MenuManager : MonoBehaviour
     public Button[] activityButtons;
     public Slider volumeSlider;
     public Toggle soundToggle;
+    public Toggle tutorialToggle;
     public GameObject fade;
     public GameObject themeSelection;
-    public GameObject completionMessage;
 
     public void Awake()
     {
@@ -31,17 +31,13 @@ public class MenuManager : MonoBehaviour
         fade.SetActive(!GameManager.themeSet);
         themeSelection.SetActive(!GameManager.themeSet);
 
-        if (GameManager.sectionsComplete[3])
-        {
-            fade.SetActive(true);
-            completionMessage.SetActive(true);
-        }
     }
 
     public void Update()
     {
         volumeSlider.value = GameManager.volumeLevel;
         soundToggle.isOn = !GameManager.muted;
+        tutorialToggle.isOn = GameManager.skipTutorials;
         setAvailableSections();
 
     }
@@ -119,14 +115,13 @@ public class MenuManager : MonoBehaviour
         GameManager.muted = !soundToggle.isOn;
     }
 
+    public void toggleTutorial()
+    {
+        GameManager.skipTutorials = tutorialToggle.isOn;
+    }
+
     public void adjustVolume()
     {
         GameManager.updateVolume(volumeSlider.value);
-    }
-
-    public void closeMessage()
-    {
-        completionMessage.SetActive(false);
-        fade.SetActive(false);
     }
 }

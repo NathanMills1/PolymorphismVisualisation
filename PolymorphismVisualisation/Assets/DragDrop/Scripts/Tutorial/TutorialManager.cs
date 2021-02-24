@@ -17,9 +17,9 @@ public class TutorialManager : MonoBehaviour
     private static Vector2 dialoguePosFor2 = new Vector2(0, -350);
     private static Vector2[] tutorialBoxPositions = new Vector2[] { dialoguePosFor1, dialoguePosFor2, dialoguePosFor2 };
 
-    public void loadTutorial()
+    public void loadTutorial(bool skipTutorial)
     {
-        if(GameManager.activeActivity <= 3 && !GameManager.tutorialsComplete[GameManager.activeActivity - 1])
+        if(!skipTutorial && (GameManager.activeActivity <= 3 && !GameManager.tutorialsComplete[GameManager.activeActivity - 1]))
         {
             currentTutorial = tutorials[GameManager.activeActivity - 1];
             tutorialBox.GetComponent<RectTransform>().localPosition = tutorialBoxPositions[GameManager.activeActivity - 1];

@@ -9,6 +9,7 @@ public static class GameManager
     public static Theme theme { get; set; }
     public static Language codingLanguage { get; set; }
     public static bool muted { get; set; }
+    public static bool skipTutorials { get; set; }
     public static float volumeLevel { get; private set; }
 
     public static bool[] sectionsComplete { get; private set; }
@@ -27,7 +28,7 @@ public static class GameManager
         if (!initialised)
         {
 
-            sectionsComplete = new bool[] { true, false, false, false };
+            sectionsComplete = new bool[] { true, true, true, true };
             tutorialsComplete = new bool[] { false, false, false };
             sectionProgress = new int[] { 0, 0, 0, 0 };
             volumeLevel = 1;
